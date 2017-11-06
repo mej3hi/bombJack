@@ -71,11 +71,11 @@ Bomb.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
 
     // pass my scale into the sprite, for drawing
-    this.sprite.scale = this._scale;
+    this.sprite.scale = this.scale;
 
     var frame = [0,0,14,16];
     this.sprite.drawWrappedCentredAt(ctx, this.cx, this.cy, this.rotation, frame);
 
-    this.sprite.scale = origScale;
+    
 
 };
