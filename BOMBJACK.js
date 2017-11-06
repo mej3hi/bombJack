@@ -171,7 +171,7 @@ function renderSimulation(ctx) {
     lifeManager.render(ctx);
 
    
-    //levelManager.render(ctx);
+    levelManager.render(ctx);
     if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
 

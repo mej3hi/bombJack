@@ -27,11 +27,11 @@ var entityManager = {
 
 // "PRIVATE" DATA
 
-_platform : [],
+_platforms : [],
 _bullets  : [],
 _enemies  : [],
 _jack     : [],
-_bomb     : [],
+_bombs     : [],
 
 // "PRIVATE" METHODS
 
@@ -52,7 +52,7 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._platform, this._bomb ,this._enemies, this._bullets, this._jack];
+    this._categories = [this._platforms, this._bombs ,this._enemies, this._bullets, this._jack];
 },
 
 eraseAllEntities : function(){
@@ -83,11 +83,11 @@ fireBullet: function(cx, cy, velX, velY, rotation) {
 },
 
 generatePlatform : function(descr) {
-    this._platform.push(new Platform(descr));
+    this._platforms.push(new Platform(descr));
 },
 
 generateBomb : function(descr) {
-    this._bomb.push(new Bomb(descr));
+    this._bombs.push(new Bomb(descr));
 },
 
 generateEnemy : function(descr) {
@@ -144,7 +144,7 @@ update: function(du) {
         }
     }
     
-    //if (this._platform.length === 0) this._generateRocks();
+    //if (this._platforms.length === 0) this._generateRocks();
 
 },
 

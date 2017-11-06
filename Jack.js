@@ -329,12 +329,12 @@ Jack.prototype.movePlayer = function (du) {
 
     }
 
-    for (var i = 0; i < entityManager._platform.length; i++) {
+    for (var i = 0; i < entityManager._platforms.length; i++) {
                 
-        if(entityManager._platform[i].collidesWith(prevX, prevY, nextX, nextY, this.getRadius())) {
+        if(entityManager._platforms[i].collidesWith(prevX, prevY, nextX, nextY, this.getRadius())) {
                 this.velY = oldVelY * 0;
                 intervalVelY = this.velY;
-                if(this.cy < entityManager._platform[i].cy){
+                if(this.cy < entityManager._platforms[i].cy){
                     this._isJumping = false;
 
                 }

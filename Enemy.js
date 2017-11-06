@@ -126,4 +126,6 @@ Enemy.prototype.render = function (ctx) {
     // pass my scale into the sprite, for drawing
     this.sprite.scale = this.scale;
     this.sprite.drawWrappedCentredAt(ctx, this.cx, this.cy, this.rotation, frame); 
+
+    this.sprite.scale = origScale;
 };

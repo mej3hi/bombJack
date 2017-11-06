@@ -29,16 +29,14 @@ function Platform(descr) {
 
     this.cx = this.cx || 200;
     this.cy = this.cy || 200;
-    this.width = this.width || 40;
-    this.height = this.height || 40;
+    this.width = this.width || 100;
+    this.height = this.height || 10;
 
     this.halfWidth = this.width / 2;
     this.halfHeight = this.height / 2;
 
     // Default sprite and scale, if not otherwise specified
-    this.sprite = this.sprite || g_sprites.rock;
-    this.scale  = this.scale  || 1;
-
+    
 
 /*  
     // Diagnostics to check inheritance stuff
@@ -100,15 +98,7 @@ Platform.prototype.evaporateSound = new Audio(
 
 
 Platform.prototype.render = function (ctx) {
-    //var origScale = this.sprite.scale;
-
-    // pass my scale into the sprite, for drawing
-    /*this.sprite.scale = this.scale;
-
-    this.sprite.drawWrappedCentredAt(
-    ctx, this.cx, this.cy, this.rotation);*/
-
-  
+    
     util.fillBox(ctx, this.cx - this.halfWidth, this.cy - this.halfHeight, this.width,this.height, "yellow")
 
 };
