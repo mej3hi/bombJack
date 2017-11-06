@@ -120,6 +120,13 @@ fillText: function(ctx, x, y, msg, fontSize, fontFamliy, style){
     ctx.fillText (msg, x, y);
     ctx.fillStyle = oldStyle;
 
-}
+},
+
+
+sleep : function (ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+},
+
+
 
 };

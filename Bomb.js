@@ -21,7 +21,7 @@ function Bomb(descr) {
     this.cy = this.cy || 200;
 
     // Default sprite and scale, if not otherwise specified
-    this.sprite = this.sprite || g_sprites.rock;
+    this.sprite = this.sprite || g_sprites.bomb;
     this.scale  = this.scale  || 1;
 
     this.points =  this.points || 100;
@@ -53,6 +53,7 @@ Bomb.prototype.update = function (du) {
 };
 
 Bomb.prototype.collectBomb = function(){
+    this.playCollectBombSound();
     this.kill();
     return this.points;
 }
@@ -60,21 +61,21 @@ Bomb.prototype.collectBomb = function(){
 Bomb.prototype.getRadius = function () {
     return this.scale * (this.sprite.width / 2) * 0.9;
 };
-
-// HACKED-IN AUDIO (no preloading)
-Bomb.prototype.splitSound = new Audio(
-  "sounds/rockSplit.ogg");
-Bomb.prototype.evaporateSound = new Audio(
-  "sounds/rockEvaporate.ogg");
-
+Bomb.prototype.playCollectBombSound = function(){
+    Bomb.prototype.collectBombSound = new Audio(
+        "sounds/collectBomb.wav");
+    this.collectBombSound.play();
+}
 
 Bomb.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
 
     // pass my scale into the sprite, for drawing
-    this.sprite.scale = this.scale;
+    this.sprite.scale = this._scale;
 
-    this.sprite.drawWrappedCentredAt(
-    ctx, this.cx, this.cy, this.rotation);
+    var frame = [0,0,14,16];
+    this.sprite.drawWrappedCentredAt(ctx, this.cx, this.cy, this.rotation, frame);
+
+    this.sprite.scale = origScale;
 
 };

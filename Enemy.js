@@ -49,6 +49,19 @@ Enemy.prototype = new Entity();
     this.velY = velY;
 };*/
 
+Enemy.prototype.animate = [
+    [45, 53, 11, 15],
+    [61, 53, 11, 15],
+    [76, 53, 13, 15],
+    [92, 53, 11, 15],
+    [108, 53, 11, 15],
+    [123, 53, 13, 15]
+];
+
+Enemy.prototype.renderFrame = 0;
+Enemy.prototype.duPerAnimFrame = 12;
+Enemy.prototype.nextFrame = 0;
+
 Enemy.prototype.update = function (du) {
 
     // TODO: YOUR STUFF HERE! --- Unregister and check for death
@@ -82,7 +95,7 @@ Enemy.prototype.update = function (du) {
 };
 
 Enemy.prototype.getRadius = function () {
-    return this.scale * (this.sprite.width / 2) * 0.9;
+    return (30 / 2) ;     // Uses hardcoded sprite height, to be fixed
 };
 
 // HACKED-IN AUDIO (no preloading)
@@ -94,18 +107,23 @@ Enemy.prototype.evaporateSound = new Audio(
 
 Enemy.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
+    var frame;
+
+    if (this.movingRight) {
+        frame = this.animate[this.renderFrame];
+        if (this.nextFrame % this.duPerAnimFrame === 0) {
+            this.renderFrame = (this.renderFrame + 1) % 3;
+        }
+        this.nextFrame++;
+    } else {
+        frame = this.animate[this.renderFrame + 3];
+        if (this.nextFrame % this.duPerAnimFrame === 0) {
+            this.renderFrame = (this.renderFrame + 1) % 3;
+        }
+        this.nextFrame++;
+    }
 
     // pass my scale into the sprite, for drawing
     this.sprite.scale = this.scale;
-    if (this.movingRight) {
-        this.sprite.drawWrappedCentredAt(
-        ctx, this.cx, this.cy, this.rotation);
-    }
-    if (!this.movingRight) {
-        ctx.scale(-1, 1);
-        this.sprite.drawWrappedCentredAt(
-        ctx, -this.cx, this.cy, this.rotation);
-        ctx.scale(-1, 1);
-    }
-
+    this.sprite.drawWrappedCentredAt(ctx, this.cx, this.cy, this.rotation, frame); 
 };

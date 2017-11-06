@@ -55,6 +55,18 @@ deferredSetup : function () {
     this._categories = [this._platform, this._bomb ,this._enemies, this._bullets, this._jack];
 },
 
+eraseAllEntities : function(){
+    for (var c = 0; c < this._categories.length; ++c) {
+        var aCategory = this._categories[c];
+        var i = 0;
+        while (i < aCategory.length) {
+            aCategory[i].kill();
+            i++;
+        }
+    }
+    
+},
+
 init: function() {
     //this._generateShip();
 },
@@ -132,7 +144,7 @@ update: function(du) {
         }
     }
     
-    if (this._platform.length === 0) this._generateRocks();
+    //if (this._platform.length === 0) this._generateRocks();
 
 },
 

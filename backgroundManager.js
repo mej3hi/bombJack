@@ -21,11 +21,12 @@ update : function(du){
 
 render : function(ctx){
 	if(!this.image){
-		console.log("No image for the background")
+		//console.log("No image for the background")
 	}
-	var width = levelManager.mapWidth;
-	var height = levelManager.mapHeight;
-	ctx.drawImage(this.image,0,0,width,height);
+	else ctx.drawImage(this.image,0,0,600,560);
+	// var width = levelManager.mapWidth;
+	// var height = levelManager.mapHeight;
+	
 }
 
 }

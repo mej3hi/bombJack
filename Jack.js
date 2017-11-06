@@ -22,6 +22,7 @@ function Jack(descr) {
     this.cx = this.cx || 200;
     this.cy = this.cy || 200;
 
+
     this.origX = this.cx;
     this.origY = this.cy;
 
@@ -47,6 +48,24 @@ Jack.prototype.KEY_JUMP = 'W'.charCodeAt(0);
 Jack.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Jack.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 
+Jack.prototype.animate = [
+    [5, 3, 13, 17],
+    [25, 3, 14, 17],
+    [45, 3, 14, 17],
+    [66, 3, 14, 17],
+    [86, 3, 13, 17],
+    [105, 3, 14, 17],
+    [125, 3, 14, 17],
+    [145, 3, 13, 17],
+    [165, 3, 13, 17],
+    [185, 3, 13, 17],
+    [205, 3, 13, 17]
+];
+
+Jack.prototype.renderFrame = 0;
+Jack.prototype.duPerAnimFrame = 9;
+Jack.prototype.nextFrame = 0;
+
 //Jack.prototype.KEY_FIRE   = ' '.charCodeAt(0);
 
 // Initial, inheritable, default values
@@ -56,7 +75,7 @@ Jack.prototype.numSubSteps = 1;
 
 // HACKED-IN AUDIO (no preloading)
 Jack.prototype.warpSound = new Audio(
-    "sounds/dead.wav");
+    "sounds/warpSound.wav");
 
 Jack.prototype.warp = function () {
 
@@ -95,6 +114,7 @@ Jack.prototype._updateWarp = function (du) {
 Jack.prototype._moveToASafePlace = function () {
 
     // Move to a safe place some suitable distance away
+
     this.cx = this.origX;
     this.cy = this.origY;
        
@@ -123,7 +143,6 @@ Jack.prototype.maybeFireBullet = function () {
     
 };
 Jack.prototype.update = function (du) {
-
     // Handle warping
     if (this._isWarping) {
         this._updateWarp(du);
@@ -171,6 +190,9 @@ Jack.prototype.update = function (du) {
         if (ent instanceof Bomb){
             var score = ent.collectBomb();
             scoreboardManager.addScore(score);
+            levelManager.totalBomb--;
+            console.log(levelManager.totalBomb);
+
         }
         if (ent instanceof Platform){
             // if(ent.collidesWithTop(prevX, prevY, nextX, nextY, this.getRadius())) {
@@ -206,7 +228,7 @@ Jack.prototype.getScore = function(){
 
 
 Jack.prototype.computeSubStep = function (du) {
-    
+
     this.movePlayer(du);  
 
 };
@@ -231,11 +253,12 @@ Jack.prototype.calculateJump = function (accelY) {
 
 var NOMINAL_GRAVITY = 1.12;
 
-var NOMINAL_JUMP = +30.2;
+var NOMINAL_JUMP = +25.2;
 
 
 
 Jack.prototype.movePlayer = function (du) {
+
     var accelY = 0;
     var accelX = 0;
 
@@ -263,23 +286,30 @@ Jack.prototype.movePlayer = function (du) {
     var nextX = this.cx + intervalVelX * du;
     var nextY = this.cy + intervalVelY * du;
     
-    var minY = (g_sprites.jack.height / 2)*this.scale;
-   // var maxY = g_canvas.height - minY;
+    // var minY = 17*this.scale;
+    // // //var maxY = g_canvas.height - minY - 40;
+    // var maxY = levelManager.mapHeight - minY;
+
+    // var minX = (g_sprites.jack.width / 2)*this.scale;
+    // //var maxX = g_canvas.width - minX;
+    // var maxX = levelManager.mapWidth - minX;
+
+
+    var minY = 17*this.scale;                     // Uses hardcoded sprite height, to be fixed
     var maxY = levelManager.mapHeight - minY;
 
-    var minX = (g_sprites.jack.width / 2)*this.scale;
-    //var maxX = g_canvas.width - minX;
-    var maxX = levelManager.mapWidth - minX;
+    var minX = 13;                     // Uses hardcoded sprite width, to be fixed
+    var maxX = g_canvas.width - minX;
 
     // Ignore the bounce if the jack is already in
     // the "border zone" (to avoid trapping them there)
     
     
     if (keys[this.KEY_LEFT] && this.cx > 0 + this.getRadius()) {
-        this.cx -= 10 * du;
+        this.cx -= 6 * du;
     }
     if (keys[this.KEY_RIGHT] && this.cx < g_canvas.width - this.getRadius()) {
-        this.cx += 10 * du;
+        this.cx += 6 * du;
     }
 
 
@@ -321,7 +351,8 @@ Jack.prototype.movePlayer = function (du) {
 
 
 Jack.prototype.getRadius = function () {
-    return ((this.sprite.width / 2) * 0.9)*this.scale;
+    return (34 / 2) * 0.9;                  // Uses hardcoded height of sprite, to be fixed
+    
 };
 
 Jack.prototype.takeBulletHit = function () {
@@ -336,10 +367,33 @@ Jack.prototype.halt = function () {
 
 Jack.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
+    var frame;
+
     // pass my scale into the sprite, for drawing
-    this.sprite.scale = this.scale;
-    this.sprite.drawWrappedCentredAt(
-    ctx, this.cx, this.cy, this.rotation
-    );
+    this.sprite.scale = this._scale;
+
+
+    if (this.velX === 0 && this.velY === 0) {
+        frame = this.animate[0];
+    } else if (this.velY > 0) {
+        frame = this.animate[10];
+    } else if (this.velY < 0) {
+        frame = this.animate[9];
+    } else if (this.KEY_RIGHT) {
+        frame = this.animate[this.renderFrame + 1];
+        if (this.nextFrame % this.duPerAnimFrame === 0) {
+            this.renderFrame = (this.renderFrame + 1) % 4;
+        }
+        this.nextFrame++;
+    } else if (this.KEY_LEFT) {
+        frame = this.animate[this.renderFrame + 5];
+        if (this.nextFrame % this.duPerAnimFrame === 0) {
+            this.renderFrame = (this.renderFrame + 1) % 4;
+        }
+        this.nextFrame++;
+    }
+
+    this.sprite.drawWrappedCentredAt(ctx, this.cx, this.cy, this.rotation, frame);
+
     this.sprite.scale = origScale;
 };

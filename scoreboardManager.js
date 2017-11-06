@@ -20,20 +20,17 @@ update : function(du){
 
 
 render : function(ctx){
-
-	var posX =  g_canvas.width - 100;
-	var posY = g_canvas.height - 5; 
 	util.fillText(ctx, 
-		posX,
-		posY-20,
+		500,
+		575,
 		"SCORE",
 		this._fontSize,
 		this._fontFamliy,
 		this._fontColor);
 
 	util.fillText(ctx, 
-		posX,
-		posY,
+		500,
+		595,
 		this._score,
 		this._fontSize,
 		this._fontFamliy,

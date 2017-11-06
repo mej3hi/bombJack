@@ -7,12 +7,12 @@
 var levelManager = {
 
 level : 1,
-//totalBomb : 0,
+totalBomb : 0,
 
 _gridWidth : 40,
 _gridHeight : 40,
-mapWidth : 0,
-mapHeight :0,
+mapWidth : 600,
+mapHeight :560,
 
 _fontSize : "20px",
 _fontFamliy : "Arial",
@@ -21,28 +21,27 @@ _fontColor : "white",
 
 
 update : function(du){
-	/*if(this.totalBomb === 0){
-		console.log("næsta level");
-		//this.nextLevel();
-	}*/
+	if(this.totalBomb === 0 && this.level <3){		
+		this.changeLevel();
+		//this.demo();
+		
+	}
 
 },
-
+/*
 render : function(ctx){
-	var posX =  g_canvas.width - 330;
-	var posY = g_canvas.height - 5; 
 
 	util.fillText(ctx, 
-		posX,
-		posY-20,
+		270,
+		575,
 		"LEVEL",
 		this._fontSize,
 		this._fontFamliy,
 		this._fontColor);
 
 	util.fillText(ctx, 
-		posX+22,
-		posY,
+		292,
+		595,
 		this.level,
 		this._fontSize,
 		this._fontFamliy,
@@ -66,21 +65,52 @@ render : function(ctx){
 },
 
 
+*/
+changeLevel : function() {
+	this.clearLevel();		
+	this.nextLevel();
+	this.createLevel(this.level);
+},
+
+clearLevel : function() {
+	entityManager.eraseAllEntities();
+},
 
 nextLevel : function(){
-	this.level++;
-	this.getLevel(this.getLevel());
+	this.playLevelChangeSound();
+	this.level++;	
 },
 
 getLevel : function(){
-	switch(this.level){
-	case 1:
-		return this._levelInfo.one;
-		break;
-	}	
+	return this.level;	
 },
 
+createLevel : function (level) {
 
+	//console.log(this.level)
+	switch(level){
+
+	case 1:
+	    console.log(level)
+		return this.levelOne();
+		break;
+	case 2:
+		return this.levelTwo();
+		break;
+	
+	}
+
+
+
+},
+
+playLevelChangeSound : function(){
+    var levelChangeSound = new Audio(
+        "sounds/levelChangeSound.wav");
+    levelChangeSound.play();
+},
+
+/*
 createLevel : function (grideLevel) {
 	var grid = grideLevel.grid
 	this.setMapHeight(grid);
@@ -164,6 +194,167 @@ createLevel : function (grideLevel) {
 
 	
 },
+*/
+
+levelOne : function () {
+	entityManager.generateJack({
+        cx : 300,
+        cy : 500,
+        scale: 1,
+        //halfWidth : (g_sprites.jack.width * .2)/2,
+        //halfHeight : (g_sprites.jack.height * .2)/2
+    });
+
+	// PLATFORMS
+    entityManager.generatePlatform({ // *
+        cx : 120, cy : 450, scale : .2, width : 100, height : 20
+
+    });
+
+    entityManager.generatePlatform({ // * * 
+        cx : 220, cy : 150, scale : .2, width : 100, height : 20
+    });
+    entityManager.generatePlatform({
+        cx : 420, cy : 100, scale : .2, width : 100, height : 20
+
+    });
+
+    entityManager.generatePlatform({
+        cx : 350, cy : 350, scale : .2, width : 100, height : 20
+
+    });
+    entityManager.generatePlatform({
+        cx : 450, cy : 450, scale : .2, width : 200, height : 20
+
+    });
+
+
+    // ENEMIES
+    entityManager.generateEnemy({ // *
+        cx : 120, cy : 425, scale : 1, range : 100, velX: 1.2
+        
+    });
+    entityManager.generateEnemy({ // * * 
+        cx : 220, cy : 125, scale : 1, range : 100, velX: 0.9
+    });
+
+    entityManager.generateEnemy({
+        cx : 420, cy : 75, scale : 1, range : 100, velX: 1
+    });
+
+
+
+     // BOMBS
+    entityManager.generateBomb({cx: 80, cy: 20, scale: 2.5});
+    entityManager.generateBomb({cx: 140, cy: 20, scale: 2.5});
+    entityManager.generateBomb({cx: 200, cy: 20, scale: 2.5});
+    
+
+    entityManager.generateBomb({cx: 20, cy: 200, scale: 2.5});
+    entityManager.generateBomb({cx: 20, cy: 260, scale: 2.5});
+    entityManager.generateBomb({cx: 20, cy: 320, scale: 2.5});
+    entityManager.generateBomb({cx: 20, cy: 380, scale: 2.5});
+
+    entityManager.generateBomb({cx: 400, cy: 420, scale: 2.5});
+    entityManager.generateBomb({cx: 460, cy: 420, scale: 2.5});
+    entityManager.generateBomb({cx: 520, cy: 420, scale: 2.5});
+
+    entityManager.generateBomb({cx: 400, cy: 20, scale: 2.5});
+    entityManager.generateBomb({cx: 460, cy: 20, scale: 2.5});
+    entityManager.generateBomb({cx: 520, cy: 20, scale: 2.5});
+
+    entityManager.generateBomb({cx: 80, cy: 540, scale: 2.5});
+    entityManager.generateBomb({cx: 140, cy: 540, scale: 2.5});
+    entityManager.generateBomb({cx: 200, cy: 540, scale: 2.5});
+
+    entityManager.generateBomb({cx: 580, cy: 200, scale: 2.5});
+    entityManager.generateBomb({cx: 580, cy: 260, scale: 2.5});
+    entityManager.generateBomb({cx: 580, cy: 320, scale: 2.5});
+    entityManager.generateBomb({cx: 580, cy: 380, scale: 2.5});
+
+    entityManager.generateBomb({cx: 400, cy: 140, scale: 2.5});
+    entityManager.generateBomb({cx: 460, cy: 140, scale: 2.5});
+    entityManager.generateBomb({cx: 520, cy: 140, scale: 2.5});
+
+
+    this.totalBomb = 5; //23;
+    backgroundManager.setBackground("img/backgroundEgypt.png");
+},
+
+levelTwo : function () {
+	entityManager.generateJack({
+        cx : 300,
+        cy : 500,
+        scale: 1,
+        //halfWidth : (g_sprites.jack.width * .2)/2,
+        //halfHeight : (g_sprites.jack.height * .2)/2
+    });
+
+	// PLATFORMS
+    entityManager.generatePlatform({ // *
+        cx : 220, cy : 350, scale : .2, width : 100, height : 20
+
+    });
+
+    entityManager.generatePlatform({ // * * 
+        cx : 120, cy : 250, scale : .2, width : 100, height : 20
+    });
+    entityManager.generatePlatform({
+        cx : 420, cy : 100, scale : .2, width : 100, height : 20
+
+    });
+
+    // ENEMIES
+    entityManager.generateEnemy({ // *
+        cx : 120, cy : 425, scale : 1, range : 100, velX: 1.2
+        
+    });
+   
+
+    entityManager.generateEnemy({
+        cx : 420, cy : 75, scale : 1, range : 100, velX: 1
+    });
+
+
+
+     // BOMBS
+    entityManager.generateBomb({cx: 80, cy: 20, scale: 2.5});
+    entityManager.generateBomb({cx: 140, cy: 20, scale: 2.5});
+    entityManager.generateBomb({cx: 200, cy: 20, scale: 2.5});
+    
+
+    // entityManager.generateBomb({cx: 20, cy: 200, scale: 2.5});
+    // entityManager.generateBomb({cx: 20, cy: 260, scale: 2.5});
+    // entityManager.generateBomb({cx: 20, cy: 320, scale: 2.5});
+    // entityManager.generateBomb({cx: 20, cy: 380, scale: 2.5});
+
+    // entityManager.generateBomb({cx: 400, cy: 420, scale: 2.5});
+    // entityManager.generateBomb({cx: 460, cy: 420, scale: 2.5});
+    // entityManager.generateBomb({cx: 520, cy: 420, scale: 2.5});
+
+    // entityManager.generateBomb({cx: 400, cy: 20, scale: 2.5});
+    // entityManager.generateBomb({cx: 460, cy: 20, scale: 2.5});
+    // entityManager.generateBomb({cx: 520, cy: 20, scale: 2.5});
+
+    // entityManager.generateBomb({cx: 80, cy: 540, scale: 2.5});
+    // entityManager.generateBomb({cx: 140, cy: 540, scale: 2.5});
+    // entityManager.generateBomb({cx: 200, cy: 540, scale: 2.5});
+
+    // entityManager.generateBomb({cx: 580, cy: 200, scale: 2.5});
+    // entityManager.generateBomb({cx: 580, cy: 260, scale: 2.5});
+    // entityManager.generateBomb({cx: 580, cy: 320, scale: 2.5});
+    // entityManager.generateBomb({cx: 580, cy: 380, scale: 2.5});
+
+    // entityManager.generateBomb({cx: 400, cy: 140, scale: 2.5});
+    // entityManager.generateBomb({cx: 460, cy: 140, scale: 2.5});
+    // entityManager.generateBomb({cx: 520, cy: 140, scale: 2.5});
+
+    backgroundManager.setBackground("img/backgroundLevel2.png");
+
+    this.totalBomb = 3;	
+    //this.totalBomb = entityManager._bomb.length;
+    //backgroundManager.setBackground("img/backgroundEgypt.png");
+},
 
 setMapHeight : function(grid){
 	this.mapHeight = grid.length * this._gridHeight;
@@ -178,6 +369,29 @@ setmapWidth : function(grid){
 // Level info for each level 
 _levelInfo : {
 	
+
+	one:{ 
+	/*
+		background: "img/backgroundEgypt.png",
+
+		grid:[
+			[   0,   0,   0,   0,   0,   0,   0,   0,   2,   0,   0,   0,   0,   0,   0],
+			[   0,   3,   3,   3,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+		    [   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+			[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+			[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+			[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   3,   0],
+			[   0,   0,   0,   0,   2,   0,   0,   0,   0,   0,   0,   0,   0,   3,   0],
+			[   0,   0,   4,   4,   4,   4,   4,   0,   0,   0,   0,   0,   0,   3,   0],
+			[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   3,   0],
+			[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+			[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+			[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+			[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+			[   0,   0,   0,   0,   0,   0,   0,   1,   0,   0,   0,   0,   0,   0,   2]
+		]
+
+	},
 
 	one:{ 
 
@@ -199,6 +413,9 @@ _levelInfo : {
 			[   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
 			[   0,   0,   0,   0,   0,   0,   0,   1,   0,   0,   0,   0,   0,   0,   2]
 		]
+	*/
+
+
 
 	},
 

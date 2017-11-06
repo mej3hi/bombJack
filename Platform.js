@@ -65,18 +65,21 @@ Platform.prototype.update = function (du) {
 };
 
 Platform.prototype.getRadius = function () {
-    return this.scale * (this.sprite.width / 2) * 0.9;
+    //return this.scale * (this.sprite.width / 2) * 0.9;
 };
 
 Platform.prototype.collidesWith = function (prevX, prevY, 
                                           nextX, nextY, 
                                           r) {
-    var platformEdge = this.cy-this.halfHeight;
+    var platformEdgeTop = this.cy - this.halfHeight;
+    var platformEdgeBottom = this.cy + this.halfHeight;
+    
     // Check Y coords
 
     
-    if ((nextY + r > platformEdge && prevY + r <= platformEdge)||
-        (nextY - r < platformEdge && prevY - r >= platformEdge)) {
+    if ((nextY + r > platformEdgeTop && prevY + r <= platformEdgeTop)||
+        (nextY - r < platformEdgeBottom && prevY - r >= platformEdgeBottom)) {
+
         // Check X coords
         if (nextX + r >= this.cx - this.halfWidth &&
             nextX - r <= this.cx + this.halfWidth) {
@@ -97,7 +100,7 @@ Platform.prototype.evaporateSound = new Audio(
 
 
 Platform.prototype.render = function (ctx) {
-    var origScale = this.sprite.scale;
+    //var origScale = this.sprite.scale;
 
     // pass my scale into the sprite, for drawing
     /*this.sprite.scale = this.scale;
