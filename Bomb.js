@@ -24,7 +24,8 @@ function Bomb(descr) {
     this.sprite = this.sprite || g_sprites.bomb;
     this.scale  = this.scale  || 1;
 
-    this.points =  this.points || 100;
+    this.points =  this.points || 100;  
+    this.collected = false; 
 
 
 /*  
@@ -39,24 +40,34 @@ function Bomb(descr) {
 
 Bomb.prototype = new Entity();
 
+Bomb.prototype.pointsLifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
+
 Bomb.prototype.update = function (du) {
 
     // TODO: YOUR STUFF HERE! --- Unregister and check for death
     spatialManager.unregister(this);
      
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
+    if(this.collected){
+        this.pointsLifeSpan -= du;
+    }
+
+    if (this.pointsLifeSpan < 0) return entityManager.KILL_ME_NOW;
     
     // TODO: YOUR STUFF HERE! --- (Re-)Register
-    spatialManager.register(this);
-     
+    if (!this.collected){
+        spatialManager.register(this);
+    }
 
 };
 
 Bomb.prototype.collectBomb = function(){
     this.playCollectBombSound();
-    this.kill();
+    this.collected = true;
     return this.points;
 }
+
+
 
 Bomb.prototype.getRadius = function () {
     return this.scale * (this.sprite.width / 2) * 0.9;
@@ -70,11 +81,21 @@ Bomb.prototype.playCollectBombSound = function(){
 Bomb.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
 
-    // pass my scale into the sprite, for drawing
-    this.sprite.scale = this._scale;
+     // pass my scale into the sprite, for drawing
+    this.sprite.scale = this.scale;
 
     var frame = [0,0,14,16];
-    this.sprite.drawWrappedCentredAt(ctx, this.cx, this.cy, this.rotation, frame);
+   
+
+    if (this.collected) {
+        ctx.font="20px Georgia";
+        if (this.cx > 550) ctx.fillText(this.points,this.cx-50,this.cy);
+        else if (this.cx < 50) ctx.fillText(this.points,this.cx+20,this.cy);
+        else ctx.fillText(this.points,this.cx,this.cy);
+    }
+    else  this.sprite.drawWrappedCentredAt(ctx, this.cx, this.cy, this.rotation, frame);
+
+   
 
     this.sprite.scale = origScale;
 
