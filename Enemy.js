@@ -30,7 +30,7 @@ function Enemy(descr) {
       
     // Default sprite and scale, if not otherwise specified
     this.sprite = this.sprite || g_sprites.enemy;
-    this.scale  = this.scale  || 1;
+    this.scale  = this.scale  || 2;
 
     this.movingRight = false;
 /*  
@@ -95,8 +95,9 @@ Enemy.prototype.update = function (du) {
 };
 
 Enemy.prototype.getRadius = function () {
-    return (30 / 2) ;     // Uses hardcoded sprite height, to be fixed
+    return this.scale * (this.animate[0][3]/2) * 0.9;
 };
+
 
 // HACKED-IN AUDIO (no preloading)
 Enemy.prototype.splitSound = new Audio(
@@ -125,7 +126,7 @@ Enemy.prototype.render = function (ctx) {
 
     // pass my scale into the sprite, for drawing
     this.sprite.scale = this.scale;
-    this.sprite.drawWrappedCentredAt(ctx, this.cx, this.cy, this.rotation, frame); 
+    this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, frame); 
 
     this.sprite.scale = origScale;
 };

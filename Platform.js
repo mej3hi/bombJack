@@ -79,8 +79,8 @@ Platform.prototype.collidesWith = function (prevX, prevY,
         (nextY - r < platformEdgeBottom && prevY - r >= platformEdgeBottom)) {
 
         // Check X coords
-        if (nextX + r >= this.cx - this.halfWidth &&
-            nextX - r <= this.cx + this.halfWidth) {
+        if (nextX + r/2 >= this.cx - this.halfWidth &&
+            nextX - r/2 <= this.cx + this.halfWidth) {
 
             // It's a hit!
             return true;

@@ -47,7 +47,8 @@ var g_ctx = g_canvas.getContext("2d");
 // ====================
 
 function initialFirstLevel() {
-    
+    //intro.callBack = levelManager.firstLevel;
+    //intro.jack = new Jack({cx : 20,cy : 500});
     levelManager.createLevel(levelManager.getLevel());
     
 }
@@ -80,8 +81,11 @@ function updateSimulation(du) {
     
     processDiagnostics();
     
-    entityManager.update(du);
+    if(intro.hasBeenPlayed) entityManager.update(du);
+    else intro.update(du);
     levelManager.update(du);
+    
+    
 
     // Prevent perpetual firing!
    // eatKey(Ship.prototype.KEY_FIRE);
@@ -166,12 +170,17 @@ function renderSimulation(ctx) {
 
  
     backgroundManager.render(ctx);
-    entityManager.render(ctx);
+
+    if(intro.hasBeenPlayed) entityManager.render(ctx);
+    else intro.render(ctx);
+
     scoreboardManager.render(ctx);
     lifeManager.render(ctx);
+    levelManager.render(ctx);
+
 
    
-    levelManager.render(ctx);
+    
     if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
 
@@ -190,6 +199,7 @@ function requestPreloads() {
         bomb   : "img/bomb.png",
         enemy  : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
         jack   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
+        bombJackSprite : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -204,11 +214,13 @@ function preloadDone() {
     g_sprites.bomb  = new Sprite(g_images.bomb);
     g_sprites.enemy = new Sprite(g_images.enemy);
     g_sprites.jack  = new Sprite(g_images.jack);
+    g_sprites.intro = new Sprite(g_images.bombJackSprite);
 
     g_sprites.bullet = new Sprite(g_images.ship);
     g_sprites.bullet.scale = 0.25;
 
     entityManager.init();
+    //intro.jack = new Jack({cx : 20,cy : 500});
     initialFirstLevel();
 
     main.init();

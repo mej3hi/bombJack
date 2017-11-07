@@ -41,7 +41,7 @@ Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation, frame) {
     ctx.translate(-cx, -cy);
     // drawImage expects "top-left" coords, so we offset our destination
     // coords accordingly, to draw our sprite centred at the origin
-    ctx.drawImage(this.image, cropX, cropY, cropWidth, cropHeight, cx - cropWidth, cy-cropHeight, cropWidth*2, cropHeight*2);
+    ctx.drawImage(this.image, cropX, cropY, cropWidth, cropHeight, cx - (cropWidth/2), cy-(cropHeight/2), cropWidth, cropHeight);
     
     ctx.restore();
 };  

@@ -22,7 +22,7 @@ function Bomb(descr) {
 
     // Default sprite and scale, if not otherwise specified
     this.sprite = this.sprite || g_sprites.bomb;
-    this.scale  = this.scale  || 1;
+    this.scale  = this.scale  || 2;
 
     this.points =  this.points || 100;  
     this.collected = false; 
@@ -92,7 +92,7 @@ Bomb.prototype.render = function (ctx) {
         else if (this.cx < 50) ctx.fillText(this.points,this.cx+20,this.cy);
         else ctx.fillText(this.points,this.cx,this.cy);
     }
-    else  this.sprite.drawWrappedCentredAt(ctx, this.cx, this.cy, this.rotation, frame);
+    else  this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, frame);
 
    
 

@@ -49,6 +49,7 @@ render : function(ctx){
 
 
 changeLevel : function() {
+
 	this.clearLevel();		
 	this.nextLevel();
 	this.createLevel(this.level);
