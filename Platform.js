@@ -90,15 +90,16 @@ Platform.prototype.collidesWith = function (prevX, prevY,
     return false;
 };
 
-// HACKED-IN AUDIO (no preloading)
-Platform.prototype.splitSound = new Audio(
-  "sounds/rockSplit.ogg");
-Platform.prototype.evaporateSound = new Audio(
-  "sounds/rockEvaporate.ogg");
-
 
 Platform.prototype.render = function (ctx) {
+
+    var grd=ctx.createLinearGradient(this.cx,this.cy - this.halfHeight,this.cx,this.cy + this.halfHeight);
+        grd.addColorStop(0,'rgba(254, 204, 0 ,1)');
+        grd.addColorStop(0.5,'rgba(254, 135, 0 ,1)');
+        grd.addColorStop(1.,'rgba(254, 37, 0 ,1)');
     
-    util.fillBox(ctx, this.cx - this.halfWidth, this.cy - this.halfHeight, this.width,this.height, "yellow")
+    util.fillCircle(ctx, this.cx-this.halfWidth, this.cy, this.halfHeight,grd)
+    util.fillCircle(ctx, this.cx+this.halfWidth, this.cy, this.halfHeight,grd)
+    util.fillBox(ctx, this.cx - this.halfWidth, this.cy - this.halfHeight, this.width,this.height, grd)
 
 };

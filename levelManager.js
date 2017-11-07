@@ -12,16 +12,42 @@ totalBomb : 0,
 mapWidth : 600,
 mapHeight :560,
 
+startCx: -50,
+startCy: 300,
+renderStarSprite: false,
+
 _fontSize : "20px",
 _fontFamliy : "Arial",
 _fontColor : "white",
 
-
+lifeSpan: 5000/ NOMINAL_UPDATE_INTERVAL,
 
 update : function(du){
-	if(entityManager._bombs.length <= 0 && this.level <3){		
-		this.changeLevel();
-		//this.demo();		
+	if(entityManager._bombs.length <= 15 && this.level <3){
+
+
+		if(this.lifeSpan === (5000/ NOMINAL_UPDATE_INTERVAL) ){
+			this.clearLevel();
+			this.nextLevel();
+			var a = this.getMap(this.level);
+			backgroundManager.setBackground(a.background)
+			this.renderStarSprite = true;
+		}
+
+		this.lifeSpan -=du;
+
+		if(this.lifeSpan < 0){
+			this.createLevel(this.level);
+			this.lifeSpan = 5000/ NOMINAL_UPDATE_INTERVAL;
+			this.renderStarSprite = false;
+		}	
+
+		this.startCx +=du*4;		
+		if(this.startCx >= 300){
+			this.startCx=300;
+		}
+
+		
 	}
 
 },
@@ -43,17 +69,31 @@ render : function(ctx){
 		this._fontSize,
 		this._fontFamliy,
 		this._fontColor);
+
+
+	if(this.renderStarSprite){
+		var origScale = g_sprites.bombJack.scale;
+		g_sprites.bombJack.scale = 3;
+			
+		g_sprites.bombJack.drawCentredAt(ctx,this.startCx,this.startCy,0,[240, 260, 50,15]);
+		g_sprites.bombJack.drawCentredAt(ctx,600-this.startCx,this.startCy,0,[300, 260, 50,15]);
+
+		g_sprites.bombJack.scale = origScale;
+	}
+	
 	
 },
 
 
-
 changeLevel : function() {
 
-	this.clearLevel();		
+	this.clearLevel();
+
 	this.nextLevel();
 	this.createLevel(this.level);
 },
+
+
 
 clearLevel : function() {
 	entityManager.eraseAllEntities();
@@ -200,8 +240,8 @@ _levelInfo : {
 
     	// ENEMIES
     	enemy : [
-		    {cx : 120, cy : 425, scale : 1, range : 100, velX: 1.2},
-		    {cx : 420, cy : 75, scale : 1, range : 100, velX: 1},
+		    {cx : 120, cy : 425, range : 100, velX: 1.2},
+		    {cx : 420, cy : 75, range : 100, velX: 1},
     	],
 
 

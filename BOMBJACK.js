@@ -47,8 +47,6 @@ var g_ctx = g_canvas.getContext("2d");
 // ====================
 
 function initialFirstLevel() {
-    //intro.callBack = levelManager.firstLevel;
-    //intro.jack = new Jack({cx : 20,cy : 500});
     levelManager.createLevel(levelManager.getLevel());
     
 }
@@ -103,7 +101,6 @@ var KEY_MIXED   = keyCode('M');;
 var KEY_GRAVITY = keyCode('G');
 var KEY_AVE_VEL = keyCode('V');
 var KEY_SPATIAL = keyCode('X');
-var KEY_LEVEL   = keyCode('Z');
 
 var KEY_HALT  = keyCode('H');
 var KEY_RESET = keyCode('R');
@@ -126,11 +123,7 @@ function processDiagnostics() {
 
     if (eatKey(KEY_SPATIAL)) g_renderSpatialDebug = !g_renderSpatialDebug;
 
-    if (eatKey(KEY_LEVEL)) g_renderLevelDebug = !g_renderLevelDebug;
-
     if (eatKey(KEY_HALT)) entityManager.haltShips();
-
-    //if (eatKey(KEY_RESET)) entityManager.resetShips();
 
     if (eatKey(KEY_0)) entityManager.toggleRocks();
 
@@ -178,9 +171,6 @@ function renderSimulation(ctx) {
     lifeManager.render(ctx);
     levelManager.render(ctx);
 
-
-   
-    
     if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
 
@@ -194,9 +184,7 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        ship   : "img/ship.png",
-        ship2  : "img/ship.png",
-        bomb   : "img/bomb.png",
+        bomb   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
         enemy  : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
         jack   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
         bombJackSprite : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
@@ -209,18 +197,13 @@ var g_sprites = {};
 
 function preloadDone() {
 
-    g_sprites.ship  = new Sprite(g_images.ship);
-    g_sprites.ship2 = new Sprite(g_images.ship2);
     g_sprites.bomb  = new Sprite(g_images.bomb);
     g_sprites.enemy = new Sprite(g_images.enemy);
     g_sprites.jack  = new Sprite(g_images.jack);
     g_sprites.intro = new Sprite(g_images.bombJackSprite);
-
-    g_sprites.bullet = new Sprite(g_images.ship);
-    g_sprites.bullet.scale = 0.25;
+    g_sprites.bombJack = new Sprite(g_images.bombJackSprite);
 
     entityManager.init();
-    //intro.jack = new Jack({cx : 20,cy : 500});
     initialFirstLevel();
 
     main.init();

@@ -40,6 +40,11 @@ function Bomb(descr) {
 
 Bomb.prototype = new Entity();
 
+Bomb.prototype.animate = [
+    [25, 137, 14, 17],
+];
+
+
 Bomb.prototype.pointsLifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
 
 Bomb.prototype.update = function (du) {
@@ -70,7 +75,7 @@ Bomb.prototype.collectBomb = function(){
 
 
 Bomb.prototype.getRadius = function () {
-    return this.scale * (this.sprite.width / 2) * 0.9;
+    return this.scale * 8 * 0.9;
 };
 Bomb.prototype.playCollectBombSound = function(){
     Bomb.prototype.collectBombSound = new Audio(
@@ -86,16 +91,15 @@ Bomb.prototype.render = function (ctx) {
     var frame = [0,0,14,16];
    
 
+       
     if (this.collected) {
         ctx.font="20px Georgia";
         if (this.cx > 550) ctx.fillText(this.points,this.cx-50,this.cy);
         else if (this.cx < 50) ctx.fillText(this.points,this.cx+20,this.cy);
         else ctx.fillText(this.points,this.cx,this.cy);
     }
-    else  this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, frame);
-
-   
-
+    else  this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, this.animate[0]);
+    
     this.sprite.scale = origScale;
 
 };
