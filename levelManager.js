@@ -182,7 +182,7 @@ createLevel : function (level) {
 _levelInfo : {
 
 
-	two:{
+	one:{
 
 		background: "img/backgroundEgypt.png",
 		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
@@ -268,7 +268,7 @@ _levelInfo : {
 
 	},
 
-	one:{
+	two:{
 
 		background: "img/backgroundGreek.png",
 		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
