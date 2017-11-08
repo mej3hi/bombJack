@@ -38,6 +38,8 @@ function Jack(descr) {
     this.scale = this.scale || 2;
     this._isWarping = false;
     this._isJumping = false;
+
+    this.lifesLeft = this.lifesLeft || 3;
 };
 
 Jack.prototype = new Entity();
@@ -64,7 +66,6 @@ Jack.prototype.animate = [
     [205, 3, 13, 17]
 ];
 
-
 Jack.prototype.renderFrame = 0;
 Jack.prototype.duPerAnimFrame = 9;
 Jack.prototype.nextFrame = 0;
@@ -83,7 +84,7 @@ Jack.prototype.warpSound = new Audio(
 Jack.prototype.warp = function () {
 
     this._isWarping = true;
-    this._scaleDirn = -2;
+    this._scaleDirn = -1;
     this.warpSound.play();
     
     // Unregister me from my old posistion
@@ -96,11 +97,11 @@ Jack.prototype._updateWarp = function (du) {
     var SHRINK_RATE = 3 / SECS_TO_NOMINALS;
     this.scale += this._scaleDirn * SHRINK_RATE * du;
     
-    if (this.scale < 0.2) {
+    if (this.scale < 0.2 ) {
     
         this._moveToASafePlace();
         this.halt();
-        this._scaleDirn = 2;
+        this._scaleDirn = 1;
         
     } else if (this.scale > 2) {
     
@@ -147,7 +148,9 @@ Jack.prototype.maybeFireBullet = function () {
 };
 Jack.prototype.update = function (du) {
     // Handle warping
-    if (this._isWarping) {
+
+    // Check if Jack has 3 lifes to skip warping after game over.
+    if (this._isWarping && lifeManager.getJackLife() !=3) {
         this._updateWarp(du);
         return;
     }
@@ -187,7 +190,9 @@ Jack.prototype.update = function (du) {
 
         if (ent instanceof Enemy){
             this.warp();
+
             lifeManager.takeJackLife(1);
+            console.log(lifeManager.getJackLife())
         }
 
         if (ent instanceof Bomb){

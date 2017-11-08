@@ -85,6 +85,14 @@ render : function(ctx){
 },
 
 
+backToFirstLevel : function() {
+	//lifeManager._jackLife = 3;
+	this.clearLevel();		
+	this.level = 1;
+	this.createLevel(this.level);
+},
+
+
 changeLevel : function() {
 
 	this.clearLevel();

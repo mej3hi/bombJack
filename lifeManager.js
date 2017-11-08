@@ -1,15 +1,25 @@
 var lifeManager = {
 
 _jackLife : 3,
+gameOver  : false,
 
 takeJackLife : function(life){
 	this._jackLife -= life;
 },
 
 update : function(du){
+	if (this._jackLife === 0){
+		
+		levelManager.backToFirstLevel();
+		this._jackLife = 3;
+
+	}
   
 },
 
+getJackLife : function(){
+	return this._jackLife;
+},
 
 render : function(ctx){
 	//console.log(",life manager render",g_sprites.jack)
