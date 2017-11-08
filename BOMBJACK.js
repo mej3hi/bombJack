@@ -48,7 +48,10 @@ var g_ctx = g_canvas.getContext("2d");
 
 function initialFirstLevel() {
     levelManager.createLevel(levelManager.getLevel());
-    
+}
+
+function init() {
+    intro.playIntro(initialFirstLevel)
 }
 
 // =============
@@ -76,17 +79,19 @@ function gatherInputs() {
 // GAME-SPECIFIC UPDATE LOGIC
 
 function updateSimulation(du) {
-    
+
     processDiagnostics();
-    
-    levelManager.update(du);
-    lifeManager.update(du);
-    if(intro.hasBeenPlayed) entityManager.update(du);
+
+    if(intro.hasBeenPlayed){
+      levelManager.update(du);
+      lifeManager.update(du);
+      entityManager.update(du);
+    }
     else intro.update(du);
-    
-    
-    
-    
+
+
+
+
 
     // Prevent perpetual firing!
    // eatKey(Ship.prototype.KEY_FIRE);
@@ -108,19 +113,10 @@ var KEY_SPATIAL = keyCode('X');
 var KEY_HALT  = keyCode('H');
 var KEY_RESET = keyCode('R');
 
-var KEY_0 = keyCode('0');
-
-var KEY_1 = keyCode('1');
-var KEY_2 = keyCode('2');
-
-var KEY_K = keyCode('K');
-
 function processDiagnostics() {
 
     if (eatKey(KEY_MIXED))
         g_allowMixedActions = !g_allowMixedActions;
-
-    if (eatKey(KEY_GRAVITY)) g_useGravity = !g_useGravity;
 
     if (eatKey(KEY_AVE_VEL)) g_useAveVel = !g_useAveVel;
 
@@ -128,23 +124,7 @@ function processDiagnostics() {
 
     if (eatKey(KEY_HALT)) entityManager.haltShips();
 
-    if (eatKey(KEY_0)) entityManager.toggleRocks();
 
-    if (eatKey(KEY_1)) entityManager.generateShip({
-        cx : g_mouseX,
-        cy : g_mouseY,
-        
-        sprite : g_sprites.ship});
-
-    if (eatKey(KEY_2)) entityManager.generateShip({
-        cx : g_mouseX,
-        cy : g_mouseY,
-        
-        sprite : g_sprites.ship2
-        });
-
-    if (eatKey(KEY_K)) entityManager.killNearestShip(
-        g_mouseX, g_mouseY);
 }
 
 
@@ -164,16 +144,10 @@ function processDiagnostics() {
 
 function renderSimulation(ctx) {
 
- 
+
     backgroundManager.render(ctx);
-
-    if(lifeManager.gameOver) intro.render(ctx);
-
-    if(intro.hasBeenPlayed) entityManager.render(ctx);
-    else intro.render(ctx);
-
-
-
+    if(!intro.hasBeenPlayed) intro.render(ctx);
+    entityManager.render(ctx);
     scoreboardManager.render(ctx);
     lifeManager.render(ctx);
     levelManager.render(ctx);
@@ -211,7 +185,8 @@ function preloadDone() {
     g_sprites.bombJack = new Sprite(g_images.bombJackSprite);
 
     entityManager.init();
-    initialFirstLevel();
+    init();
+    //initialFirstLevel();
 
     main.init();
 }

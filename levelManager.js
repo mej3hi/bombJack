@@ -167,7 +167,9 @@ createLevel : function (level) {
 		};
 	}
 
-	backgroundManager.setBackground(level.background)
+	backgroundManager.setBackground(level.background);
+	soundManager.setBackgroundMusic(level.backgroundSound);
+
 	
 },
 
@@ -179,6 +181,7 @@ _levelInfo : {
 	one:{
 
 		background: "img/backgroundEgypt.png",
+		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
 
 		jack:{cx : 300,cy : 500}, 
 
@@ -234,7 +237,8 @@ _levelInfo : {
 
 	two:{
 
-		background: "img/backgroundLevel2.png",
+		background: "img/backgroundGreek.png",
+		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
 
 		jack: {cx : 300,cy : 500},
    

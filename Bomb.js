@@ -24,11 +24,11 @@ function Bomb(descr) {
     this.sprite = this.sprite || g_sprites.bomb;
     this.scale  = this.scale  || 2;
 
-    this.points =  this.points || 100;  
-    this.collected = false; 
+    this.points =  this.points || 100;
+    this.collected = false;
 
 
-/*  
+/*
     // Diagnostics to check inheritance stuff
     this._EnemyProperty = true;
     console.dir(this);
@@ -51,14 +51,14 @@ Bomb.prototype.update = function (du) {
 
     // TODO: YOUR STUFF HERE! --- Unregister and check for death
     spatialManager.unregister(this);
-     
+
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
     if(this.collected){
         this.pointsLifeSpan -= du;
     }
 
     if (this.pointsLifeSpan < 0) return entityManager.KILL_ME_NOW;
-    
+
     // TODO: YOUR STUFF HERE! --- (Re-)Register
     if (!this.collected){
         spatialManager.register(this);
@@ -89,9 +89,9 @@ Bomb.prototype.render = function (ctx) {
     this.sprite.scale = this.scale;
 
     var frame = [0,0,14,16];
-   
 
-       
+
+
     if (this.collected) {
         ctx.font="20px Georgia";
         if (this.cx > 550) ctx.fillText(this.points,this.cx-50,this.cy);
@@ -99,7 +99,7 @@ Bomb.prototype.render = function (ctx) {
         else ctx.fillText(this.points,this.cx,this.cy);
     }
     else  this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, this.animate[0]);
-    
+
     this.sprite.scale = origScale;
 
 };

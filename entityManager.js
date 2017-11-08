@@ -17,7 +17,7 @@ with suitable 'data' and 'methods'.
 
 
 // Tell jslint not to complain about my use of underscore prefixes (nomen),
-// my flattening of some indentation (white), or my use of incr/decr ops 
+// my flattening of some indentation (white), or my use of incr/decr ops
 // (plusplus).
 //
 /*jslint nomen: true, white: true, plusplus: true*/
@@ -64,23 +64,13 @@ eraseAllEntities : function(){
             i++;
         }
     }
-    
+
 },
 
 init: function() {
     //this._generateShip();
 },
 
-fireBullet: function(cx, cy, velX, velY, rotation) {
-    this._bullets.push(new Bullet({
-        cx   : cx,
-        cy   : cy,
-        velX : velX,
-        velY : velY,
-
-        rotation : rotation
-    }));
-},
 
 generatePlatform : function(descr) {
     this._platforms.push(new Platform(descr));
@@ -97,29 +87,6 @@ generateEnemy : function(descr) {
 generateJack : function(descr) {
     this._jack.push(new Jack(descr));
 },
-
-
-killNearestShip : function(xPos, yPos) {
-    var theShip = this._findNearestShip(xPos, yPos).theShip;
-    if (theShip) {
-        theShip.kill();
-    }
-},
-
-yoinkNearestShip : function(xPos, yPos) {
-    var theShip = this._findNearestShip(xPos, yPos).theShip;
-    if (theShip) {
-        theShip.setPos(xPos, yPos);
-    }
-},
-
-resetShips: function() {
-    this._forEachOf(this._ships, Ship.prototype.reset);
-},
-
-haltShips: function() {
-    this._forEachOf(this._ships, Ship.prototype.halt);
-},	
 
 
 update: function(du) {
@@ -143,7 +110,7 @@ update: function(du) {
             }
         }
     }
-    
+
     //if (this._platforms.length === 0) this._generateRocks();
 
 },
@@ -170,4 +137,3 @@ render: function(ctx) {
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();
-
