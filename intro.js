@@ -27,7 +27,7 @@ _fontSize : "20px",
 _fontFamliy : "Arial",
 _fontColor : "white",
 
-lifeSpan: 10/ NOMINAL_UPDATE_INTERVAL,
+lifeSpan: 100/ NOMINAL_UPDATE_INTERVAL,
 
 frame: [3,300,195,80],
 

@@ -81,9 +81,12 @@ function updateSimulation(du) {
     
     processDiagnostics();
     
+    levelManager.update(du);
+    lifeManager.update(du);
     if(intro.hasBeenPlayed) entityManager.update(du);
     else intro.update(du);
-    levelManager.update(du);
+    
+    
     
     
 
@@ -171,8 +174,12 @@ function renderSimulation(ctx) {
  
     backgroundManager.render(ctx);
 
+    if(lifeManager.gameOver) intro.render(ctx);
+
     if(intro.hasBeenPlayed) entityManager.render(ctx);
     else intro.render(ctx);
+
+
 
     scoreboardManager.render(ctx);
     lifeManager.render(ctx);
