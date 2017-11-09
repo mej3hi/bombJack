@@ -129,6 +129,11 @@ getMap: function(level){
 		return this._levelInfo.two;
 		break;
 
+	case 3:
+		return this._levelInfo.three;
+		break;
+
+
 	}
 
 },
