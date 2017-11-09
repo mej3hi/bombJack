@@ -129,13 +129,6 @@ getMap: function(level){
 		return this._levelInfo.two;
 		break;
 
-<<<<<<< HEAD
-=======
-	case 3:
-		return this._levelInfo.three;
-		break;
-
->>>>>>> 2f8c9117b409ef54f156669cc0baafe7a438eba6
 	}
 
 },
@@ -191,11 +184,7 @@ _levelInfo : {
 		background: "img/backgroundEgypt.png",
 		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
 
-<<<<<<< HEAD
 		jack:{cx : 300,cy : 500},
-=======
-		jack:{cx : 600/2,cy : 560/2},
->>>>>>> 2f8c9117b409ef54f156669cc0baafe7a438eba6
 
 		platform:[
 
@@ -230,7 +219,6 @@ _levelInfo : {
 		    {cx: 140, cy: 20},
 		    {cx: 200, cy: 20},*/
 
-<<<<<<< HEAD
 		    {cx: 20, cy: 200},
 		    {cx: 20, cy: 260},
 		    {cx: 20, cy: 320},
@@ -256,49 +244,6 @@ _levelInfo : {
 		    {cx: 400, cy: 140},
 		    {cx: 460, cy: 140},
 		    {cx: 520, cy: 140},
-=======
-
-				//Top Left
-		    {cx: 3*30,   cy: 1*30},
-		    {cx: 5*30,   cy: 1*30},
-		    {cx: 7*30,   cy: 1*30},
-
-				//Top Right
-		    {cx: 15*30,   cy: 1*30},
-		    {cx: 17*30,   cy: 1*30},
-		    {cx: 19*30,   cy: 1*30},
-
-
-				//Top Right	- Below Platform
-		    {cx: 11*30,   cy: 4*30},
-		    {cx: 13*30,   cy: 4*30},
-		    {cx: 15*30,   cy: 4*30},
-		    {cx: 17*30,   cy: 4*30},
-
-				//Bottom Right Platform
-		    {cx: 13*30,   cy: 14*30},
-		    {cx: 15*30,   cy: 14*30},
-		    {cx: 17*30,   cy: 14*30},
-
-
-
-				//Bottom Left
-		    {cx: 3*30,   cy: 18*30},
-		    {cx: 5*30,   cy: 18*30},
-		    {cx: 7*30,   cy: 18*30},
-
-				//Far left
-		    {cx: 1*30,   cy: 7*30},
-		    {cx: 1*30,   cy: 9*30},
-		    {cx: 1*30,   cy: 11*30},
-		    {cx: 1*30,   cy: 13*30},
-
-				//Far Right
-		    {cx: 19*30,   cy: 7*30},
-		    {cx: 19*30,   cy: 9*30},
-		    {cx: 19*30,   cy: 11*30},
-		    {cx: 19*30,   cy: 13*30},
->>>>>>> 2f8c9117b409ef54f156669cc0baafe7a438eba6
 		]
 
 
@@ -346,13 +291,10 @@ _levelInfo : {
 
     	// BOMBS
 	     bomb: [
-<<<<<<< HEAD
 		    {cx: 80, cy: 20},
 		    {cx: 140, cy: 20},
 		    {cx: 200, cy: 20},
 
-=======
->>>>>>> 2f8c9117b409ef54f156669cc0baafe7a438eba6
 
 				//Bottom Left Bombs
 		    {cx: 3*30,    cy: 14*30},
