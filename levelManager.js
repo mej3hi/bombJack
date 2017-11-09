@@ -39,22 +39,23 @@ update : function(du){
 		if(this.lifeSpan < 0){
 			this.createLevel(this.level);
 			this.lifeSpan = 5000/ NOMINAL_UPDATE_INTERVAL;
+			this.startCx=-50;
 			this.renderStarSprite = false;
-		}	
+		}
 
-		this.startCx +=du*4;		
+		this.startCx +=du*4;
 		if(this.startCx >= 300){
 			this.startCx=300;
 		}
 
-		
+
 	}
 
 },
 
 render : function(ctx){
 
-	util.fillText(ctx, 
+	util.fillText(ctx,
 		270,
 		575,
 		"LEVEL",
@@ -62,7 +63,7 @@ render : function(ctx){
 		this._fontFamliy,
 		this._fontColor);
 
-	util.fillText(ctx, 
+	util.fillText(ctx,
 		292,
 		595,
 		this.level,
@@ -74,20 +75,20 @@ render : function(ctx){
 	if(this.renderStarSprite){
 		var origScale = g_sprites.bombJack.scale;
 		g_sprites.bombJack.scale = 3;
-			
+
 		g_sprites.bombJack.drawCentredAt(ctx,this.startCx,this.startCy,0,[240, 260, 50,15]);
 		g_sprites.bombJack.drawCentredAt(ctx,600-this.startCx,this.startCy,0,[300, 260, 50,15]);
 
 		g_sprites.bombJack.scale = origScale;
 	}
-	
-	
+
+
 },
 
 
 backToFirstLevel : function() {
 	//lifeManager._jackLife = 3;
-	this.clearLevel();		
+	this.clearLevel();
 	this.level = 1;
 	this.createLevel(this.level);
 },
@@ -109,11 +110,11 @@ clearLevel : function() {
 
 nextLevel : function(){
 	this.playLevelChangeSound();
-	this.level++;	
+	this.level++;
 },
 
 getLevel : function(){
-	return this.level;	
+	return this.level;
 },
 
 getMap: function(level){
@@ -127,7 +128,7 @@ getMap: function(level){
 	case 2:
 		return this._levelInfo.two;
 		break;
-	
+
 	}
 
 },
@@ -170,20 +171,20 @@ createLevel : function (level) {
 	backgroundManager.setBackground(level.background);
 	soundManager.setBackgroundMusic(level.backgroundSound);
 
-	
+
 },
 
 
-// Level info for each level 
+// Level info for each level
 _levelInfo : {
-	
+
 
 	one:{
 
 		background: "img/backgroundEgypt.png",
 		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
 
-		jack:{cx : 300,cy : 500}, 
+		jack:{cx : 300,cy : 500},
 
 		platform:[
 			{cx : 120, cy : 450, width : 100},
@@ -204,7 +205,7 @@ _levelInfo : {
 		 	/*{cx: 80, cy: 20},
 		    {cx: 140, cy: 20},
 		    {cx: 200, cy: 20},*/
-		    
+
 		    {cx: 20, cy: 200},
 		    {cx: 20, cy: 260},
 		    {cx: 20, cy: 320},
@@ -231,7 +232,7 @@ _levelInfo : {
 		    {cx: 460, cy: 140},
 		    {cx: 520, cy: 140},
 		]
-	
+
 
 	},
 
@@ -241,7 +242,7 @@ _levelInfo : {
 		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
 
 		jack: {cx : 300,cy : 500},
-   
+
 
 		// PLATFORMS
 		platform: [
@@ -262,7 +263,7 @@ _levelInfo : {
 		    {cx: 80, cy: 20},
 		    {cx: 140, cy: 20},
 		    {cx: 200, cy: 20},
-		    
+
 
 		    {cx: 20, cy: 200},
 		    {cx: 20, cy: 260},

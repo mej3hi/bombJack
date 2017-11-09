@@ -168,7 +168,7 @@ function requestPreloads() {
         bomb   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
         enemy  : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
         jack   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
-        bombJackSprite : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
+        bombJackSprite : "img/Arcade_Bomb_Jack_General_Sprites_3.png",
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);

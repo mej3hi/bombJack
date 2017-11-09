@@ -30,10 +30,10 @@ function Jack(descr) {
     this.velY = this.velY || 0;
 
     this.rotation = this.rotation || 0;
-    
+
     // Default sprite, if not otherwise specified
     this.sprite = this.sprite || g_sprites.jack;
-    
+
     // Set normal drawing scale, and warp state off
     this.scale = this.scale || 2;
     this._isWarping = false;
@@ -86,7 +86,7 @@ Jack.prototype.warp = function () {
     this._isWarping = true;
     this._scaleDirn = -1;
     this.warpSound.play();
-    
+
     // Unregister me from my old posistion
     // ...so that I can't be collided with while warping
     spatialManager.unregister(this);
@@ -96,22 +96,22 @@ Jack.prototype._updateWarp = function (du) {
 
     var SHRINK_RATE = 3 / SECS_TO_NOMINALS;
     this.scale += this._scaleDirn * SHRINK_RATE * du;
-    
+
     if (this.scale < 0.2 ) {
-    
+
         this._moveToASafePlace();
         this.halt();
         this._scaleDirn = 1;
-        
+
     } else if (this.scale > 2) {
-    
+
         this.scale = 2;
         this._isWarping = false;
-        
+
         // Reregister me from my old posistion
         // ...so that I can be collided with again
         spatialManager.register(this);
-        
+
     }
 };
 
@@ -121,19 +121,19 @@ Jack.prototype._moveToASafePlace = function () {
 
     this.cx = this.origX;
     this.cy = this.origY;
-       
-        
-    
+
+
+
 };
-    
+
 Jack.prototype.maybeFireBullet = function () {
 
     if (keys[this.KEY_FIRE]) {
-    
+
         var dX = +Math.sin(this.rotation);
         var dY = -Math.cos(this.rotation);
         var launchDist = this.getRadius() * 1.2;
-        
+
         var relVel = this.launchVel;
         var relVelX = dX * relVel;
         var relVelY = dY * relVel;
@@ -142,22 +142,27 @@ Jack.prototype.maybeFireBullet = function () {
            this.cx + dX * launchDist, this.cy + dY * launchDist,
            this.velX + relVelX, this.velY + relVelY,
            this.rotation);
-           
+
     }
-    
+
 };
 Jack.prototype.update = function (du) {
     // Handle warping
+
+    if(lifeManager.getJackLife() <= 0){
+      spatialManager.unregister(this);
+      return entityManager.KILL_ME_NOW;
+    }
 
     // Check if Jack has 3 lifes to skip warping after game over.
     if (this._isWarping && lifeManager.getJackLife() !=3) {
         this._updateWarp(du);
         return;
     }
-    
+
     // TODO: YOUR STUFF HERE! --- Unregister and check for death
     spatialManager.unregister(this);
-     
+
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
 
     // Perform movement substeps
@@ -172,7 +177,7 @@ Jack.prototype.update = function (du) {
 
     var prevX = this.cx;
     var prevY = this.cy;
-    
+
     // Compute my provisional new position (barring collisions)
     var nextX = prevX + this.velX * du;
     var nextY = prevY + this.velY * du;
@@ -214,16 +219,16 @@ Jack.prototype.update = function (du) {
             //     }
             // }
         }
-              
-            
-        
-        
+
+
+
+
     }
     else spatialManager.register(this);
 
 
-    
-    
+
+
 };
 
 Jack.prototype.addScore = function(score){
@@ -237,22 +242,22 @@ Jack.prototype.getScore = function(){
 
 Jack.prototype.computeSubStep = function (du) {
 
-    this.movePlayer(du);  
+    this.movePlayer(du);
 
 };
 
 Jack.prototype.calculateJump = function (accelY) {
-    
+
     var jump = 0;
 
     if (eatKey(this.KEY_JUMP) && !this._isJumping) {
         this._isJumping = true;
-        jump += NOMINAL_JUMP;      
+        jump += NOMINAL_JUMP;
     }
 
-    // Apply jump 
-    
-    var accelY = -1 * jump;  
+    // Apply jump
+
+    var accelY = -1 * jump;
 
     accelY += NOMINAL_GRAVITY;
     return accelY;
@@ -274,26 +279,26 @@ Jack.prototype.movePlayer = function (du) {
     // u = original velocity
     var oldVelX = this.velX;
     var oldVelY = this.velY;
-    
+
     // v = u + at
     this.velX += accelX * du;
-    this.velY += accelY * du; 
+    this.velY += accelY * du;
 
     // v_ave = (u + v) / 2
     var aveVelX = (oldVelX + this.velX) / 2;
     var aveVelY = (oldVelY + this.velY) / 2;
-    
+
     // Decide whether to use the average or not (average is best!)
     var intervalVelX = g_useAveVel ? aveVelX : this.velX;
     var intervalVelY = g_useAveVel ? aveVelY : this.velY;
-    
+
     // s = s + v_ave * t
     var prevX = this.cx;
     var prevY = this.cy;
 
     var nextX = this.cx + intervalVelX * du;
     var nextY = this.cy + intervalVelY * du;
-    
+
     // var minY = 17*this.scale;
     // // //var maxY = g_canvas.height - minY - 40;
     // var maxY = levelManager.mapHeight - minY;
@@ -311,8 +316,8 @@ Jack.prototype.movePlayer = function (du) {
 
     // Ignore the bounce if the jack is already in
     // the "border zone" (to avoid trapping them there)
-    
-    
+
+
     if (keys[this.KEY_LEFT] && this.cx > 0 + this.getRadius()) {
         this.cx -= 6 * du;
     }
@@ -321,9 +326,9 @@ Jack.prototype.movePlayer = function (du) {
     }
 
 
-   
+
     if (this.cy > maxY || this.cy < minY) {
-       
+
         // do nothing
     }
     else if (nextY > maxY) {
@@ -338,7 +343,7 @@ Jack.prototype.movePlayer = function (du) {
     }
 
     for (var i = 0; i < entityManager._platforms.length; i++) {
-                
+
         if(entityManager._platforms[i].collidesWith(prevX, prevY, nextX, nextY, this.getRadius())) {
                 this.velY = oldVelY * 0;
                 intervalVelY = this.velY;
@@ -347,10 +352,10 @@ Jack.prototype.movePlayer = function (du) {
 
                 }
         }
-        
-    } 
 
-    
+    }
+
+
     // s = s + v_ave * t
     this.cx += du * intervalVelX;
     this.cy += du * intervalVelY;
@@ -360,7 +365,7 @@ Jack.prototype.movePlayer = function (du) {
 
 Jack.prototype.getRadius = function () {
      return ((this.animate[0][3]/2) * 0.9)*this.scale;
-    
+
 };
 
 Jack.prototype.getHalfHeight = function(){
@@ -408,9 +413,9 @@ Jack.prototype.render = function (ctx) {
     } else {
         frame = this.animate[0];
     }
-    
+
     this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, frame);
 
-    
+
     this.sprite.scale = origScale;
 };
