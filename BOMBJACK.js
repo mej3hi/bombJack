@@ -51,7 +51,7 @@ function initialFirstLevel() {
 }
 
 function init() {
-    intro.playIntro(initialFirstLevel)
+    intro.playIntro(initialFirstLevel);
 }
 
 // =============
@@ -105,7 +105,7 @@ var g_useAveVel = true;
 var g_renderSpatialDebug = false;
 var g_renderLevelDebug = false;
 
-var KEY_MIXED   = keyCode('M');;
+var KEY_MIXED   = keyCode('M');
 var KEY_GRAVITY = keyCode('G');
 var KEY_AVE_VEL = keyCode('V');
 var KEY_SPATIAL = keyCode('X');
@@ -167,6 +167,7 @@ function requestPreloads() {
     var requiredImages = {
         bomb   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
         enemy  : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
+        bird   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
         jack   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
         bombJackSprite : "img/Arcade_Bomb_Jack_General_Sprites_3.png",
     };
@@ -180,6 +181,7 @@ function preloadDone() {
 
     g_sprites.bomb  = new Sprite(g_images.bomb);
     g_sprites.enemy = new Sprite(g_images.enemy);
+    g_sprites.bird  = new Sprite(g_images.bird);
     g_sprites.jack  = new Sprite(g_images.jack);
     g_sprites.intro = new Sprite(g_images.bombJackSprite);
     g_sprites.bombJack = new Sprite(g_images.bombJackSprite);

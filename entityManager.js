@@ -30,6 +30,7 @@ var entityManager = {
 _platforms : [],
 _bullets  : [],
 _enemies  : [],
+_birds    : [],
 _jack     : [],
 _bombs     : [],
 
@@ -52,7 +53,7 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._platforms, this._bombs ,this._enemies, this._bullets, this._jack];
+    this._categories = [this._platforms, this._bombs ,this._enemies, this._birds, this._bullets, this._jack];
 },
 
 eraseAllEntities : function(){
@@ -82,6 +83,10 @@ generateBomb : function(descr) {
 
 generateEnemy : function(descr) {
     this._enemies.push(new Enemy(descr));
+},
+
+generateBird : function(descr) {
+    this._birds.push(new Bird(descr));
 },
 
 generateJack : function(descr) {
@@ -133,7 +138,7 @@ render: function(ctx) {
     }
 }
 
-}
+};
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();

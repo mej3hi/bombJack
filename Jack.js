@@ -193,7 +193,7 @@ Jack.prototype.update = function (du) {
     var ent = this.isColliding() ;
     if (ent){
 
-        if (ent instanceof Enemy){
+        if (ent instanceof Enemy || ent instanceof Bird){
             this.warp();
 
             lifeManager.takeJackLife(1);
@@ -308,10 +308,10 @@ Jack.prototype.movePlayer = function (du) {
     // var maxX = levelManager.mapWidth - minX;
 
 
-    var minY = this.getHalfHeight()*this.scale;                  // Uses hardcoded sprite height, to be fixed
+    var minY = this.getHalfHeight()*this.scale;
     var maxY = levelManager.mapHeight - minY;
 
-    var minX = this.getHalfWidth()*this.scale;                      // Uses hardcoded sprite width, to be fixed
+    var minX = this.getHalfWidth()*this.scale;
     var maxX = g_canvas.width - minX;
 
     // Ignore the bounce if the jack is already in
@@ -332,29 +332,27 @@ Jack.prototype.movePlayer = function (du) {
         // do nothing
     }
     else if (nextY > maxY) {
-            this.velY = oldVelY * 0;
-            intervalVelY = this.velY;
-            this._isJumping = false;
+        this.cy = maxY;
+        this.velY = oldVelY * 0;
+        intervalVelY = this.velY;
+        this._isJumping = false;
 
     }else if (nextY < minY){
-            this.velY = oldVelY * 0;
-            intervalVelY = this.velY;
+        this.velY = oldVelY * 0;
+        intervalVelY = this.velY;
 
     }
 
     for (var i = 0; i < entityManager._platforms.length; i++) {
 
         if(entityManager._platforms[i].collidesWith(prevX, prevY, nextX, nextY, this.getRadius())) {
-                this.velY = oldVelY * 0;
-                intervalVelY = this.velY;
-                if(this.cy < entityManager._platforms[i].cy){
-                    this._isJumping = false;
-
-                }
+            this.velY = oldVelY * 0;
+            intervalVelY = this.velY;
+            if(this.cy < entityManager._platforms[i].cy){
+                this._isJumping = false;
+            }
         }
-
     }
-
 
     // s = s + v_ave * t
     this.cx += du * intervalVelX;

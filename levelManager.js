@@ -166,6 +166,12 @@ createLevel : function (level) {
 		};
 	}
 
+	if(level.bird){
+		for (var i = 0; i < level.bird.length; i++) {
+			entityManager.generateBird(level.bird[i]);
+		}
+	}
+
 	if(level.bomb){
 		for (var i = 0; i < level.bomb.length; i++) {
 			entityManager.generateBomb(level.bomb[i]);
@@ -218,6 +224,8 @@ _levelInfo : {
 				//Top Right Enemy
 		   	{cx : 14*30, cy : 3*30-20, range : 100, velX: 1}
 		],
+
+		bird:[],
 
 		bomb:[
 		 	/*{cx: 80, cy: 20},
@@ -292,6 +300,9 @@ _levelInfo : {
 		    {cx : 420, cy : 75, range : 100, velX: 1},
 				*/
     	],
+
+    	// BIRDS
+    	bird : [],
 
 
     	// BOMBS
@@ -382,6 +393,9 @@ _levelInfo : {
 		    {cx : 420, cy : 75, range : 100, velX: 1},
 				*/
     	],
+
+    	// BIRDS
+    	bird : [{cx : 50, cy : 410, range : 600, velX: 2}],
 
 
     	// BOMBS
