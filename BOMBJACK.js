@@ -165,10 +165,12 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        bomb   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
-        enemy  : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
-        bird   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
-        jack   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
+        bomb    : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
+        powerup : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
+        enemy   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
+        bird1   : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
+        bird2   : "img/Arcade_Bomb_Jack_General_Sprites_2-MirrorImage.png",
+        jack    : "img/Arcade_Bomb_Jack_General_Sprites_2.png",
         bombJackSprite : "img/Arcade_Bomb_Jack_General_Sprites_3.png",
     };
 
@@ -179,12 +181,14 @@ var g_sprites = {};
 
 function preloadDone() {
 
-    g_sprites.bomb  = new Sprite(g_images.bomb);
-    g_sprites.enemy = new Sprite(g_images.enemy);
-    g_sprites.bird  = new Sprite(g_images.bird);
-    g_sprites.jack  = new Sprite(g_images.jack);
-    g_sprites.intro = new Sprite(g_images.bombJackSprite);
-    g_sprites.bombJack = new Sprite(g_images.bombJackSprite);
+    g_sprites.bomb      = new Sprite(g_images.bomb);
+    g_sprites.powerup   = new Sprite(g_images.powerup);
+    g_sprites.enemy     = new Sprite(g_images.enemy);
+    g_sprites.birdLeft  = new Sprite(g_images.bird1);
+    g_sprites.birdRight = new Sprite(g_images.bird2);
+    g_sprites.jack      = new Sprite(g_images.jack);
+    g_sprites.intro     = new Sprite(g_images.bombJackSprite);
+    g_sprites.bombJack  = new Sprite(g_images.bombJackSprite);
 
     entityManager.init();
     init();
