@@ -169,13 +169,19 @@ createLevel : function (level) {
 	if(level.bird){
 		for (var i = 0; i < level.bird.length; i++) {
 			entityManager.generateBird(level.bird[i]);
-		}
+		};
 	}
 
 	if(level.bomb){
 		for (var i = 0; i < level.bomb.length; i++) {
 			entityManager.generateBomb(level.bomb[i]);
 			this.totalBomb++;
+		};
+	}
+
+	if(level.powerup){
+		for (var i = 0; i < level.powerup.length; i++) {
+			entityManager.generatePowerup(level.powerup[i]);
 		};
 	}
 
@@ -218,14 +224,14 @@ _levelInfo : {
 
 		enemy:[
 				//Bottom Left Enemy
-				{cx : 4*30, cy : 15*30-20, range : 100, velX: 1.2},
+				//{cx : 4*30, cy : 15*30-20, range : 100, velX: 1.2},
 				//Top Left Enemy
 		   	{cx : 7*30, cy : 5*30-20, range : 100, velX: 0.9},
 				//Top Right Enemy
 		   	{cx : 14*30, cy : 3*30-20, range : 100, velX: 1}
 		],
 
-		bird:[],
+		bird:[{cx : 4*30, cy : 15*30-20, range : 300, velX: 3}],
 
 		bomb:[
 		 	/*{cx: 80, cy: 20},
@@ -257,7 +263,9 @@ _levelInfo : {
 		    {cx: 400, cy: 140},
 		    {cx: 460, cy: 140},
 		    {cx: 520, cy: 140},
-		]
+		],
+
+		powerup:[]
 
 
 	},
@@ -355,6 +363,9 @@ _levelInfo : {
 		    {cx: 13*30,   cy: 6*30},
 
 	    ],
+
+	    // POWERUPS
+	    powerup: []
 	},
 
 	three:{
@@ -395,14 +406,14 @@ _levelInfo : {
     	],
 
     	// BIRDS
-    	bird : [{cx : 50, cy : 410, range : 600, velX: 2}],
+    	bird : [{cx : 250, cy : 425, range : 600, velX: 2}],
 
 
     	// BOMBS
 	     bomb: [
 
 				//Bottom Left Bombs
-		    {cx: 1*30,    cy: 14*30},
+		    //{cx: 1*30,    cy: 14*30},
 		    {cx: 3*30,    cy: 14*30},
 		    {cx: 5*30,    cy: 14*30},
 
@@ -446,12 +457,10 @@ _levelInfo : {
 		    {cx: 19*30,    cy: 1*30},
 
 	    ],
+
+	    // POWERUPS
+	    powerup:[{cx: 1*30,    cy: 14*30}]
 	}
 }
-
-
-
-
-
 
 }

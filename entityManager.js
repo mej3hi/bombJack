@@ -28,11 +28,12 @@ var entityManager = {
 // "PRIVATE" DATA
 
 _platforms : [],
-_bullets  : [],
-_enemies  : [],
-_birds    : [],
-_jack     : [],
+_bullets   : [],
+_enemies   : [],
+_birds     : [],
+_jack      : [],
 _bombs     : [],
+_powerups  : [],
 
 // "PRIVATE" METHODS
 
@@ -53,7 +54,7 @@ KILL_ME_NOW : -1,
 // i.e. thing which need `this` to be defined.
 //
 deferredSetup : function () {
-    this._categories = [this._platforms, this._bombs ,this._enemies, this._birds, this._bullets, this._jack];
+    this._categories = [this._platforms, this._bombs ,this._powerups, this._enemies, this._birds, this._bullets, this._jack];
 },
 
 eraseAllEntities : function(){
@@ -79,6 +80,10 @@ generatePlatform : function(descr) {
 
 generateBomb : function(descr) {
     this._bombs.push(new Bomb(descr));
+},
+
+generatePowerup : function(descr) {
+    this._powerups.push(new Powerup(descr));
 },
 
 generateEnemy : function(descr) {

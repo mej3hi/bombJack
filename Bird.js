@@ -29,7 +29,7 @@ function Bird(descr) {
     this.range = this.range || 200;
       
     // Default sprite and scale, if not otherwise specified
-    this.sprite = this.sprite || g_sprites.bird;
+    this.sprite = this.sprite || g_sprites.birdLeft;
     this.scale  = this.scale  || 2;
 
     this.movingRight = false;
@@ -39,7 +39,7 @@ function Bird(descr) {
     console.dir(this);
 */
 
-};
+}
 
 
 Bird.prototype = new Entity();
@@ -56,11 +56,15 @@ Bird.prototype.animate = [
     [139, 53, 18, 15],
     [159, 53, 18, 15],
     [179, 53, 18, 15],
-    [260, 53, 17, 15]
+    [260, 53, 17, 15],
+    [325, 53, 18, 15],
+    [305, 53, 18, 15],
+    [285, 53, 18, 15],
+    [204, 53, 17, 15]
 ];
 
 Bird.prototype.renderFrame = 0;
-Bird.prototype.duPerAnimFrame = 12;
+Bird.prototype.duPerAnimFrame = 8;
 Bird.prototype.nextFrame = 0;
 
 Bird.prototype.update = function (du) {
@@ -71,6 +75,7 @@ Bird.prototype.update = function (du) {
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
 
     if (!this.movingRight){
+        this.sprite = g_sprites.birdLeft;
         this.cx -= this.velX * du;
         if (this.cx < this.origX - this.range/2 ){
 
@@ -80,6 +85,7 @@ Bird.prototype.update = function (du) {
         
     }
     if (this.movingRight){
+        this.sprite = g_sprites.birdRight;
         this.cx += this.velX * du;
         if (this.cx > this.origX + this.range/2 ){
 
@@ -111,22 +117,29 @@ Bird.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
     var frame;
 
-    if (this.movingRight) {
+    if (this.velX === 0) {
         frame = this.animate[this.renderFrame];
         if (this.nextFrame % this.duPerAnimFrame === 0) {
             this.renderFrame = (this.renderFrame + 1) % 3;
         }
         this.nextFrame++;
+    } else if (this.movingRight) {
+        frame = this.animate[this.renderFrame + 7];
+        if (this.nextFrame % this.duPerAnimFrame === 0) {
+            this.renderFrame = (this.renderFrame + 1) % 4;
+        }
+        this.nextFrame++;
     } else {
         frame = this.animate[this.renderFrame + 3];
         if (this.nextFrame % this.duPerAnimFrame === 0) {
-            this.renderFrame = (this.renderFrame + 1) % 3;
+            this.renderFrame = (this.renderFrame + 1) % 4;
         }
         this.nextFrame++;
     }
 
     // pass my scale into the sprite, for drawing
     this.sprite.scale = this.scale;
+
     this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, frame); 
 
     this.sprite.scale = origScale;

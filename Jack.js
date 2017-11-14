@@ -207,6 +207,13 @@ Jack.prototype.update = function (du) {
             console.log(levelManager.totalBomb);
 
         }
+
+        if (ent instanceof Powerup){
+            var score = ent.collectPowerup();
+            scoreboardManager.addScore(score);
+            levelManager.totalPowerup--;
+        }
+
         if (ent instanceof Platform){
             // if(ent.collidesWithTop(prevX, prevY, nextX, nextY, this.getRadius())) {
             //     this.velY =  0;
