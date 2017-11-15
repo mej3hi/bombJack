@@ -29,7 +29,6 @@ _fontFamliy : "Arial",
 _fontColor : "white",
 
 lifeSpan: 5000/ NOMINAL_UPDATE_INTERVAL,
-
 frame: [3,300,195,80],
 
 introSound: "sounds/Commodore64/title-screen-sid-stereo-.mp3",

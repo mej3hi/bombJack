@@ -23,7 +23,7 @@ _fontColor : "white",
 lifeSpan: 5000/ NOMINAL_UPDATE_INTERVAL,
 
 update : function(du){
-	if(entityManager._bombs.length <= 15 && this.level <4){
+	if(entityManager._bombs.length <= 0 && this.level <5){
 
 		if(this.lifeSpan === (5000/ NOMINAL_UPDATE_INTERVAL) ){
 			this.clearLevel();
@@ -126,6 +126,12 @@ getMap: function(level){
 
 	case 3:
 		return this._levelInfo.three;
+		break;
+	case 4:
+		return this._levelInfo.four;
+		break;
+	case 5:
+		return this._levelInfo.five;
 		break;
 
 
@@ -455,7 +461,195 @@ _levelInfo : {
 
 	    // POWERUPS
 	    powerup:[{cx: 1*30,    cy: 14*30}]
+	},
+
+
+	four:{
+
+		background: "img/backgroundCity.png",
+		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
+
+		jack: {cx : 300,cy : 250},
+
+
+		// PLATFORMS
+		platform: [
+
+				//Top Left Platform
+		    {cx : 5*30, cy : 5*30, width : 3*30, color : 1},
+
+				//Top Right Platform
+		    {cx : 15*30, cy : 5*30, width : 3*30, color : 1},
+
+
+				//Bottom Left
+		    {cx : 5*30, cy : 15*30, width : 3*30, color : 1},
+
+				//Bottom Right
+		    {cx : 15*30, cy : 15*30, width : 3*30, color : 1},
+
+			
+
+	    ],
+
+    	// ENEMIES
+    	enemy : [
+				/*
+		    {cx : 120, cy : 425, range : 100, velX: 1.2},
+		    {cx : 420, cy : 75, range : 100, velX: 1},
+				*/
+    	],
+
+    	// BIRDS
+    	bird : [{cx : 250, cy : 425, range : 600, velX: 2}],
+
+
+    	// BOMBS
+	     bomb: [
+
+				//Bottom Left Bombs
+		    //{cx: 1*30,    cy: 14*30},
+		    {cx: 3*30,    cy: 14*30},
+		    {cx: 5*30,    cy: 14*30},
+		    {cx: 7*30,    cy: 14*30},
+
+				//Bottom Right Bombs
+		    {cx: 13*30,    cy: 14*30},
+		    {cx: 15*30,    cy: 14*30},
+		    {cx: 17*30,    cy: 14*30},
+
+				//Ground Left Bombs
+		    {cx: 1*30,    cy: 18*30},
+		    {cx: 3*30,    cy: 18*30},
+		    {cx: 5*30,    cy: 18*30},
+
+				//Ground Right Bombs
+			{cx: 15*30,    cy: 18*30},
+		    {cx: 17*30,    cy: 18*30},
+		    {cx: 19*30,    cy: 18*30},
+
+				//Middle Left Bombs
+		    {cx: 15*30,    cy: 9*30},
+		    {cx: 17*30,    cy: 9*30},
+		    {cx: 19*30,    cy: 9*30},
+
+				//Middle Right Bombs
+		    {cx: 1*30,    cy: 9*30},
+		    {cx: 3*30,    cy: 9*30},
+		    {cx: 5*30,    cy: 9*30},
+
+				//Top Left Platform Bombs
+		    {cx: 1*30,    cy: 4*30},
+		    {cx: 3*30,    cy: 4*30},
+		    {cx: 5*30,    cy: 4*30},
+
+				//Top Right Platform Bombs
+		    {cx: 13*30,    cy: 4*30},
+		    {cx: 15*30,    cy: 4*30},
+		    {cx: 17*30,    cy: 4*30},
+
+	
+
+	    ],
+
+	    // POWERUPS
+	    powerup:[{cx: 1*30,    cy: 14*30}]
+	},
+
+	five:{
+
+		background: "img/backgroundCityNight.png",
+		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
+
+		jack: {cx : 300,cy : 250},
+
+
+		// PLATFORMS
+		platform: [
+
+			
+
+			
+
+	    ],
+
+    	// ENEMIES
+    	enemy : [
+				/*
+		    {cx : 120, cy : 425, range : 100, velX: 1.2},
+		    {cx : 420, cy : 75, range : 100, velX: 1},
+				*/
+    	],
+
+    	// BIRDS
+    	bird : [
+
+    	{cx : 250, cy : 425, range : 600, velX: 2},
+    	{cx : 150, cy : 225, range : 600, velX: 2}
+
+    	],
+
+
+    	// BOMBS
+	     bomb: [
+
+			//First column from left
+		    
+		    {cx: 3*30,    cy: 12*30},
+		    {cx: 3*30,    cy: 14*30},
+		    {cx: 3*30,    cy: 16*30},
+
+		    	
+		    {cx: 3*30,    cy: 4*30},
+		    {cx: 3*30,    cy: 6*30},
+		    {cx: 3*30,    cy: 8*30},
+
+		    //Second column from left
+		    {cx: 7*30,    cy: 12*30},
+		    {cx: 7*30,    cy: 14*30},
+		    {cx: 7*30,    cy: 16*30},
+
+		    {cx: 7*30,    cy: 4*30},
+		    {cx: 7*30,    cy: 6*30},
+		    {cx: 7*30,    cy: 8*30},
+
+		    //Second column from left
+		    {cx: 13*30,    cy: 12*30},
+		    {cx: 13*30,    cy: 14*30},
+		    {cx: 13*30,    cy: 16*30},
+
+		    {cx: 13*30,    cy: 4*30},
+		    {cx: 13*30,    cy: 6*30},
+		    {cx: 13*30,    cy: 8*30},
+
+
+				//Bottom Right Bombs
+			{cx: 17*30,    cy: 12*30},
+		    {cx: 17*30,    cy: 14*30},
+		    {cx: 17*30,    cy: 16*30},
+
+		    {cx: 17*30,    cy: 4*30},
+		    {cx: 17*30,    cy: 6*30},
+		    {cx: 17*30,    cy: 8*30},
+
+
+			
+
+				//Top Right Bombs
+		    
+
+		
+
+	
+
+	    ],
+
+	    // POWERUPS
+	    powerup:[{cx: 1*30,    cy: 14*30}]
 	}
+
 }
+
+
 
 }

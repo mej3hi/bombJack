@@ -178,7 +178,7 @@ Jack.prototype.calculateJump = function (accelY) {
 
     var jump = 0;
 
-    if (eatKey(this.KEY_JUMP) && !this._isJumping) {
+    if (eatKey(this.KEY_JUMP) && !this._isJumping && this.velY == 0) {
         this._isJumping = true;
         jump += NOMINAL_JUMP;
     }
