@@ -27,8 +27,7 @@ function Bomb(descr) {
     this.points =  this.points || 100;
     this.collected = false;
 
-    this.lifeSpan = this.lifeSpan || 20000 / NOMINAL_UPDATE_INTERVAL;
-    this.origLifeSpan = this.lifeSpan;
+    this.timeToIgnite = this.timeToIgnite || -1;
 
 
 /*
@@ -39,17 +38,17 @@ function Bomb(descr) {
 
 };
 
-
-
 Bomb.prototype = new Entity();
 
-
 Bomb.prototype.animate = [
-    [25, 137, 14, 17],
-    [67, 137, 14, 17],
-    [87, 137, 14, 17],
+    [25, 134, 14, 18],
+    [45, 134, 14, 18],
+    [65, 134, 14, 18],
+    [85, 134, 14, 18],
 ];
 
+
+Bomb.prototype.frame = [45, 134, 14, 18];
 Bomb.prototype.renderFrame = 0;
 Bomb.prototype.duPerAnimFrame = 9;
 Bomb.prototype.nextFrame = 0;
@@ -57,6 +56,7 @@ Bomb.prototype.nextFrame = 0;
 Bomb.prototype.pointsLifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
 
 Bomb.prototype.isIgnite = false;
+Bomb.prototype.igniteTime = 10000 / NOMINAL_UPDATE_INTERVAL;
 
 
 Bomb.prototype.update = function (du) {
@@ -71,8 +71,12 @@ Bomb.prototype.update = function (du) {
 
     if (this.pointsLifeSpan < 0) return entityManager.KILL_ME_NOW;
 
-    if(this.lifeSpan < 0 ){
-      //return entityManager.KILL_ME_NOW;
+
+   if(this.isIgnite){
+        this.igniteTime -= du;
+        if(this.igniteTime < 0){
+          return entityManager.KILL_ME_NOW;
+        }
     }
 
     // TODO: YOUR STUFF HERE! --- (Re-)Register
@@ -80,12 +84,16 @@ Bomb.prototype.update = function (du) {
         spatialManager.register(this);
     }
 
-    this.lifeSpan -= du;
-    if( this.lifeSpan < this.origLifeSpan/2 && !this.isIgnite){
-        this.isIgnite = true;
-        this.points = 500;
+    if(this.timeToIgnite > -1){
+        this.timeToIgnite -= du;
+        if(this.timeToIgnite < 250){
+          this.frame = this.animate[0]
+        }
+        if( this.timeToIgnite  < 0){
+              this.isIgnite = true;
+              this.points = 300;
+        }
     }
-
 
 };
 
@@ -96,7 +104,7 @@ Bomb.prototype.collectBomb = function(){
 }
 
 Bomb.prototype.getRadius = function () {
-    return this.scale * 8 * 0.9;
+    return this.scale * 10 * 0.9;
 };
 Bomb.prototype.playCollectBombSound = function(){
     Bomb.prototype.collectBombSound = new Audio(
@@ -105,7 +113,7 @@ Bomb.prototype.playCollectBombSound = function(){
 }
 
 Bomb.prototype.render = function (ctx) {
-    var frame;
+
     var origScale = this.sprite.scale;
 
     this.sprite.scale = this.scale;
@@ -116,16 +124,17 @@ Bomb.prototype.render = function (ctx) {
         else if (this.cx < 50) ctx.fillText(this.points,this.cx+20,this.cy);
         else ctx.fillText(this.points,this.cx,this.cy);
 
-      }else if(this.isIgnite){
-
-        frame = this.animate[this.renderFrame + 1];
-        if (this.nextFrame % this.duPerAnimFrame === 0) {
-            this.renderFrame = (this.renderFrame + 1) % 2;
-        }
-        this.nextFrame++;
-        this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, frame);
     }
-    else  this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, this.animate[0]);
+    else {
+      if(this.isIgnite){
+          this.frame = this.animate[this.renderFrame + 2];
+          if (this.nextFrame % this.duPerAnimFrame === 0) {
+              this.renderFrame = (this.renderFrame + 1) % 2;
+          }
+          this.nextFrame++;
+        }
+      this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, this.frame);
+    }
 
     this.sprite.scale = origScale;
 
