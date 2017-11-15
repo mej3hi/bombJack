@@ -355,6 +355,7 @@ Jack.prototype.movePlayer = function (du) {
         this._isJumping = false;
 
     }else if (nextY < minY){
+        this.cy = minY;
         this.velY = oldVelY * 0;
         intervalVelY = this.velY;
 
