@@ -65,6 +65,10 @@ Jack.prototype.renderFrame = 0;
 Jack.prototype.duPerAnimFrame = 9;
 Jack.prototype.nextFrame = 0;
 
+Jack.prototype.powerupActive = false;
+Jack.prototype.powerupLifespan = 0;
+Jack.prototype.powerupEffectSize = 1.5;
+
 //Jack.prototype.KEY_FIRE   = ' '.charCodeAt(0);
 
 // Initial, inheritable, default values
@@ -142,6 +146,14 @@ Jack.prototype.update = function (du) {
         this.computeSubStep(dStep);
     }
 
+    if (this.powerupActive) {
+        this.powerupLifespan -= du;
+    }
+
+    if (this.powerupActive && this.powerupLifespan <= 0) {
+        this.powerupActive = false;
+    }
+
     var ent = this.isColliding() ;
     if (ent){
 
@@ -160,6 +172,8 @@ Jack.prototype.update = function (du) {
             var score = ent.collectPowerup();
             scoreboardManager.addScore(score);
             levelManager.totalPowerup--;
+            this.powerupActive = true;
+            this.powerupLifespan = ent.effectLifeSpan;
         }
 
     }
@@ -177,6 +191,11 @@ Jack.prototype.computeSubStep = function (du) {
 Jack.prototype.calculateJump = function (accelY) {
 
     var jump = 0;
+    var powerJump = 1;
+
+    if (this.powerupActive) {
+        powerJump = this.powerupEffectSize;
+    }
 
     if (eatKey(this.KEY_JUMP) && !this._isJumping) {
         this._isJumping = true;
@@ -185,7 +204,7 @@ Jack.prototype.calculateJump = function (accelY) {
 
     // Apply jump
 
-    var accelY = -1 * jump;
+    var accelY = -1 * jump * powerJump;
 
     accelY += NOMINAL_GRAVITY;
     return accelY;
@@ -273,6 +292,7 @@ Jack.prototype.movePlayer = function (du) {
         this._isJumping = false;
 
     }else if (nextY < minY){
+        this.cy = minY;
         this.velY = oldVelY * 0;
         intervalVelY = this.velY;
 
