@@ -2,15 +2,6 @@
 // ROCK
 // ====
 
-"use strict";
-
-/* jshint browser: true, devel: true, globalstrict: true */
-
-/*
-0        1         2         3         4         5         6         7         8
-12345678901234567890123456789012345678901234567890123456789012345678901234567890
-*/
-
 
 "use strict";
 
@@ -26,7 +17,7 @@
 function Platform(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
-    
+
     this.cx = this.cx || 200;
     this.cy = this.cy || 200;
     this.width = this.width || 100;

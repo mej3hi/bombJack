@@ -42,11 +42,10 @@ function Jack(descr) {
 
 Jack.prototype = new Entity();
 
-//Jack.prototype.halfWidth = this.animate[0][2]/2;
-
-Jack.prototype.KEY_JUMP = 'W'.charCodeAt(0);
+Jack.prototype.KEY_JUMP = ' '.charCodeAt(0);
 Jack.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Jack.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
+Jack.prototype.KEY_PARASHOUT  = 'W'.charCodeAt(0);
 
 Jack.prototype.animate = [
     [5, 3, 13, 17],
@@ -193,10 +192,17 @@ Jack.prototype.calculateJump = function (accelY) {
 
 };
 
-var NOMINAL_GRAVITY = 1.12;
+var NOMINAL_GRAVITY = 1;
 
 var NOMINAL_JUMP = +25.2;
 
+var PARASHOUT_DRAG = 1.12;
+
+Jack.prototype.parashout = function(){
+   if(keys[this.KEY_PARASHOUT] && this._isJumping && this.velY > 0){
+     this.velY = 2;
+   }
+};
 
 
 Jack.prototype.movePlayer = function (du) {
@@ -212,6 +218,8 @@ Jack.prototype.movePlayer = function (du) {
     // v = u + at
     this.velX += accelX * du;
     this.velY += accelY * du;
+
+    this.parashout();
 
     // v_ave = (u + v) / 2
     var aveVelX = (oldVelX + this.velX) / 2;
@@ -239,10 +247,19 @@ Jack.prototype.movePlayer = function (du) {
 
 
     if (keys[this.KEY_LEFT] && this.cx > 0 + this.getRadius()) {
-        this.cx -= 6 * du;
+        if(keys[this.KEY_PARASHOUT]){
+            this.cx -= 3 * du;
+        }else{
+            this.cx -= 6 * du;
+        }
     }
     if (keys[this.KEY_RIGHT] && this.cx < g_canvas.width - this.getRadius()) {
-        this.cx += 6 * du;
+      if(keys[this.KEY_PARASHOUT]){
+          this.cx += 3 * du;
+      }else{
+          this.cx += 6 * du;
+      }
+
     }
 
     if (this.cy > maxY || this.cy < minY) {
