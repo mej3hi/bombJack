@@ -46,6 +46,7 @@ Powerup.prototype.animate = [
 
 
 Powerup.prototype.pointsLifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
+Powerup.prototype.effectLifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
 
 Powerup.prototype.update = function (du) {
 
