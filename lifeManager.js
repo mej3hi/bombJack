@@ -25,8 +25,9 @@ update : function(du){
 					this.lifeSpan = 5000/ NOMINAL_UPDATE_INTERVAL;
 					this.gameOverCx= -50;
 					this.gameOverSprite = false;
-					levelManager.backToFirstLevel()
+					levelManager.backToFirstLevel();
 					this._jackLife = 3;
+					scoreboardManager.clearScore();
 				}
 
 				this.gameOverCx +=du*4;
