@@ -14,14 +14,12 @@
 
 // A generic contructor which accepts an arbitrary descriptor object
 function Jack(descr) {
-    console.log("búa til jack")
 
     // Common inherited setup logic from Entity
     this.setup(descr);
 
     this.cx = this.cx || 200;
     this.cy = this.cy || 200;
-
 
     this.origX = this.cx;
     this.origY = this.cy;
@@ -43,8 +41,6 @@ function Jack(descr) {
 };
 
 Jack.prototype = new Entity();
-
-Jack.prototype._score = 0;
 
 //Jack.prototype.halfWidth = this.animate[0][2]/2;
 
@@ -117,35 +113,11 @@ Jack.prototype._updateWarp = function (du) {
 
 Jack.prototype._moveToASafePlace = function () {
 
-    // Move to a safe place some suitable distance away
-
     this.cx = this.origX;
     this.cy = this.origY;
-
-
-
 };
 
-Jack.prototype.maybeFireBullet = function () {
 
-    if (keys[this.KEY_FIRE]) {
-
-        var dX = +Math.sin(this.rotation);
-        var dY = -Math.cos(this.rotation);
-        var launchDist = this.getRadius() * 1.2;
-
-        var relVel = this.launchVel;
-        var relVelX = dX * relVel;
-        var relVelY = dY * relVel;
-
-        entityManager.fireBullet(
-           this.cx + dX * launchDist, this.cy + dY * launchDist,
-           this.velX + relVelX, this.velY + relVelY,
-           this.rotation);
-
-    }
-
-};
 Jack.prototype.update = function (du) {
     // Handle warping
 
@@ -154,8 +126,7 @@ Jack.prototype.update = function (du) {
       return entityManager.KILL_ME_NOW;
     }
 
-    // Check if Jack has 3 lifes to skip warping after game over.
-    if (this._isWarping && lifeManager.getJackLife() !=3) {
+    if (this._isWarping ) {
         this._updateWarp(du);
         return;
     }
@@ -172,40 +143,18 @@ Jack.prototype.update = function (du) {
         this.computeSubStep(dStep);
     }
 
-    // Handle firing
-    this.maybeFireBullet();
-
-    var prevX = this.cx;
-    var prevY = this.cy;
-
-    // Compute my provisional new position (barring collisions)
-    var nextX = prevX + this.velX * du;
-    var nextY = prevY + this.velY * du;
-
-    // TODO: YOUR STUFF HERE! --- Warp if isColliding, otherwise Register
-
-
-    var aveVelY = (oldVelY + this.velY) / 2;
-    var intervalVelY = g_useAveVel ? aveVelY : this.velY;
-    var oldVelY = this.velY;
-    // Check Y coords
-
     var ent = this.isColliding() ;
     if (ent){
 
         if (ent instanceof Enemy || ent instanceof Bird){
             this.warp();
-
             lifeManager.takeJackLife(1);
-            console.log(lifeManager.getJackLife())
         }
 
         if (ent instanceof Bomb){
             var score = ent.collectBomb();
             scoreboardManager.addScore(score);
             levelManager.totalBomb--;
-            console.log(levelManager.totalBomb);
-
         }
 
         if (ent instanceof Powerup){
@@ -214,36 +163,9 @@ Jack.prototype.update = function (du) {
             levelManager.totalPowerup--;
         }
 
-        if (ent instanceof Platform){
-            // if(ent.collidesWithTop(prevX, prevY, nextX, nextY, this.getRadius())) {
-            //     this.velY =  0;
-            //     intervalVelY = this.velY;
-            //     if(this.cy < ent.cy){
-            //         console.log("asdasdadsdasd" ,this.cy )
-            //         this._isJumping = false;
-            //         this._onPlatform = true;
-
-            //     }
-            // }
-        }
-
-
-
-
     }
     else spatialManager.register(this);
 
-
-
-
-};
-
-Jack.prototype.addScore = function(score){
-    this._score += score;
-};
-
-Jack.prototype.getScore = function(){
-    return this._score;
 };
 
 
@@ -306,15 +228,6 @@ Jack.prototype.movePlayer = function (du) {
     var nextX = this.cx + intervalVelX * du;
     var nextY = this.cy + intervalVelY * du;
 
-    // var minY = 17*this.scale;
-    // // //var maxY = g_canvas.height - minY - 40;
-    // var maxY = levelManager.mapHeight - minY;
-
-    // var minX = (g_sprites.jack.width / 2)*this.scale;
-    // //var maxX = g_canvas.width - minX;
-    // var maxX = levelManager.mapWidth - minX;
-
-
     var minY = this.getHalfHeight()*this.scale;
     var maxY = levelManager.mapHeight - minY;
 
@@ -331,8 +244,6 @@ Jack.prototype.movePlayer = function (du) {
     if (keys[this.KEY_RIGHT] && this.cx < g_canvas.width - this.getRadius()) {
         this.cx += 6 * du;
     }
-
-
 
     if (this.cy > maxY || this.cy < minY) {
 
@@ -381,9 +292,6 @@ Jack.prototype.getHalfWidth = function(){
     return this.animate[0][2]/2;
 };
 
-Jack.prototype.takeBulletHit = function () {
-    this.warp();
-};
 
 Jack.prototype.halt = function () {
     this.velX = 0;

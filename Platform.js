@@ -26,8 +26,7 @@
 function Platform(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
-    console.log("Descrp",descr)
-
+    
     this.cx = this.cx || 200;
     this.cy = this.cy || 200;
     this.width = this.width || 100;

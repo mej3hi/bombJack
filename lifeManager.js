@@ -5,7 +5,7 @@ gameOver  : false,
 
 lifeSpan: 5000/ NOMINAL_UPDATE_INTERVAL,
 gameOverSprite: false,
-gameOverCx:300,
+gameOverCx:-50,
 gameOverCy:300,
 
 takeJackLife : function(life){

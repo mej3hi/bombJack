@@ -23,14 +23,12 @@ _fontColor : "white",
 lifeSpan: 5000/ NOMINAL_UPDATE_INTERVAL,
 
 update : function(du){
-	if(entityManager._bombs.length <= 6 && this.level <4){
-
+	if(entityManager._bombs.length <= 15 && this.level <4){
 
 		if(this.lifeSpan === (5000/ NOMINAL_UPDATE_INTERVAL) ){
 			this.clearLevel();
 			this.nextLevel();
-			var a = this.getMap(this.level);
-			backgroundManager.setBackground(a.background)
+			backgroundManager.setBackground(this.getMap(this.level).background)
 			this.renderStarSprite = true;
 		}
 
@@ -87,7 +85,6 @@ render : function(ctx){
 
 
 backToFirstLevel : function() {
-	//lifeManager._jackLife = 3;
 	this.clearLevel();
 	this.level = 1;
 	this.createLevel(this.level);
@@ -95,9 +92,7 @@ backToFirstLevel : function() {
 
 
 changeLevel : function() {
-
 	this.clearLevel();
-
 	this.nextLevel();
 	this.createLevel(this.level);
 },
