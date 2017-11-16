@@ -67,7 +67,7 @@ Jack.prototype.nextFrame = 0;
 
 Jack.prototype.powerupActive = false;
 Jack.prototype.powerupLifespan = 0;
-Jack.prototype.powerupEffectSize = 1.5;
+Jack.prototype.powerupEffectSize = 1.3;
 
 //Jack.prototype.KEY_FIRE   = ' '.charCodeAt(0);
 
