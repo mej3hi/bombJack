@@ -149,6 +149,8 @@ update : function(du){
   	if(this.lifeSpan < 0){
   		  this.hasBeenPlayed = true;
         this.isPlaying = false;
+        this.youWonCx= -50;
+        this.fireWorks = [];
         this.lifeSpan =  10000/ NOMINAL_UPDATE_INTERVAL;
         this.callBack();
   	}
