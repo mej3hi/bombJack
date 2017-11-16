@@ -99,13 +99,6 @@ Enemy.prototype.getRadius = function () {
 };
 
 
-// HACKED-IN AUDIO (no preloading)
-Enemy.prototype.splitSound = new Audio(
-  "sounds/rockSplit.ogg");
-Enemy.prototype.evaporateSound = new Audio(
-  "sounds/rockEvaporate.ogg");
-
-
 Enemy.prototype.render = function (ctx) {
     var origScale = this.sprite.scale;
     var frame;

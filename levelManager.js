@@ -177,8 +177,13 @@ createLevel : function (level) {
 	}
 
 	if(level.bomb){
+		var ignite = 250;
 		for (var i = 0; i < level.bomb.length; i++) {
 			entityManager.generateBomb(level.bomb[i]);
+			if (i%2 == 0){
+				entityManager._bombs[i].timeToIgnite = ignite;
+				ignite = ignite + 250;
+			}
 			this.totalBomb++;
 		};
 	}
