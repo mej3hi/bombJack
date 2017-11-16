@@ -69,11 +69,8 @@ Jack.prototype.powerupActive = false;
 Jack.prototype.powerupLifespan = 0;
 Jack.prototype.powerupEffectSize = 1.3;
 
-//Jack.prototype.KEY_FIRE   = ' '.charCodeAt(0);
 
 // Initial, inheritable, default values
-
-Jack.prototype.launchVel = 2;
 Jack.prototype.numSubSteps = 1;
 
 // HACKED-IN AUDIO (no preloading)
@@ -161,13 +158,11 @@ Jack.prototype.update = function (du) {
         if (ent instanceof Bomb){
             var score = ent.collectBomb();
             scoreboardManager.addScore(score);
-            levelManager.totalBomb--;
         }
 
         if (ent instanceof Powerup){
             var score = ent.collectPowerup();
             scoreboardManager.addScore(score);
-            levelManager.totalPowerup--;
             this.powerupActive = true;
             this.powerupLifespan = ent.effectLifeSpan;
         }

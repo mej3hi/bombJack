@@ -7,7 +7,6 @@
 var levelManager = {
 
 level : 1,
-totalBomb : 0,
 
 mapWidth : 600,
 mapHeight :560,
@@ -29,7 +28,6 @@ update : function(du){
 			// play start theman
 			if(!this.renderStarSprite){
 				this.clearLevel();
-
 				backgroundManager.setBackground(this.getMap(this.level+1).background)
 				this.renderStarSprite = true;
 			}
@@ -56,7 +54,6 @@ update : function(du){
 				this.level = 1;
 				scoreboardManager.clearScore();
 				winningScene.playIntro(initialFirstLevel);
-				//console.log("render winningScene")
 
 		}
 
@@ -199,7 +196,7 @@ createLevel : function (level) {
 				entityManager._bombs[i].timeToIgnite = ignite;
 				ignite = ignite + 350;
 			}
-			this.totalBomb++;
+
 		};
 	}
 

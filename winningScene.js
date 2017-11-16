@@ -147,9 +147,7 @@ update : function(du){
     }
 
   	if(this.lifeSpan < 0){
-  		this.hasBeenPlayed = true;
-
-      console.log("búinn að splila")
+  		  this.hasBeenPlayed = true;
         this.isPlaying = false;
         this.lifeSpan =  10000/ NOMINAL_UPDATE_INTERVAL;
         this.callBack();
