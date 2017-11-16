@@ -26,14 +26,7 @@ function Platform(descr) {
     this.halfWidth = this.width / 2;
     this.halfHeight = this.height / 2;
 
-    // Default sprite and scale, if not otherwise specified
 
-
-/*
-    // Diagnostics to check inheritance stuff
-    this._EnemyProperty = true;
-    console.dir(this);
-*/
 
 };
 
@@ -42,12 +35,12 @@ Platform.prototype = new Entity();
 
 Platform.prototype.update = function (du) {
 
-    // TODO: YOUR STUFF HERE! --- Unregister and check for death
+    // Unregister and check for death
     spatialManager.unregister(this);
 
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
 
-    // TODO: YOUR STUFF HERE! --- (Re-)Register
+    // (Re-)Register
     spatialManager.register(this);
 
 

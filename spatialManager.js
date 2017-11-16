@@ -34,8 +34,6 @@ _entities : [],
 getNewSpatialID : function() {
     return this._nextSpatialID++;
 
-    // TODO: YOUR STUFF HERE!
-
 },
 
 register: function(entity) {
@@ -56,7 +54,6 @@ unregister: function(entity) {
       }
    };
 
-    // TODO: YOUR STUFF HERE!
 
 },
 
@@ -71,10 +68,11 @@ findEntityInRange: function(posX, posY, radius) {
         var entityPos = e.getPos();
         var entityRadius = e.getRadius();
 
-        var wrappedDistSq = util.wrappedDistSq(
+
+        var wrappedDistSq = util.distSq(
+
             entityPos.posX,  entityPos.posY, 
-            posX, posY,
-            g_canvasWidth, g_canvasHeight);
+            posX, posY);
 
         var radiusDistSq = util.square(entityRadius) + util.square(radius);
 
@@ -83,10 +81,6 @@ findEntityInRange: function(posX, posY, radius) {
         }
 
     }
-
-
-
-    // TODO: YOUR STUFF HERE!
 
 },
 

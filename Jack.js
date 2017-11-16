@@ -99,7 +99,8 @@ Jack.prototype._updateWarp = function (du) {
 
     if (this.scale < 0.2 ) {
 
-        this._moveToASafePlace();
+        this.cx = this.origX;
+        this.cy = this.origY;
         this.halt();
         this._scaleDirn = 1;
 
@@ -113,12 +114,6 @@ Jack.prototype._updateWarp = function (du) {
         spatialManager.register(this);
 
     }
-};
-
-Jack.prototype._moveToASafePlace = function () {
-
-    this.cx = this.origX;
-    this.cy = this.origY;
 };
 
 

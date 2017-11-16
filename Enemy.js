@@ -33,21 +33,11 @@ function Enemy(descr) {
     this.scale  = this.scale  || 2;
 
     this.movingRight = this.movingRight || false;
-/*  
-    // Diagnostics to check inheritance stuff
-    this._EnemyProperty = true;
-    console.dir(this);
-*/
 
 };
 
 
 Enemy.prototype = new Entity();
-
-/*Enemy.prototype.setVelocity = function (velX,velY) {
-    this.velX = velX;
-    this.velY = velY;
-};*/
 
 Enemy.prototype.animate = [
     [45, 53, 11, 15],
@@ -64,7 +54,7 @@ Enemy.prototype.nextFrame = 0;
 
 Enemy.prototype.update = function (du) {
 
-    // TODO: YOUR STUFF HERE! --- Unregister and check for death
+    // Unregister and check for death
     spatialManager.unregister(this);
      
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
@@ -88,7 +78,7 @@ Enemy.prototype.update = function (du) {
     }
     this.cy += this.velY * du;
     
-    // TODO: YOUR STUFF HERE! --- (Re-)Register
+    // (Re-)Register
     spatialManager.register(this);
      
 

@@ -66,13 +66,6 @@ function updateSimulation(du) {
       entityManager.update(du);
     }
     else intro.update(du);
-
-
-
-
-
-    // Prevent perpetual firing!
-   // eatKey(Ship.prototype.KEY_FIRE);
 }
 
 // GAME-SPECIFIC DIAGNOSTICS
@@ -170,7 +163,6 @@ function preloadDone() {
 
     entityManager.init();
     init();
-    //initialFirstLevel();
 
     main.init();
 }

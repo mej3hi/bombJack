@@ -27,13 +27,6 @@ function Powerup(descr) {
     this.points =  this.points || 500;
     this.collected = false;
 
-
-/*
-    // Diagnostics to check inheritance stuff
-    this._EnemyProperty = true;
-    console.dir(this);
-*/
-
 };
 
 
@@ -50,7 +43,7 @@ Powerup.prototype.effectLifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
 
 Powerup.prototype.update = function (du) {
 
-    // TODO: YOUR STUFF HERE! --- Unregister and check for death
+    //  --- Unregister and check for death
     spatialManager.unregister(this);
 
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
@@ -60,7 +53,7 @@ Powerup.prototype.update = function (du) {
 
     if (this.pointsLifeSpan < 0) return entityManager.KILL_ME_NOW;
 
-    // TODO: YOUR STUFF HERE! --- (Re-)Register
+    // --- (Re-)Register
     if (!this.collected){
         spatialManager.register(this);
     }
