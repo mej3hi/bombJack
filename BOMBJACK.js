@@ -47,11 +47,12 @@ var g_ctx = g_canvas.getContext("2d");
 // ====================
 
 function initialFirstLevel() {
-    levelManager.createLevel(levelManager.getLevel());
+    levelManager.createLevel(1);
 }
 
 function init() {
     intro.playIntro(initialFirstLevel);
+  //  winningScene.playIntro(initialFirstLevel);
 }
 
 // =============
@@ -81,11 +82,16 @@ function gatherInputs() {
 function updateSimulation(du) {
 
     processDiagnostics();
+    if(winningScene.isPlaying){
+      winningScene.update(du)
+      return
+    };
 
     if(intro.hasBeenPlayed){
-      levelManager.update(du);
-      lifeManager.update(du);
-      entityManager.update(du);
+        levelManager.update(du);
+        lifeManager.update(du);
+        entityManager.update(du);
+
     }
     else intro.update(du);
 
@@ -147,6 +153,7 @@ function renderSimulation(ctx) {
 
     backgroundManager.render(ctx);
     if(!intro.hasBeenPlayed) intro.render(ctx);
+    if(winningScene.isPlaying) winningScene.render(ctx);
     entityManager.render(ctx);
     scoreboardManager.render(ctx);
     lifeManager.render(ctx);

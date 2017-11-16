@@ -23,31 +23,46 @@ _fontColor : "white",
 lifeSpan: 5000/ NOMINAL_UPDATE_INTERVAL,
 
 update : function(du){
-	if(entityManager._bombs.length <= 0 && this.level <5){
+	if(entityManager._bombs.length <= 15){
 
-		if(this.lifeSpan === (5000/ NOMINAL_UPDATE_INTERVAL) ){
-			this.clearLevel();
-			this.nextLevel();
-			backgroundManager.setBackground(this.getMap(this.level).background)
-			this.renderStarSprite = true;
-		}
+		if(this.level < 1){
+			// play start theman
+			if(!this.renderStarSprite){
+				this.clearLevel();
 
-		this.lifeSpan -=du;
+				backgroundManager.setBackground(this.getMap(this.level+1).background)
+				this.renderStarSprite = true;
+			}
 
-		if(this.lifeSpan < 0){
-			this.createLevel(this.level);
-			this.lifeSpan = 5000/ NOMINAL_UPDATE_INTERVAL;
-			this.startCx=-50;
-			this.renderStarSprite = false;
-		}
+			this.lifeSpan -=du;
 
-		this.startCx +=du*4;
-		if(this.startCx >= 300){
-			this.startCx=300;
+			if(this.lifeSpan < 0){
+				this.nextLevel();
+				this.createLevel(this.level);
+				this.lifeSpan = 5000/ NOMINAL_UPDATE_INTERVAL;
+				this.startCx=-50;
+				this.renderStarSprite = false;
+			}
+
+			this.startCx +=du*4;
+			if(this.startCx >= 300){
+				this.startCx=300;
+			}
+
+
+		}else{
+			// play winnign theman
+				this.clearLevel();
+				this.level = 1;
+				scoreboardManager.clearScore();
+				winningScene.playIntro(initialFirstLevel);
+				//console.log("render winningScene")
+
 		}
 
 
 	}
+
 
 },
 
@@ -488,7 +503,7 @@ _levelInfo : {
 				//Bottom Right
 		    {cx : 15*30, cy : 15*30, width : 3*30, color : 1},
 
-			
+
 
 	    ],
 
@@ -548,7 +563,7 @@ _levelInfo : {
 		    {cx: 15*30,    cy: 4*30},
 		    {cx: 17*30,    cy: 4*30},
 
-	
+
 
 	    ],
 
@@ -567,9 +582,9 @@ _levelInfo : {
 		// PLATFORMS
 		platform: [
 
-			
 
-			
+
+
 
 	    ],
 
@@ -594,12 +609,12 @@ _levelInfo : {
 	     bomb: [
 
 			//First column from left
-		    
+
 		    {cx: 3*30,    cy: 12*30},
 		    {cx: 3*30,    cy: 14*30},
 		    {cx: 3*30,    cy: 16*30},
 
-		    	
+
 		    {cx: 3*30,    cy: 4*30},
 		    {cx: 3*30,    cy: 6*30},
 		    {cx: 3*30,    cy: 8*30},
@@ -633,14 +648,14 @@ _levelInfo : {
 		    {cx: 17*30,    cy: 8*30},
 
 
-			
+
 
 				//Top Right Bombs
-		    
 
-		
 
-	
+
+
+
 
 	    ],
 
