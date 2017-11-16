@@ -32,7 +32,7 @@ function Enemy(descr) {
     this.sprite = this.sprite || g_sprites.enemy;
     this.scale  = this.scale  || 2;
 
-    this.movingRight = false;
+    this.movingRight = this.movingRight || false;
 /*  
     // Diagnostics to check inheritance stuff
     this._EnemyProperty = true;

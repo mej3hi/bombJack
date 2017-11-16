@@ -81,6 +81,7 @@ Powerup.prototype.getRadius = function () {
 Powerup.prototype.playCollectPowerupSound = function(){
     Powerup.prototype.collectPowerupSound = new Audio(
         "sounds/collectBomb.wav");
+    this.collectPowerupSound.volume = 0.2;
     this.collectPowerupSound.play();
 }
 

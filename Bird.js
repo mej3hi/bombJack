@@ -32,7 +32,7 @@ function Bird(descr) {
     this.sprite = this.sprite || g_sprites.birdLeft;
     this.scale  = this.scale  || 2;
 
-    this.movingRight = false;
+    this.movingRight = this.movingRight || false;
 /*  
     // Diagnostics to check inheritance stuff
     this._EnemyProperty = true;

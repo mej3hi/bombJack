@@ -79,6 +79,7 @@ Jack.prototype.numSubSteps = 1;
 // HACKED-IN AUDIO (no preloading)
 Jack.prototype.warpSound = new Audio(
     "sounds/warpSound.wav");
+Jack.prototype.warpSound.volume = 0.5;
 
 Jack.prototype.warp = function () {
 
