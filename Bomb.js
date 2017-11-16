@@ -109,6 +109,7 @@ Bomb.prototype.getRadius = function () {
 Bomb.prototype.playCollectBombSound = function(){
     Bomb.prototype.collectBombSound = new Audio(
         "sounds/collectBomb.wav");
+    this.collectBombSound.volume = 0.2;
     this.collectBombSound.play();
 }
 

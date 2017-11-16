@@ -44,7 +44,6 @@ getJackLife : function(){
 },
 
 render : function(ctx){
-	//console.log(",life manager render",g_sprites.jack)
 	var origScale = g_sprites.jack.scale;
 	var scale = 1.6;
 

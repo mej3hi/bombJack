@@ -34,7 +34,7 @@ lifeSpan: 5000/ NOMINAL_UPDATE_INTERVAL,
 
 frame: [3,300,195,80],
 
-introSound: "sounds/Commodore64/title-screen-sid-stereo-.mp3",
+introSound: "sounds/arcade/Arcade-Intro.mp3",
 background: "img/backgroundEgypt.png",
 
 callBack: undefined,
@@ -89,28 +89,37 @@ render : function(ctx){
 	 	g_sprites.intro.scale = origScale;
 
 		util.fillText(ctx,
-			this.cx-this.frame[2],
-			this.cy+this.frame[3]+20 ,
-			"A: LEFT",
+			this.cx-100,
+			50 ,
+			"LEFT: LEFT ARROW",
 			this._fontSize,
 			this._fontFamliy,
 			this._fontColor);
 
 			util.fillText(ctx,
-			this.cx-30,
-			this.cy+this.frame[3]+20 ,
-			"D:RIGHT",
+			this.cx-100,
+			100,
+      //this.cy+this.frame[3]+20 ,
+			"RIGHT: RIGHT ARROW",
 			this._fontSize,
 			this._fontFamliy,
 			this._fontColor);
 
 			util.fillText(ctx,
-			this.cx+this.frame[2]-90 ,
-			this.cy+this.frame[3]+20 ,
-			"W: JUMP",
+			this.cx-100 ,
+			150 ,
+			"JUMP: SPACE",
 			this._fontSize,
 			this._fontFamliy,
 			this._fontColor);
+
+      util.fillText(ctx,
+      this.cx-100 ,
+      200 ,
+      "PARACHUTE: UP ARROW",
+      this._fontSize,
+      this._fontFamliy,
+      this._fontColor);
 
 
 },

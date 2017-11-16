@@ -121,8 +121,6 @@ update: function(du) {
         }
     }
 
-    //if (this._platforms.length === 0) this._generateRocks();
-
 },
 
 render: function(ctx) {

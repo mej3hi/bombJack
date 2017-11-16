@@ -32,22 +32,12 @@ function Enemy(descr) {
     this.sprite = this.sprite || g_sprites.enemy;
     this.scale  = this.scale  || 2;
 
-    this.movingRight = false;
-/*  
-    // Diagnostics to check inheritance stuff
-    this._EnemyProperty = true;
-    console.dir(this);
-*/
+    this.movingRight = this.movingRight || false;
 
 };
 
 
 Enemy.prototype = new Entity();
-
-/*Enemy.prototype.setVelocity = function (velX,velY) {
-    this.velX = velX;
-    this.velY = velY;
-};*/
 
 Enemy.prototype.animate = [
     [45, 53, 11, 15],
@@ -64,7 +54,7 @@ Enemy.prototype.nextFrame = 0;
 
 Enemy.prototype.update = function (du) {
 
-    // TODO: YOUR STUFF HERE! --- Unregister and check for death
+    // Unregister and check for death
     spatialManager.unregister(this);
      
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
@@ -88,7 +78,7 @@ Enemy.prototype.update = function (du) {
     }
     this.cy += this.velY * du;
     
-    // TODO: YOUR STUFF HERE! --- (Re-)Register
+    // (Re-)Register
     spatialManager.register(this);
      
 
@@ -97,13 +87,6 @@ Enemy.prototype.update = function (du) {
 Enemy.prototype.getRadius = function () {
     return this.scale * (this.animate[0][3]/2) * 0.9;
 };
-
-
-// HACKED-IN AUDIO (no preloading)
-Enemy.prototype.splitSound = new Audio(
-  "sounds/rockSplit.ogg");
-Enemy.prototype.evaporateSound = new Audio(
-  "sounds/rockEvaporate.ogg");
 
 
 Enemy.prototype.render = function (ctx) {

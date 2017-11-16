@@ -99,7 +99,7 @@ render : function(ctx){
 
 lifeSpan: 10000/ NOMINAL_UPDATE_INTERVAL,
 
-//introSound: "sounds/Commodore64/title-screen-sid-stereo-.mp3",
+introSound: "sounds/arcade/Arcade-GameFinish.mp3",
 background: "img/backgroundEgypt.png",
 
 callBack: undefined,
@@ -112,7 +112,7 @@ playIntro: function (call) {
   this.fireWorks.push(Object.assign({}, this.fireWork));
   this.fireWorks.push(Object.assign({}, this.fireWork));
   this.fireWorks.push(Object.assign({}, this.fireWork));
-  //soundManager.setBackgroundMusic(this.introSound);
+  soundManager.setBackgroundMusic(this.introSound);
   backgroundManager.setBackground(this.background);
 },
 

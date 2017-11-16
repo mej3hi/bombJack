@@ -32,7 +32,7 @@ function Bird(descr) {
     this.sprite = this.sprite || g_sprites.birdLeft;
     this.scale  = this.scale  || 2;
 
-    this.movingRight = false;
+    this.movingRight = this.movingRight || false;
 /*  
     // Diagnostics to check inheritance stuff
     this._EnemyProperty = true;
@@ -69,7 +69,7 @@ Bird.prototype.nextFrame = 0;
 
 Bird.prototype.update = function (du) {
 
-    // TODO: YOUR STUFF HERE! --- Unregister and check for death
+    //Unregister and check for death
     spatialManager.unregister(this);
      
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
@@ -95,7 +95,7 @@ Bird.prototype.update = function (du) {
     }
     this.cy += this.velY * du;
     
-    // TODO: YOUR STUFF HERE! --- (Re-)Register
+    //--- (Re-)Register
     spatialManager.register(this);
      
 
@@ -104,13 +104,6 @@ Bird.prototype.update = function (du) {
 Bird.prototype.getRadius = function () {
     return this.scale * (this.animate[0][3]/2) * 0.9;
 };
-
-
-// HACKED-IN AUDIO (no preloading)
-Bird.prototype.splitSound = new Audio(
-  "sounds/rockSplit.ogg");
-Bird.prototype.evaporateSound = new Audio(
-  "sounds/rockEvaporate.ogg");
 
 
 Bird.prototype.render = function (ctx) {

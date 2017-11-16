@@ -109,7 +109,9 @@ backToFirstLevel : function() {
 changeLevel : function() {
 	this.clearLevel();
 	this.nextLevel();
-	this.createLevel(this.level);
+	if (this.level > 5 && this.level % 5 == 0){
+		this.createLevel(1);
+	}
 },
 
 
@@ -119,7 +121,7 @@ clearLevel : function() {
 },
 
 nextLevel : function(){
-	this.playLevelChangeSound();
+	//this.playLevelChangeSound();
 	this.level++;
 },
 
@@ -159,6 +161,7 @@ getMap: function(level){
 playLevelChangeSound : function(){
     var levelChangeSound = new Audio(
         "sounds/levelChangeSound.wav");
+    levelChangeSound.volume = 0.2;
     levelChangeSound.play();
 },
 
@@ -189,8 +192,13 @@ createLevel : function (level) {
 	}
 
 	if(level.bomb){
+		var ignite = 350;
 		for (var i = 0; i < level.bomb.length; i++) {
 			entityManager.generateBomb(level.bomb[i]);
+			if (i%2 == 0){
+				entityManager._bombs[i].timeToIgnite = ignite;
+				ignite = ignite + 350;
+			}
 			this.totalBomb++;
 		};
 	}
@@ -215,26 +223,26 @@ _levelInfo : {
 	one:{
 
 		background: "img/backgroundEgypt.png",
-		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
+		backgroundSound : "sounds/arcade/Arcade-Track1.mp3",
 
 		jack:{cx : 300,cy : 500},
 
 		platform:[
 
-				//Top Left Platform
-		    {cx : 7*30, cy : 150, width : 100, color : 1},
+			//Top Left Platform
+	   		{cx : 7*30, cy : 5*30, width : 100, color : 1},
 
-				//Top Right Platform
-				{cx : 14*30, cy : 3*30, width : 100, color : 1},
+			//Top Right Platform
+			{cx : 14*30, cy : 3*30, width : 100, color : 1},
 
-				//Middle Platform
-		    {cx : 11*30, cy : 11*30, width : 100, color : 1},
+			//Middle Platform
+	    	{cx : 11*30, cy : 11*30, width : 100, color : 1},
 
-				//Bottom Left Platform
-				{cx : 4*30, cy : 15*30, width : 100, color : 1},
+			//Bottom Left Platform
+			{cx : 4*30, cy : 15*30, width : 100, color : 1},
 
-				//Bottom Right Platform
-		    {cx : 15*30, cy : 15*30, width : 200, color : 1},
+			//Bottom Right Platform
+	    	{cx : 15*30, cy : 15*30, width : 200, color : 1},
 
 		],
 
@@ -247,41 +255,53 @@ _levelInfo : {
 		   	{cx : 14*30, cy : 3*30-20, range : 100, velX: 1}
 		],
 
-		bird:[{cx : 4*30, cy : 15*30-20, range : 300, velX: 3}],
+		bird:[
+
+			{cx : 10*30, cy : 15*30-20, range : 400, velX: 4}
+
+		],
 
 		bomb:[
 		 	/*{cx: 80, cy: 20},
 		    {cx: 140, cy: 20},
 		    {cx: 200, cy: 20},*/
 
-		    {cx: 20, cy: 200},
-		    {cx: 20, cy: 260},
-		    {cx: 20, cy: 320},
-		    {cx: 20, cy: 380},
+		    {cx: 3*30,    cy: 1*30},
+		    {cx: 5*30,    cy: 1*30},
+		    {cx: 7*30,    cy: 1*30},
 
-		    {cx: 400, cy: 420},
-		    {cx: 460, cy: 420},
-		    {cx: 520, cy: 420},
+		    {cx: 13*30,    cy: 1*30},
+		    {cx: 15*30,    cy: 1*30},
+		    {cx: 17*30,    cy: 1*30},
 
-		   /* {cx: 400, cy: 20},
-		    {cx: 460, cy: 20},
-		    {cx: 520, cy: 20},*/
 
-		    {cx: 80, cy: 540},
-		    {cx: 140, cy: 540},
-		    {cx: 200, cy: 540},
+		    {cx: 11*30,    cy: 4*30},
+		    {cx: 13*30,    cy: 4*30},
+		    {cx: 15*30,    cy: 4*30},
+		    {cx: 17*30,    cy: 4*30},
 
-		    {cx: 580, cy: 200},
-		    {cx: 580, cy: 260},
-		    {cx: 580, cy: 320},
-		    {cx: 580, cy: 380},
+		    {cx: 1*30, cy: 7*30},
+		    {cx: 1*30, cy: 9*30},
+		    {cx: 1*30, cy: 11*30},
+		    {cx: 1*30, cy: 13*30},
 
-		    {cx: 400, cy: 140},
-		    {cx: 460, cy: 140},
-		    {cx: 520, cy: 140},
+		    {cx: 19*30, cy: 7*30},
+		    {cx: 19*30, cy: 9*30},
+		    {cx: 19*30, cy: 11*30},
+		    {cx: 19*30, cy: 13*30},
+
+		    {cx: 13*30,    cy: 14*30},
+		    {cx: 15*30,    cy: 14*30},
+		    {cx: 17*30,    cy: 14*30},
+
+		    {cx: 3*30,    cy: 18*30},
+		    {cx: 5*30,    cy: 18*30},
+		    {cx: 7*30,    cy: 18*30},
+
+
 		],
 
-		powerup:[]
+		powerup:[{cx: 1*30,    cy: 14*30}]
 
 
 	},
@@ -289,9 +309,9 @@ _levelInfo : {
 	two:{
 
 		background: "img/backgroundGreek.png",
-		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
+		backgroundSound : "sounds/arcade/Arcade-Track2.mp3",
 
-		jack: {cx : 300,cy : 500},
+		jack: {cx : 300,cy : 450},
 
 
 		// PLATFORMS
@@ -319,22 +339,28 @@ _levelInfo : {
 
     	// ENEMIES
     	enemy : [
-				/*
-		    {cx : 120, cy : 425, range : 100, velX: 1.2},
-		    {cx : 420, cy : 75, range : 100, velX: 1},
-				*/
+				//Bottom Left
+		    {cx : 7*30, cy : 430, range : 100, velX: 1.2},
+		    	//Top Right
+		    //{cx : 17*30, cy : 160, range : 180, velX: 1.5},
+		    	//Middle left
+		    {cx : 4*30, cy : 310, range : 100, velX: 1.4},
+		    	//Middle right
+		    //	{cx : 16*30, cy : 310, range : 100, velX: 1.7},
+		    	//Top Right
+		    {cx : 17*30, cy : 160, range : 180, velX: 1.5},
+
     	],
 
     	// BIRDS
-    	bird : [],
+    	bird : [
+    		{cx : 300, cy : 225, range : 200, velX: 3}
+
+    	],
 
 
     	// BOMBS
 	     bomb: [
-		    {cx: 80, cy: 20},
-		    {cx: 140, cy: 20},
-		    {cx: 200, cy: 20},
-
 
 				//Bottom Left Bombs
 		    {cx: 3*30,    cy: 14*30},
@@ -387,7 +413,7 @@ _levelInfo : {
 	three:{
 
 		background: "img/backgroundCastle.png",
-		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
+		backgroundSound : "sounds/arcade/Arcade-Track3.mp3",
 
 		jack: {cx : 300,cy : 250},
 
@@ -400,7 +426,6 @@ _levelInfo : {
 
 				//Top Right Platform
 		    {cx : 14*30, cy : 5*30, width : 3*30, color : 1},
-
 
 				//Bottom Left
 		    {cx : 3*30, cy : 15*30, width : 3*30, color : 1},
@@ -415,14 +440,21 @@ _levelInfo : {
 
     	// ENEMIES
     	enemy : [
-				/*
-		    {cx : 120, cy : 425, range : 100, velX: 1.2},
-		    {cx : 420, cy : 75, range : 100, velX: 1},
-				*/
+
+		    //{cx : 6*30,  cy : 130, range : 90, velX: 1.2},
+		    {cx : 14*30, cy : 130, range : 90, velX: 1},
+		    {cx : 10*30, cy : 545, range : 300, velX: 1.5},
+
     	],
 
     	// BIRDS
-    	bird : [{cx : 250, cy : 425, range : 600, velX: 2}],
+    	bird : [
+    		{cx : 300, cy : 500, range : 500, velX: 3},
+
+    		//{cx : 300, cy : 340, range : 500, velX: 4},
+
+    		//{cx : 300, cy : 70, range : 400, velX: 2}
+    	],
 
 
     	// BOMBS
@@ -465,12 +497,12 @@ _levelInfo : {
 		    {cx: 15*30,   cy: 4*30},
 
 				//Top Left Bombs
-		    {cx: 1*30,    cy: 1*30},
-		    {cx: 3*30,    cy: 1*30},
+		    {cx: 2*30,    cy: 1*30},
+		    {cx: 4*30,    cy: 1*30},
 
 				//Top Right Bombs
-		    {cx: 17*30,    cy: 1*30},
-		    {cx: 19*30,    cy: 1*30},
+		    {cx: 16*30,    cy: 1*30},
+		    {cx: 18*30,    cy: 1*30},
 
 	    ],
 
@@ -482,9 +514,9 @@ _levelInfo : {
 	four:{
 
 		background: "img/backgroundCity.png",
-		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
+		backgroundSound : "sounds/arcade/Arcade-Track4.mp3",
 
-		jack: {cx : 300,cy : 250},
+		jack: {cx : 300,cy : 450},
 
 
 		// PLATFORMS
@@ -509,14 +541,21 @@ _levelInfo : {
 
     	// ENEMIES
     	enemy : [
-				/*
-		    {cx : 120, cy : 425, range : 100, velX: 1.2},
-		    {cx : 420, cy : 75, range : 100, velX: 1},
-				*/
+
+		    {cx : 5*30, cy : 430, range : 100, velX: 1.2, movingRight: true},
+		    {cx : 15*30, cy : 130, range : 100, velX: 1.5},
+		    //{cx : 15*30, cy : 430, range : 100, velX: 1.8, movingRight: true},
+		    {cx : 5*30, cy : 130, range : 100, velX: 2},
+		    //{cx : 3*30, cy : 545, range : 100, velX: 2, movingRight: true},
+		    {cx : 17*30, cy : 545, range : 100, velX: 1.5}
+
     	],
 
     	// BIRDS
-    	bird : [{cx : 250, cy : 425, range : 600, velX: 2}],
+    	bird : [
+    		//{cx : 150, cy : 325, range : 300, velX: 2},
+    		{cx : 450, cy : 325, range : 300, velX: 1.5}
+    	],
 
 
     	// BOMBS
@@ -524,14 +563,14 @@ _levelInfo : {
 
 				//Bottom Left Bombs
 		    //{cx: 1*30,    cy: 14*30},
-		    {cx: 3*30,    cy: 14*30},
-		    {cx: 5*30,    cy: 14*30},
-		    {cx: 7*30,    cy: 14*30},
+		    {cx: 4*30,    cy: 14*30},
+		    {cx: 6*30,    cy: 14*30},
+		    {cx: 8*30,    cy: 14*30},
 
 				//Bottom Right Bombs
-		    {cx: 13*30,    cy: 14*30},
-		    {cx: 15*30,    cy: 14*30},
-		    {cx: 17*30,    cy: 14*30},
+		    {cx: 12*30,    cy: 14*30},
+		    {cx: 14*30,    cy: 14*30},
+		    {cx: 16*30,    cy: 14*30},
 
 				//Ground Left Bombs
 		    {cx: 1*30,    cy: 18*30},
@@ -574,33 +613,30 @@ _levelInfo : {
 	five:{
 
 		background: "img/backgroundCityNight.png",
-		backgroundSound : "sounds/Commodore64/in-game-bgm-magnetic-fields-part-2-sid-stereo-.mp3",
+		backgroundSound : "sounds/arcade/Arcade-Track5.mp3",
 
-		jack: {cx : 300,cy : 250},
+		jack: {cx : 300,cy : 450},
 
 
 		// PLATFORMS
 		platform: [
 
 
-
-
-
 	    ],
 
     	// ENEMIES
     	enemy : [
-				/*
-		    {cx : 120, cy : 425, range : 100, velX: 1.2},
-		    {cx : 420, cy : 75, range : 100, velX: 1},
-				*/
+
+		    {cx : 120, cy : 545, range : 100, velX: 1.2},
+		    {cx : 420, cy : 545, range : 100, velX: 1},
+
     	],
 
     	// BIRDS
     	bird : [
 
-    	{cx : 250, cy : 425, range : 600, velX: 2},
-    	{cx : 150, cy : 225, range : 600, velX: 2}
+    		{cx : 300, cy : 425, range : 550, velX: 2},
+    		{cx : 300, cy : 225, range : 550, velX: 2, movingRight: true}
 
     	],
 
@@ -652,15 +688,14 @@ _levelInfo : {
 
 				//Top Right Bombs
 
-
-
-
-
-
 	    ],
 
 	    // POWERUPS
-	    powerup:[{cx: 1*30,    cy: 14*30}]
+	    powerup:[
+			{cx: 1*30,    cy: 14*30},
+	    	{cx: 19*30,    cy: 14*30}
+	    ],
+
 	}
 
 }

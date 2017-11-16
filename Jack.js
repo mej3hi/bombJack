@@ -43,9 +43,9 @@ function Jack(descr) {
 Jack.prototype = new Entity();
 
 Jack.prototype.KEY_JUMP = ' '.charCodeAt(0);
-Jack.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
-Jack.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
-Jack.prototype.KEY_PARASHOUT  = 'W'.charCodeAt(0);
+Jack.prototype.KEY_LEFT   = 37; // Left arrow key
+Jack.prototype.KEY_RIGHT  = 39; // Right arrow key
+Jack.prototype.KEY_PARACHUTE  = 38; // Up arrow key
 
 Jack.prototype.animate = [
     [5, 3, 13, 17],
@@ -79,6 +79,7 @@ Jack.prototype.numSubSteps = 1;
 // HACKED-IN AUDIO (no preloading)
 Jack.prototype.warpSound = new Audio(
     "sounds/warpSound.wav");
+Jack.prototype.warpSound.volume = 0.5;
 
 Jack.prototype.warp = function () {
 
@@ -98,7 +99,8 @@ Jack.prototype._updateWarp = function (du) {
 
     if (this.scale < 0.2 ) {
 
-        this._moveToASafePlace();
+        this.cx = this.origX;
+        this.cy = this.origY;
         this.halt();
         this._scaleDirn = 1;
 
@@ -112,12 +114,6 @@ Jack.prototype._updateWarp = function (du) {
         spatialManager.register(this);
 
     }
-};
-
-Jack.prototype._moveToASafePlace = function () {
-
-    this.cx = this.origX;
-    this.cy = this.origY;
 };
 
 
@@ -215,10 +211,8 @@ var NOMINAL_GRAVITY = 1;
 
 var NOMINAL_JUMP = +25.2;
 
-var PARASHOUT_DRAG = 1.12;
-
-Jack.prototype.parashout = function(){
-   if(keys[this.KEY_PARASHOUT] && this._isJumping && this.velY > 0){
+Jack.prototype.parachute = function(){
+   if(keys[this.KEY_PARACHUTE] && this._isJumping && this.velY > 0){
      this.velY = 2;
    }
 };
@@ -238,7 +232,7 @@ Jack.prototype.movePlayer = function (du) {
     this.velX += accelX * du;
     this.velY += accelY * du;
 
-    this.parashout();
+    this.parachute();
 
     // v_ave = (u + v) / 2
     var aveVelX = (oldVelX + this.velX) / 2;
@@ -266,14 +260,14 @@ Jack.prototype.movePlayer = function (du) {
 
 
     if (keys[this.KEY_LEFT] && this.cx > 0 + this.getRadius()) {
-        if(keys[this.KEY_PARASHOUT]){
+        if(keys[this.KEY_PARACHUTE]){
             this.cx -= 3 * du;
         }else{
             this.cx -= 6 * du;
         }
     }
     if (keys[this.KEY_RIGHT] && this.cx < g_canvas.width - this.getRadius()) {
-      if(keys[this.KEY_PARASHOUT]){
+      if(keys[this.KEY_PARACHUTE]){
           this.cx += 3 * du;
       }else{
           this.cx += 6 * du;
