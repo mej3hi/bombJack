@@ -25,7 +25,7 @@ lifeSpan: 5000/ NOMINAL_UPDATE_INTERVAL,
 update : function(du){
 	if(entityManager._bombs.length <= 15){
 
-		if(this.level < 1){
+		if(this.level < 5){
 			// play start theman
 			if(!this.renderStarSprite){
 				this.clearLevel();
