@@ -53,7 +53,7 @@ update : function(du){
 				this.clearLevel();
 				this.level = 1;
 				scoreboardManager.clearScore();
-				winningScene.playIntro(initialFirstLevel);
+				winningScene.play(initialFirstLevel);
 
 		}
 

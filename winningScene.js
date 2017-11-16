@@ -106,7 +106,7 @@ callBack: undefined,
 fireWorks: [],
 
 
-playIntro: function (call) {
+play: function (call) {
   this.callBack = call;
   this.isPlaying = true;
   this.fireWorks.push(Object.assign({}, this.fireWork));
