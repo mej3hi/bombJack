@@ -1,5 +1,7 @@
-// consts.js
-//
+// ======
+// CONSTS
+// ======
+
 // A module of generic constants
 
 "use strict";

@@ -1,3 +1,13 @@
+// ============
+// LIFE MANAGER
+// ============
+
+/*
+
+This module keeps track of how many lives Jack has remaining.
+
+*/
+
 var lifeManager = {
 
 _jackLife : 3,
@@ -13,8 +23,7 @@ takeJackLife : function(life){
 },
 
 update : function(du){
-	if (this._jackLife === 0){
-
+	if (this._jackLife === 0 && entityManager._bombs.length > 0){
 				if(this.lifeSpan === (5000/ NOMINAL_UPDATE_INTERVAL) ){
 					this.gameOverSprite = true;
 				}
@@ -72,12 +81,6 @@ render : function(ctx){
 		g_sprites.bombJack.scale = origScale;
 	}
 
-
-
-
-
 }
-
-
 
 }

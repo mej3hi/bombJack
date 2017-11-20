@@ -1,4 +1,12 @@
+// =====
+// INTRO
+// =====
 
+/*
+
+An intro sequence that is played at the start of a new game of Bomb Jack
+
+*/
 
 var intro = {
 
@@ -29,7 +37,7 @@ _fontFamliy : "Arial",
 _fontColor : "white",
 
 
-lifeSpan: 7000/ NOMINAL_UPDATE_INTERVAL,
+lifeSpan: 70/ NOMINAL_UPDATE_INTERVAL,
 
 
 frame: [3,300,195,80],
@@ -121,18 +129,6 @@ render : function(ctx){
       this._fontFamliy,
       this._fontColor);
 
-
 },
-
-
-
-
-
-
-
-
-
-
-
 
 }

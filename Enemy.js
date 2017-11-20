@@ -1,6 +1,8 @@
-// ====
-// Enemy
-// ====
+// =====
+// ENEMY
+// =====
+
+// The main enemy, a walking skeleton present in every level.
 
 "use strict";
 
@@ -27,7 +29,7 @@ function Enemy(descr) {
     this.velY = this.velY || 0;
 
     this.range = this.range || 200;
-      
+
     // Default sprite and scale, if not otherwise specified
     this.sprite = this.sprite || g_sprites.enemy;
     this.scale  = this.scale  || 2;
@@ -39,6 +41,8 @@ function Enemy(descr) {
 
 Enemy.prototype = new Entity();
 
+// The coordinates for a drawImage call to get the correct part of the
+// sprite sheet for each animation frame.
 Enemy.prototype.animate = [
     [45, 53, 11, 15],
     [61, 53, 11, 15],
@@ -56,7 +60,7 @@ Enemy.prototype.update = function (du) {
 
     // Unregister and check for death
     spatialManager.unregister(this);
-     
+
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
 
     if (!this.movingRight){
@@ -66,7 +70,7 @@ Enemy.prototype.update = function (du) {
             this.movingRight = true;
             this.cx += this.velX * du;
         }
-        
+
     }
     if (this.movingRight){
         this.cx += this.velX * du;
@@ -77,10 +81,10 @@ Enemy.prototype.update = function (du) {
         }
     }
     this.cy += this.velY * du;
-    
+
     // (Re-)Register
     spatialManager.register(this);
-     
+
 
 };
 
@@ -109,7 +113,7 @@ Enemy.prototype.render = function (ctx) {
 
     // pass my scale into the sprite, for drawing
     this.sprite.scale = this.scale;
-    this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, frame); 
+    this.sprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation, frame);
 
     this.sprite.scale = origScale;
 };

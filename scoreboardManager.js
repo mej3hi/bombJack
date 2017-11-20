@@ -1,3 +1,13 @@
+// ==================
+// SCOREBOARD MANAGER
+// ==================
+
+/*
+
+This module keeps track of the score Jack has obtained in the current game.
+
+*/
+
 var scoreboardManager = {
 
 _score : 0,

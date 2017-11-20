@@ -1,8 +1,13 @@
-// ==========
-// LEVEL STUFF
-// ==========
+// =============
+// LEVEL MANAGER
+// =============
 
-// LEVEL STUFF
+/*
+
+The different levels of Bomb Jack are defined here, with the locations of platforms and bombs
+as well as the locations and speed of enemies.
+
+*/
 
 var levelManager = {
 
@@ -22,10 +27,10 @@ _fontColor : "white",
 lifeSpan: 5000/ NOMINAL_UPDATE_INTERVAL,
 
 update : function(du){
-	if(entityManager._bombs.length <= 15){
+	if(entityManager._bombs.length <= 0){
 
 		if(this.level < 5){
-			// play start theman
+			// play start theme
 			if(!this.renderStarSprite){
 				this.clearLevel();
 				backgroundManager.setBackground(this.getMap(this.level+1).background)
@@ -49,7 +54,7 @@ update : function(du){
 
 
 		}else{
-			// play winnign theman
+			// play winning theme
 				this.clearLevel();
 				this.level = 1;
 				scoreboardManager.clearScore();
@@ -141,7 +146,7 @@ getMap: function(level){
 	case 3:
 		return this._levelInfo.three;
 		break;
-	case 4:
+	case 	4:
 		return this._levelInfo.four;
 		break;
 	case 5:
@@ -222,42 +227,47 @@ _levelInfo : {
 		background: "img/backgroundEgypt.png",
 		backgroundSound : "sounds/arcade/Arcade-Track1.mp3",
 
+		// JACK
 		jack:{cx : 300,cy : 500},
 
+		// PLATFORMS
 		platform:[
 
 			//Top Left Platform
-	   		{cx : 7*30, cy : 5*30, width : 100, color : 1},
+	   	{cx : 5*30, cy : 5*30, width : 3*30, color : 1},
 
 			//Top Right Platform
-			{cx : 14*30, cy : 3*30, width : 100, color : 1},
+			{cx : 14*30, cy : 4*30, width : 3*30, color : 1},
 
 			//Middle Platform
-	    	{cx : 11*30, cy : 11*30, width : 100, color : 1},
+	    	{cx : 11*30, cy : 11*30, width : 3*30, color : 1},
 
 			//Bottom Left Platform
-			{cx : 4*30, cy : 15*30, width : 100, color : 1},
+			{cx : 4*30, cy : 15*30, width : 3*30, color : 1},
 
 			//Bottom Right Platform
-	    	{cx : 15*30, cy : 15*30, width : 200, color : 1},
+	    	{cx : 15*30, cy : 15*30, width : 7*30, color : 1},
 
 		],
 
+		// ENEMIES
 		enemy:[
 				//Bottom Left Enemy
 				//{cx : 4*30, cy : 15*30-20, range : 100, velX: 1.2},
 				//Top Left Enemy
-		   	{cx : 7*30, cy : 5*30-20, range : 100, velX: 0.9},
+		   	{cx : 5*30, cy : 4*30+10, range : 3*30, velX: 0.9},
 				//Top Right Enemy
-		   	{cx : 14*30, cy : 3*30-20, range : 100, velX: 1}
+		   	{cx : 14*30, cy : 3*30+10, range : 3*30, velX: 1}
 		],
 
+		// BIRDS
 		bird:[
 
-			{cx : 10*30, cy : 15*30-20, range : 400, velX: 4}
+			//{cx : 10*30, cy : 2*30, range : 400, velX: 2}
 
 		],
 
+		// BOMBS
 		bomb:[
 		 	/*{cx: 80, cy: 20},
 		    {cx: 140, cy: 20},
@@ -267,15 +277,15 @@ _levelInfo : {
 		    {cx: 5*30,    cy: 1*30},
 		    {cx: 7*30,    cy: 1*30},
 
-		    {cx: 13*30,    cy: 1*30},
-		    {cx: 15*30,    cy: 1*30},
-		    {cx: 17*30,    cy: 1*30},
+		    {cx: 13*30,    cy: 3*30},
+		    {cx: 15*30,    cy: 3*30},
+		    {cx: 17*30,    cy: 3*30},
 
 
-		    {cx: 11*30,    cy: 4*30},
-		    {cx: 13*30,    cy: 4*30},
-		    {cx: 15*30,    cy: 4*30},
-		    {cx: 17*30,    cy: 4*30},
+		    {cx: 11*30,    cy: 5*30},
+		    {cx: 13*30,    cy: 5*30},
+		    {cx: 15*30,    cy: 5*30},
+		    {cx: 17*30,    cy: 5*30},
 
 		    {cx: 1*30, cy: 7*30},
 		    {cx: 1*30, cy: 9*30},
@@ -298,6 +308,7 @@ _levelInfo : {
 
 		],
 
+		// POWERUPS
 		powerup:[{cx: 1*30,    cy: 14*30}]
 
 
@@ -336,22 +347,20 @@ _levelInfo : {
 
     	// ENEMIES
     	enemy : [
+				//Top RightL
+		    {cx : 17*30, cy :  5*30+10, range :  6*30, velX: 0.8},
+				//Top RightR
+		    {cx : 17*30, cy : 5*30+10, range : 6*30, velX: 0.8, movingRight : true},
+				//Top Left
+		    {cx :  3*30, cy :  5*30+10, range :  5*30, velX: 1.2},
 				//Bottom Left
-		    {cx : 7*30, cy : 430, range : 100, velX: 1.2},
-		    	//Top Right
-		    //{cx : 17*30, cy : 160, range : 180, velX: 1.5},
-		    	//Middle left
-		    {cx : 4*30, cy : 310, range : 100, velX: 1.4},
-		    	//Middle right
-		    //	{cx : 16*30, cy : 310, range : 100, velX: 1.7},
-		    	//Top Right
-		    {cx : 17*30, cy : 160, range : 180, velX: 1.5},
+		    {cx :  7*30, cy : 14*30+10, range :  3*30, velX: 1.1},
 
     	],
 
     	// BIRDS
     	bird : [
-    		{cx : 300, cy : 225, range : 200, velX: 3}
+    		//{cx : 6*30, cy : 5*30, range : 200, velX: 1.5}
 
     	],
 
@@ -439,14 +448,14 @@ _levelInfo : {
     	enemy : [
 
 		    //{cx : 6*30,  cy : 130, range : 90, velX: 1.2},
-		    {cx : 14*30, cy : 130, range : 90, velX: 1},
-		    {cx : 10*30, cy : 545, range : 300, velX: 1.5},
+		    {cx : 14*30, cy : 4*30+10, range : 90, velX: 1},
+		    {cx : 10*30, cy : 18*30+10, range : 300, velX: 1.5},
 
     	],
 
     	// BIRDS
     	bird : [
-    		{cx : 300, cy : 500, range : 500, velX: 3},
+    		{cx : 10*30, cy : 16*30, range : 16*30, velX: 1.5},
 
     		//{cx : 300, cy : 340, range : 500, velX: 4},
 
@@ -539,19 +548,19 @@ _levelInfo : {
     	// ENEMIES
     	enemy : [
 
-		    {cx : 5*30, cy : 430, range : 100, velX: 1.2, movingRight: true},
-		    {cx : 15*30, cy : 130, range : 100, velX: 1.5},
+		    {cx : 5*30, cy : 14*30+10, range : 3*30, velX: 1.2, movingRight: true},
+		    {cx : 15*30, cy : 4*30+10, range : 3*30, velX: 1.5},
 		    //{cx : 15*30, cy : 430, range : 100, velX: 1.8, movingRight: true},
-		    {cx : 5*30, cy : 130, range : 100, velX: 2},
+		    {cx : 5*30, cy : 4*30+10, range : 3*30, velX: 2},
 		    //{cx : 3*30, cy : 545, range : 100, velX: 2, movingRight: true},
-		    {cx : 17*30, cy : 545, range : 100, velX: 1.5}
+		    {cx : 17*30, cy : 545, range : 3*30, velX: 1.5}
 
     	],
 
     	// BIRDS
     	bird : [
     		//{cx : 150, cy : 325, range : 300, velX: 2},
-    		{cx : 450, cy : 325, range : 300, velX: 1.5}
+    		{cx : 15*30, cy : 11*30, range : 10*30, velX: 1.5}
     	],
 
 
@@ -575,7 +584,7 @@ _levelInfo : {
 		    {cx: 5*30,    cy: 18*30},
 
 				//Ground Right Bombs
-			{cx: 15*30,    cy: 18*30},
+				{cx: 15*30,    cy: 18*30},
 		    {cx: 17*30,    cy: 18*30},
 		    {cx: 19*30,    cy: 18*30},
 
@@ -624,16 +633,16 @@ _levelInfo : {
     	// ENEMIES
     	enemy : [
 
-		    {cx : 120, cy : 545, range : 100, velX: 1.2},
-		    {cx : 420, cy : 545, range : 100, velX: 1},
+		    {cx : 4*30, cy : 18*30+10, range : 3*30, velX: 1.2},
+		    {cx : 420, cy : 18*30+10, range : 3*30, velX: 1},
 
     	],
 
     	// BIRDS
     	bird : [
 
-    		{cx : 300, cy : 425, range : 550, velX: 2},
-    		{cx : 300, cy : 225, range : 550, velX: 2, movingRight: true}
+    		{cx : 3*30, cy : 14*30, range : 15*30, velX: 1.5},
+    		{cx : 17*30, cy : 14*30, range : 15*30, velX: 1.8, movingRight: true}
 
     	],
 
@@ -696,7 +705,5 @@ _levelInfo : {
 	}
 
 }
-
-
 
 }

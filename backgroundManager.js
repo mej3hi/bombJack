@@ -1,8 +1,12 @@
-// ==========
-// BACKGROUND STUFF
-// ==========
+// ==================
+// BACKGROUND MANAGER
+// ==================
 
-// BACKGROUND STUFF
+/*
+
+Controls the background for the game.
+
+*/
 
 var backgroundManager = {
 
