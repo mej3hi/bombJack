@@ -37,7 +37,7 @@ _fontFamliy : "Arial",
 _fontColor : "white",
 
 
-lifeSpan: 70/ NOMINAL_UPDATE_INTERVAL,
+lifeSpan: 7000/ NOMINAL_UPDATE_INTERVAL,
 
 
 frame: [3,300,195,80],

@@ -59,7 +59,7 @@ update : function(du){
 				this.level = 1;
 				scoreboardManager.clearScore();
 				winningScene.play(initialFirstLevel);
-
+				lifeManager._jackLife = 3;
 		}
 
 
@@ -224,487 +224,486 @@ _levelInfo : {
 
 	one:{
 
-		background: "img/backgroundEgypt.png",
-		backgroundSound : "sounds/arcade/Arcade-Track1.mp3",
+	background: "img/backgroundEgypt.png",
+	backgroundSound : "sounds/arcade/Arcade-Track1.mp3",
 
-		// JACK
-		jack:{cx : 300,cy : 500},
+	// JACK
+	jack:{cx : 300,cy : 500},
 
-		// PLATFORMS
-		platform:[
+	// PLATFORMS
+	platform:[
+
+		//Top Left Platform
+		{cx : 5*30, cy : 5*30, width : 3*30, color : 1},
+
+		//Top Right Platform
+		{cx : 14*30, cy : 4*30, width : 3*30, color : 1},
+
+		//Middle Platform
+			{cx : 11*30, cy : 11*30, width : 3*30, color : 1},
+
+		//Bottom Left Platform
+		{cx : 4*30, cy : 15*30, width : 3*30, color : 1},
+
+		//Bottom Right Platform
+			{cx : 15*30, cy : 15*30, width : 7*30, color : 1},
+
+	],
+
+	// ENEMIES
+	enemy:[
+			//Bottom Left Enemy
+			//{cx : 4*30, cy : 15*30-20, range : 100, velX: 1.2},
+			//Top Left Enemy
+			{cx : 5*30, cy : 4*30+10, range : 3*30, velX: 0.9},
+			//Top Right Enemy
+			{cx : 14*30, cy : 3*30+10, range : 3*30, velX: 1}
+	],
+
+	// BIRDS
+	bird:[
+
+		//{cx : 10*30, cy : 2*30, range : 400, velX: 2}
+
+	],
+
+	// BOMBS
+	bomb:[
+		/*{cx: 80, cy: 20},
+			{cx: 140, cy: 20},
+			{cx: 200, cy: 20},*/
+
+			{cx: 3*30,    cy: 1*30},
+			{cx: 5*30,    cy: 1*30},
+			{cx: 7*30,    cy: 1*30},
+
+			{cx: 13*30,    cy: 3*30},
+			{cx: 15*30,    cy: 3*30},
+			{cx: 17*30,    cy: 3*30},
+
+
+			{cx: 11*30,    cy: 5*30},
+			{cx: 13*30,    cy: 5*30},
+			{cx: 15*30,    cy: 5*30},
+			{cx: 17*30,    cy: 5*30},
+
+			{cx: 1*30, cy: 7*30},
+			{cx: 1*30, cy: 9*30},
+			{cx: 1*30, cy: 11*30},
+			{cx: 1*30, cy: 13*30},
+
+			{cx: 19*30, cy: 7*30},
+			{cx: 19*30, cy: 9*30},
+			{cx: 19*30, cy: 11*30},
+			{cx: 19*30, cy: 13*30},
+
+			{cx: 13*30,    cy: 14*30},
+			{cx: 15*30,    cy: 14*30},
+			{cx: 17*30,    cy: 14*30},
+
+			{cx: 3*30,    cy: 18*30},
+			{cx: 5*30,    cy: 18*30},
+			{cx: 7*30,    cy: 18*30},
+
+
+	],
+
+	// POWERUPS
+	powerup:[{cx: 1*30,    cy: 14*30}]
+
+
+},
+
+two:{
+
+	background: "img/backgroundGreek.png",
+	backgroundSound : "sounds/arcade/Arcade-Track2.mp3",
+
+	jack: {cx : 300,cy : 450},
+
+
+	// PLATFORMS
+	platform: [
 
 			//Top Left Platform
-	   		{cx : 7*30, cy : 5*30, width : 100, color : 1},
+			{cx : 3*30, cy : 6*30, width : 6*30, color : 2},
 
 			//Top Right Platform
-			{cx : 14*30, cy : 3*30, width : 100, color : 1},
+			{cx : 17*30, cy : 6*30, width : 6*30, color : 2},
 
-			//Middle Platform
-	    	{cx : 11*30, cy : 11*30, width : 100, color : 1},
+			//Middle Left
+			{cx : 4*30, cy : 11*30, width : 3*30, color : 2},
 
-			//Bottom Left Platform
-			{cx : 4*30, cy : 15*30, width : 100, color : 1},
+			//Middle Right
+			{cx : 16*30, cy : 11*30, width : 3*30, color : 2},
 
-			//Bottom Right Platform
-	    	{cx : 15*30, cy : 15*30, width : 200, color : 1},
+			//Bottom Left
+			{cx : 7*30, cy : 15*30, width : 3*30, color : 2},
+
+			//Bottom Right
+			{cx : 13*30, cy : 15*30, width : 3*30, color : 2},
 
 		],
 
 		// ENEMIES
-		enemy:[
-				//Bottom Left Enemy
-				//{cx : 4*30, cy : 15*30-20, range : 100, velX: 1.2},
-				//Top Left Enemy
-		   	{cx : 7*30, cy : 5*30-20, range : 100, velX: 0.9},
-				//Top Right Enemy
-		   	{cx : 14*30, cy : 3*30-20, range : 100, velX: 1}
+		enemy : [
+			//Top RightL
+			{cx : 17*30, cy :  5*30+10, range :  6*30, velX: 0.8},
+			//Top RightR
+			{cx : 17*30, cy : 5*30+10, range : 6*30, velX: 0.8, movingRight : true},
+			//Top Left
+			{cx :  3*30, cy :  5*30+10, range :  5*30, velX: 1.2},
+			//Bottom Left
+			{cx :  7*30, cy : 14*30+10, range :  3*30, velX: 1.1},
+
 		],
 
 		// BIRDS
-		bird:[
-
-			//{cx : 10*30, cy : 2*30, range : 400, velX: 2}
+		bird : [
+			//{cx : 6*30, cy : 5*30, range : 200, velX: 1.5}
 
 		],
 
+
 		// BOMBS
-		bomb:[
-		 	/*{cx: 80, cy: 20},
-		    {cx: 140, cy: 20},
-		    {cx: 200, cy: 20},*/
+		 bomb: [
 
-		    {cx: 3*30,    cy: 1*30},
-		    {cx: 5*30,    cy: 1*30},
-		    {cx: 7*30,    cy: 1*30},
+			//Bottom Left Bombs
+			{cx: 3*30,    cy: 14*30},
+			{cx: 5*30,    cy: 14*30},
+			{cx: 7*30,    cy: 14*30},
 
-		    {cx: 13*30,    cy: 1*30},
-		    {cx: 15*30,    cy: 1*30},
-		    {cx: 17*30,    cy: 1*30},
+			//Bottom Right Bombs
+			{cx: 13*30,    cy: 14*30},
+			{cx: 15*30,    cy: 14*30},
+			{cx: 17*30,    cy: 14*30},
+
+			//Middle Left Bombs
+			{cx: 3*30,    cy: 10*30},
+			{cx: 5*30,    cy: 10*30},
+			{cx: 7*30,    cy: 10*30},
+
+			//Middle Right Bombs
+			{cx: 13*30,    cy: 10*30},
+			{cx: 15*30,    cy: 10*30},
+			{cx: 17*30,    cy: 10*30},
+
+			//Top Left Bombs
+			{cx: 1*30,    cy: 4*30},
+			{cx: 3*30,    cy: 4*30},
+			{cx: 5*30,    cy: 4*30},
+
+			//Top Right Bombs
+			{cx: 15*30,   cy: 4*30},
+			{cx: 17*30,   cy: 4*30},
+			{cx: 19*30,   cy: 4*30},
+
+			//Upper Top Middle Bombs
+			{cx: 7*30,    cy: 2*30},
+			{cx: 9*30,    cy: 2*30},
+			{cx: 11*30,   cy: 2*30},
+			{cx: 13*30,   cy: 2*30},
+
+			//Lower Top Middle Bombs
+			{cx: 7*30,    cy: 6*30},
+			{cx: 9*30,    cy: 6*30},
+			{cx: 11*30,   cy: 6*30},
+			{cx: 13*30,   cy: 6*30},
+
+		],
+
+		// POWERUPS
+		powerup: []
+},
+
+three:{
+
+	background: "img/backgroundCastle.png",
+	backgroundSound : "sounds/arcade/Arcade-Track3.mp3",
+
+	jack: {cx : 300,cy : 250},
 
 
-		    {cx: 11*30,    cy: 4*30},
-		    {cx: 13*30,    cy: 4*30},
-		    {cx: 15*30,    cy: 4*30},
-		    {cx: 17*30,    cy: 4*30},
+	// PLATFORMS
+	platform: [
 
-		    {cx: 1*30, cy: 7*30},
-		    {cx: 1*30, cy: 9*30},
-		    {cx: 1*30, cy: 11*30},
-		    {cx: 1*30, cy: 13*30},
+			//Top Left Platform
+			{cx : 6*30, cy : 5*30, width : 3*30, color : 1},
 
-		    {cx: 19*30, cy: 7*30},
-		    {cx: 19*30, cy: 9*30},
-		    {cx: 19*30, cy: 11*30},
-		    {cx: 19*30, cy: 13*30},
+			//Top Right Platform
+			{cx : 14*30, cy : 5*30, width : 3*30, color : 1},
 
-		    {cx: 13*30,    cy: 14*30},
-		    {cx: 15*30,    cy: 14*30},
-		    {cx: 17*30,    cy: 14*30},
+			//Bottom Left
+			{cx : 3*30, cy : 15*30, width : 3*30, color : 1},
 
-		    {cx: 3*30,    cy: 18*30},
-		    {cx: 5*30,    cy: 18*30},
-		    {cx: 7*30,    cy: 18*30},
+			//Bottom Right
+			{cx : 17*30, cy : 15*30, width : 3*30, color : 1},
+
+			//Bottom Middle
+			{cx : 10*30, cy : 13*30, width : 3*30, color : 1},
+
+		],
+
+		// ENEMIES
+		enemy : [
+
+			//{cx : 6*30,  cy : 130, range : 90, velX: 1.2},
+			{cx : 14*30, cy : 4*30+10, range : 90, velX: 1},
+			{cx : 10*30, cy : 18*30+10, range : 300, velX: 1.5},
+
+		],
+
+		// BIRDS
+		bird : [
+			{cx : 10*30, cy : 16*30, range : 16*30, velX: 1.5},
+
+			//{cx : 300, cy : 340, range : 500, velX: 4},
+
+			//{cx : 300, cy : 70, range : 400, velX: 2}
+		],
+
+
+		// BOMBS
+		 bomb: [
+
+			//Bottom Left Bombs
+			//{cx: 1*30,    cy: 14*30},
+			{cx: 3*30,    cy: 14*30},
+			{cx: 5*30,    cy: 14*30},
+
+			//Bottom Right Bombs
+			{cx: 15*30,    cy: 14*30},
+			{cx: 17*30,    cy: 14*30},
+			{cx: 19*30,    cy: 14*30},
+
+			//Ground Left Bombs
+			{cx: 8*30,    cy: 18*30},
+			{cx: 6*30,    cy: 18*30},
+
+			//Ground Right Bombs
+			{cx: 12*30,    cy: 18*30},
+			{cx: 14*30,    cy: 18*30},
+
+			//Middle Left Bombs
+			{cx: 8*30,    cy: 8*30},
+			{cx: 8*30,    cy: 10*30},
+			{cx: 8*30,    cy: 12*30},
+
+			//Middle Right Bombs
+			{cx: 12*30,    cy: 8*30},
+			{cx: 12*30,    cy: 10*30},
+			{cx: 12*30,    cy: 12*30},
+
+			//Top Left Platform Bombs
+			{cx: 5*30,    cy: 4*30},
+			{cx: 7*30,    cy: 4*30},
+
+			//Top Right Platform Bombs
+			{cx: 13*30,   cy: 4*30},
+			{cx: 15*30,   cy: 4*30},
+
+			//Top Left Bombs
+			{cx: 2*30,    cy: 1*30},
+			{cx: 4*30,    cy: 1*30},
+
+			//Top Right Bombs
+			{cx: 16*30,    cy: 1*30},
+			{cx: 18*30,    cy: 1*30},
+
+		],
+
+		// POWERUPS
+		powerup:[{cx: 1*30,    cy: 14*30}]
+},
+
+
+four:{
+
+	background: "img/backgroundCity.png",
+	backgroundSound : "sounds/arcade/Arcade-Track4.mp3",
+
+	jack: {cx : 300,cy : 450},
+
+
+	// PLATFORMS
+	platform: [
+
+			//Top Left Platform
+			{cx : 5*30, cy : 5*30, width : 3*30, color : 1},
+
+			//Top Right Platform
+			{cx : 15*30, cy : 5*30, width : 3*30, color : 1},
+
+
+			//Bottom Left
+			{cx : 5*30, cy : 15*30, width : 3*30, color : 1},
+
+			//Bottom Right
+			{cx : 15*30, cy : 15*30, width : 3*30, color : 1},
+
+
+
+		],
+
+		// ENEMIES
+		enemy : [
+
+			{cx : 5*30, cy : 14*30+10, range : 3*30, velX: 1.2, movingRight: true},
+			{cx : 15*30, cy : 4*30+10, range : 3*30, velX: 1.5},
+			//{cx : 15*30, cy : 430, range : 100, velX: 1.8, movingRight: true},
+			{cx : 5*30, cy : 4*30+10, range : 3*30, velX: 2},
+			//{cx : 3*30, cy : 545, range : 100, velX: 2, movingRight: true},
+			{cx : 17*30, cy : 545, range : 3*30, velX: 1.5}
+
+		],
+
+		// BIRDS
+		bird : [
+			//{cx : 150, cy : 325, range : 300, velX: 2},
+			{cx : 15*30, cy : 11*30, range : 10*30, velX: 1.5}
+		],
+
+
+		// BOMBS
+		 bomb: [
+
+			//Bottom Left Bombs
+			//{cx: 1*30,    cy: 14*30},
+			{cx: 4*30,    cy: 14*30},
+			{cx: 6*30,    cy: 14*30},
+			{cx: 8*30,    cy: 14*30},
+
+			//Bottom Right Bombs
+			{cx: 12*30,    cy: 14*30},
+			{cx: 14*30,    cy: 14*30},
+			{cx: 16*30,    cy: 14*30},
+
+			//Ground Left Bombs
+			{cx: 1*30,    cy: 18*30},
+			{cx: 3*30,    cy: 18*30},
+			{cx: 5*30,    cy: 18*30},
+
+			//Ground Right Bombs
+			{cx: 15*30,    cy: 18*30},
+			{cx: 17*30,    cy: 18*30},
+			{cx: 19*30,    cy: 18*30},
+
+			//Middle Left Bombs
+			{cx: 15*30,    cy: 9*30},
+			{cx: 17*30,    cy: 9*30},
+			{cx: 19*30,    cy: 9*30},
+
+			//Middle Right Bombs
+			{cx: 1*30,    cy: 9*30},
+			{cx: 3*30,    cy: 9*30},
+			{cx: 5*30,    cy: 9*30},
+
+			//Top Left Platform Bombs
+			{cx: 1*30,    cy: 4*30},
+			{cx: 3*30,    cy: 4*30},
+			{cx: 5*30,    cy: 4*30},
+
+			//Top Right Platform Bombs
+			{cx: 13*30,    cy: 4*30},
+			{cx: 15*30,    cy: 4*30},
+			{cx: 17*30,    cy: 4*30},
+
 
 
 		],
 
 		// POWERUPS
 		powerup:[{cx: 1*30,    cy: 14*30}]
+},
 
+five:{
 
-	},
+	background: "img/backgroundCityNight.png",
+	backgroundSound : "sounds/arcade/Arcade-Track5.mp3",
 
-	two:{
+	jack: {cx : 300,cy : 450},
 
-		background: "img/backgroundGreek.png",
-		backgroundSound : "sounds/arcade/Arcade-Track2.mp3",
 
-		jack: {cx : 300,cy : 450},
+	// PLATFORMS
+	platform: [
 
 
-		// PLATFORMS
-		platform: [
+		],
 
-				//Top Left Platform
-		    {cx : 3*30, cy : 6*30, width : 6*30, color : 2},
+		// ENEMIES
+		enemy : [
 
-				//Top Right Platform
-		    {cx : 17*30, cy : 6*30, width : 6*30, color : 2},
+			{cx : 4*30, cy : 18*30+10, range : 3*30, velX: 1.2},
+			{cx : 420, cy : 18*30+10, range : 3*30, velX: 1},
 
-				//Middle Left
-		    {cx : 4*30, cy : 11*30, width : 3*30, color : 2},
+		],
 
-				//Middle Right
-		    {cx : 16*30, cy : 11*30, width : 3*30, color : 2},
+		// BIRDS
+		bird : [
 
-				//Bottom Left
-		    {cx : 7*30, cy : 15*30, width : 3*30, color : 2},
+			{cx : 3*30, cy : 14*30, range : 15*30, velX: 1.5},
+			{cx : 17*30, cy : 14*30, range : 15*30, velX: 1.8, movingRight: true}
 
-				//Bottom Right
-		    {cx : 13*30, cy : 15*30, width : 3*30, color : 2},
+		],
 
-	    ],
 
-    	// ENEMIES
-    	enemy : [
-				//Bottom Left
-		    {cx : 7*30, cy : 430, range : 100, velX: 1.2},
-		    	//Top Right
-		    //{cx : 17*30, cy : 160, range : 180, velX: 1.5},
-		    	//Middle left
-		    {cx : 4*30, cy : 310, range : 100, velX: 1.4},
-		    	//Middle right
-		    //	{cx : 16*30, cy : 310, range : 100, velX: 1.7},
-		    	//Top Right
-		    {cx : 17*30, cy : 160, range : 180, velX: 1.5},
+		// BOMBS
+		 bomb: [
 
-    	],
+		//First column from left
 
-    	// BIRDS
-    	bird : [
-    		{cx : 300, cy : 225, range : 200, velX: 1.5}
+			{cx: 3*30,    cy: 12*30},
+			{cx: 3*30,    cy: 14*30},
+			{cx: 3*30,    cy: 16*30},
 
-    	],
 
+			{cx: 3*30,    cy: 4*30},
+			{cx: 3*30,    cy: 6*30},
+			{cx: 3*30,    cy: 8*30},
 
-    	// BOMBS
-	     bomb: [
+			//Second column from left
+			{cx: 7*30,    cy: 12*30},
+			{cx: 7*30,    cy: 14*30},
+			{cx: 7*30,    cy: 16*30},
 
-				//Bottom Left Bombs
-		    {cx: 3*30,    cy: 14*30},
-		    {cx: 5*30,    cy: 14*30},
-		    {cx: 7*30,    cy: 14*30},
+			{cx: 7*30,    cy: 4*30},
+			{cx: 7*30,    cy: 6*30},
+			{cx: 7*30,    cy: 8*30},
 
-				//Bottom Right Bombs
-		    {cx: 13*30,    cy: 14*30},
-		    {cx: 15*30,    cy: 14*30},
-		    {cx: 17*30,    cy: 14*30},
+			//Second column from left
+			{cx: 13*30,    cy: 12*30},
+			{cx: 13*30,    cy: 14*30},
+			{cx: 13*30,    cy: 16*30},
 
-				//Middle Left Bombs
-		    {cx: 3*30,    cy: 10*30},
-		    {cx: 5*30,    cy: 10*30},
-		    {cx: 7*30,    cy: 10*30},
+			{cx: 13*30,    cy: 4*30},
+			{cx: 13*30,    cy: 6*30},
+			{cx: 13*30,    cy: 8*30},
 
-				//Middle Right Bombs
-		    {cx: 13*30,    cy: 10*30},
-		    {cx: 15*30,    cy: 10*30},
-		    {cx: 17*30,    cy: 10*30},
 
-				//Top Left Bombs
-		    {cx: 1*30,    cy: 4*30},
-		    {cx: 3*30,    cy: 4*30},
-		    {cx: 5*30,    cy: 4*30},
-
-				//Top Right Bombs
-		    {cx: 15*30,   cy: 4*30},
-		    {cx: 17*30,   cy: 4*30},
-		    {cx: 19*30,   cy: 4*30},
-
-				//Upper Top Middle Bombs
-		    {cx: 7*30,    cy: 2*30},
-		    {cx: 9*30,    cy: 2*30},
-		    {cx: 11*30,   cy: 2*30},
-		    {cx: 13*30,   cy: 2*30},
-
-				//Lower Top Middle Bombs
-		    {cx: 7*30,    cy: 6*30},
-		    {cx: 9*30,    cy: 6*30},
-		    {cx: 11*30,   cy: 6*30},
-		    {cx: 13*30,   cy: 6*30},
-
-	    ],
-
-	    // POWERUPS
-	    powerup: []
-	},
-
-	three:{
-
-		background: "img/backgroundCastle.png",
-		backgroundSound : "sounds/arcade/Arcade-Track3.mp3",
-
-		jack: {cx : 300,cy : 250},
-
-
-		// PLATFORMS
-		platform: [
-
-				//Top Left Platform
-		    {cx : 6*30, cy : 5*30, width : 3*30, color : 1},
-
-				//Top Right Platform
-		    {cx : 14*30, cy : 5*30, width : 3*30, color : 1},
-
-				//Bottom Left
-		    {cx : 3*30, cy : 15*30, width : 3*30, color : 1},
-
-				//Bottom Right
-		    {cx : 17*30, cy : 15*30, width : 3*30, color : 1},
-
-				//Bottom Middle
-		    {cx : 10*30, cy : 13*30, width : 3*30, color : 1},
-
-	    ],
-
-    	// ENEMIES
-    	enemy : [
-
-		    //{cx : 6*30,  cy : 130, range : 90, velX: 1.2},
-		    {cx : 14*30, cy : 130, range : 90, velX: 1},
-		    {cx : 10*30, cy : 545, range : 300, velX: 1.5},
-
-    	],
-
-    	// BIRDS
-    	bird : [
-    		{cx : 300, cy : 500, range : 500, velX: 1.5},
-
-    		//{cx : 300, cy : 340, range : 500, velX: 4},
-
-    		//{cx : 300, cy : 70, range : 400, velX: 2}
-    	],
-
-
-    	// BOMBS
-	     bomb: [
-
-				//Bottom Left Bombs
-		    //{cx: 1*30,    cy: 14*30},
-		    {cx: 3*30,    cy: 14*30},
-		    {cx: 5*30,    cy: 14*30},
-
-				//Bottom Right Bombs
-		    {cx: 15*30,    cy: 14*30},
-		    {cx: 17*30,    cy: 14*30},
-		    {cx: 19*30,    cy: 14*30},
-
-				//Ground Left Bombs
-		    {cx: 8*30,    cy: 18*30},
-		    {cx: 6*30,    cy: 18*30},
-
-				//Ground Right Bombs
-		    {cx: 12*30,    cy: 18*30},
-		    {cx: 14*30,    cy: 18*30},
-
-				//Middle Left Bombs
-		    {cx: 8*30,    cy: 8*30},
-		    {cx: 8*30,    cy: 10*30},
-		    {cx: 8*30,    cy: 12*30},
-
-				//Middle Right Bombs
-		    {cx: 12*30,    cy: 8*30},
-		    {cx: 12*30,    cy: 10*30},
-		    {cx: 12*30,    cy: 12*30},
-
-				//Top Left Platform Bombs
-		    {cx: 5*30,    cy: 4*30},
-		    {cx: 7*30,    cy: 4*30},
-
-				//Top Right Platform Bombs
-		    {cx: 13*30,   cy: 4*30},
-		    {cx: 15*30,   cy: 4*30},
-
-				//Top Left Bombs
-		    {cx: 2*30,    cy: 1*30},
-		    {cx: 4*30,    cy: 1*30},
-
-				//Top Right Bombs
-		    {cx: 16*30,    cy: 1*30},
-		    {cx: 18*30,    cy: 1*30},
-
-	    ],
-
-	    // POWERUPS
-	    powerup:[{cx: 1*30,    cy: 14*30}]
-	},
-
-
-	four:{
-
-		background: "img/backgroundCity.png",
-		backgroundSound : "sounds/arcade/Arcade-Track4.mp3",
-
-		jack: {cx : 300,cy : 450},
-
-
-		// PLATFORMS
-		platform: [
-
-				//Top Left Platform
-		    {cx : 5*30, cy : 5*30, width : 3*30, color : 1},
-
-				//Top Right Platform
-		    {cx : 15*30, cy : 5*30, width : 3*30, color : 1},
-
-
-				//Bottom Left
-		    {cx : 5*30, cy : 15*30, width : 3*30, color : 1},
-
-				//Bottom Right
-		    {cx : 15*30, cy : 15*30, width : 3*30, color : 1},
-
-
-
-	    ],
-
-    	// ENEMIES
-    	enemy : [
-
-		    {cx : 5*30, cy : 430, range : 100, velX: 1.2, movingRight: true},
-		    {cx : 15*30, cy : 130, range : 100, velX: 1.5},
-		    //{cx : 15*30, cy : 430, range : 100, velX: 1.8, movingRight: true},
-		    {cx : 5*30, cy : 130, range : 100, velX: 2},
-		    //{cx : 3*30, cy : 545, range : 100, velX: 2, movingRight: true},
-		    {cx : 17*30, cy : 545, range : 100, velX: 1.5}
-
-    	],
-
-    	// BIRDS
-    	bird : [
-    		//{cx : 150, cy : 325, range : 300, velX: 2},
-    		{cx : 450, cy : 325, range : 300, velX: 1.5}
-    	],
-
-
-    	// BOMBS
-	     bomb: [
-
-				//Bottom Left Bombs
-		    //{cx: 1*30,    cy: 14*30},
-		    {cx: 4*30,    cy: 14*30},
-		    {cx: 6*30,    cy: 14*30},
-		    {cx: 8*30,    cy: 14*30},
-
-				//Bottom Right Bombs
-		    {cx: 12*30,    cy: 14*30},
-		    {cx: 14*30,    cy: 14*30},
-		    {cx: 16*30,    cy: 14*30},
-
-				//Ground Left Bombs
-		    {cx: 1*30,    cy: 18*30},
-		    {cx: 3*30,    cy: 18*30},
-		    {cx: 5*30,    cy: 18*30},
-
-				//Ground Right Bombs
-			{cx: 15*30,    cy: 18*30},
-		    {cx: 17*30,    cy: 18*30},
-		    {cx: 19*30,    cy: 18*30},
-
-				//Middle Left Bombs
-		    {cx: 15*30,    cy: 9*30},
-		    {cx: 17*30,    cy: 9*30},
-		    {cx: 19*30,    cy: 9*30},
-
-				//Middle Right Bombs
-		    {cx: 1*30,    cy: 9*30},
-		    {cx: 3*30,    cy: 9*30},
-		    {cx: 5*30,    cy: 9*30},
-
-				//Top Left Platform Bombs
-		    {cx: 1*30,    cy: 4*30},
-		    {cx: 3*30,    cy: 4*30},
-		    {cx: 5*30,    cy: 4*30},
-
-				//Top Right Platform Bombs
-		    {cx: 13*30,    cy: 4*30},
-		    {cx: 15*30,    cy: 4*30},
-		    {cx: 17*30,    cy: 4*30},
-
-
-
-	    ],
-
-	    // POWERUPS
-	    powerup:[{cx: 1*30,    cy: 14*30}]
-	},
-
-	five:{
-
-		background: "img/backgroundCityNight.png",
-		backgroundSound : "sounds/arcade/Arcade-Track5.mp3",
-
-		jack: {cx : 300,cy : 450},
-
-
-		// PLATFORMS
-		platform: [
-
-
-	    ],
-
-    	// ENEMIES
-    	enemy : [
-
-		    {cx : 120, cy : 545, range : 100, velX: 1.2},
-		    {cx : 420, cy : 545, range : 100, velX: 1},
-
-    	],
-
-    	// BIRDS
-    	bird : [
-
-    		{cx : 300, cy : 425, range : 550, velX: 1.5},
-    		{cx : 300, cy : 225, range : 550, velX: 1.5, movingRight: true}
-
-    	],
-
-
-    	// BOMBS
-	     bomb: [
-
-			//First column from left
-
-		    {cx: 3*30,    cy: 12*30},
-		    {cx: 3*30,    cy: 14*30},
-		    {cx: 3*30,    cy: 16*30},
-
-
-		    {cx: 3*30,    cy: 4*30},
-		    {cx: 3*30,    cy: 6*30},
-		    {cx: 3*30,    cy: 8*30},
-
-		    //Second column from left
-		    {cx: 7*30,    cy: 12*30},
-		    {cx: 7*30,    cy: 14*30},
-		    {cx: 7*30,    cy: 16*30},
-
-		    {cx: 7*30,    cy: 4*30},
-		    {cx: 7*30,    cy: 6*30},
-		    {cx: 7*30,    cy: 8*30},
-
-		    //Second column from left
-		    {cx: 13*30,    cy: 12*30},
-		    {cx: 13*30,    cy: 14*30},
-		    {cx: 13*30,    cy: 16*30},
-
-		    {cx: 13*30,    cy: 4*30},
-		    {cx: 13*30,    cy: 6*30},
-		    {cx: 13*30,    cy: 8*30},
-
-
-				//Bottom Right Bombs
+			//Bottom Right Bombs
 			{cx: 17*30,    cy: 12*30},
-		    {cx: 17*30,    cy: 14*30},
-		    {cx: 17*30,    cy: 16*30},
+			{cx: 17*30,    cy: 14*30},
+			{cx: 17*30,    cy: 16*30},
 
-		    {cx: 17*30,    cy: 4*30},
-		    {cx: 17*30,    cy: 6*30},
-		    {cx: 17*30,    cy: 8*30},
-
-
+			{cx: 17*30,    cy: 4*30},
+			{cx: 17*30,    cy: 6*30},
+			{cx: 17*30,    cy: 8*30},
 
 
-				//Top Right Bombs
 
-	    ],
 
-	    // POWERUPS
-	    powerup:[
-			{cx: 1*30,    cy: 14*30},
-	    	{cx: 19*30,    cy: 14*30}
-	    ],
+			//Top Right Bombs
+
+		],
+
+		// POWERUPS
+		powerup:[
+		{cx: 1*30,    cy: 14*30},
+			{cx: 19*30,    cy: 14*30}
+		],
 
 	}
+
 
 }
 
