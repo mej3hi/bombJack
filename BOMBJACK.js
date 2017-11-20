@@ -1,9 +1,12 @@
 // =========
-// ASTEROIDS
+// BOMB JACK
 // =========
 /*
 
-A sort-of-playable version of the classic arcade game.
+A classic arcade game recreated in 2017 by Eiríkur Hlöðversson, Martin Jensen, 
+Gunnsteinn Aron Skúlason and Jón Hafsteinn Guðmundsson, as a group projcet for 
+the course TOL308 - Computer Game Programming, tought by Patrick Kerr at the 
+University of Iceland.
 
 */
 
@@ -21,7 +24,7 @@ var g_ctx = g_canvas.getContext("2d");
 
 
 // ====================
-// CREATE INITIAL SHIPS
+// CREATE INITIAL LEVEL
 // ====================
 
 function initialFirstLevel() {
@@ -30,7 +33,6 @@ function initialFirstLevel() {
 
 function init() {
     intro.playIntro(initialFirstLevel);
-  //  winningScene.playIntro(initialFirstLevel);
 }
 
 // =============
@@ -39,7 +41,7 @@ function init() {
 
 function gatherInputs() {
     // Nothing to do here!
-    // The event handlers do everything we need for now.
+    // The event handlers do everything we need.
 }
 
 

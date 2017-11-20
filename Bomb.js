@@ -1,5 +1,5 @@
 // ====
-// Bomb
+// BOMB
 // ====
 
 "use strict";
@@ -30,16 +30,12 @@ function Bomb(descr) {
     this.timeToIgnite = this.timeToIgnite || -1;
 
 
-/*
-    // Diagnostics to check inheritance stuff
-    this._EnemyProperty = true;
-    console.dir(this);
-*/
-
 };
 
 Bomb.prototype = new Entity();
 
+// The coordinates for a drawImage call to get the correct part of the 
+// sprite sheet for each animation frame.
 Bomb.prototype.animate = [
     [25, 134, 14, 18],
     [45, 134, 14, 18],
@@ -61,7 +57,7 @@ Bomb.prototype.igniteTime = 10000 / NOMINAL_UPDATE_INTERVAL;
 
 Bomb.prototype.update = function (du) {
 
-    // TODO: YOUR STUFF HERE! --- Unregister and check for death
+    // Unregister and check for death
     spatialManager.unregister(this);
 
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
@@ -79,7 +75,7 @@ Bomb.prototype.update = function (du) {
         }
     }
 
-    // TODO: YOUR STUFF HERE! --- (Re-)Register
+    // (Re-)Register
     if (!this.collected){
         spatialManager.register(this);
     }

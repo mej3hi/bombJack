@@ -1,6 +1,12 @@
-// ============
-// SPRITE STUFF
-// ============
+// ======
+// SPRITE
+// ======
+
+/*
+
+Module for drawing the various sprites of the game in their proper places.
+
+*/
 
 "use strict";
 

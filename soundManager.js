@@ -1,3 +1,13 @@
+// =============
+// SOUND MANAGER
+// =============
+
+/*
+
+This module is called to play the sound effects of the game.
+
+*/
+
 var soundManager ={
 
 myAudio: undefined,
@@ -12,7 +22,5 @@ setBackgroundMusic: function(sound) {
     this.myAudio.loop = true;
     this.myAudio.play();
 },
-
-
 
 }

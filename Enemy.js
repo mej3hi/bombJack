@@ -1,6 +1,8 @@
-// ====
-// Enemy
-// ====
+// =====
+// ENEMY
+// =====
+
+// The main enemy, a walking skeleton present in every level.
 
 "use strict";
 
@@ -39,6 +41,8 @@ function Enemy(descr) {
 
 Enemy.prototype = new Entity();
 
+// The coordinates for a drawImage call to get the correct part of the 
+// sprite sheet for each animation frame.
 Enemy.prototype.animate = [
     [45, 53, 11, 15],
     [61, 53, 11, 15],

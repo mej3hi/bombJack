@@ -1,8 +1,13 @@
-// ==========
-// LEVEL STUFF
-// ==========
+// =============
+// LEVEL MANAGER
+// =============
 
-// LEVEL STUFF
+/*
+
+The different levels of Bomb Jack are defined here, with the locations of platforms and bombs
+as well as the locations and speed of enemies.
+
+*/
 
 var levelManager = {
 
@@ -22,10 +27,10 @@ _fontColor : "white",
 lifeSpan: 5000/ NOMINAL_UPDATE_INTERVAL,
 
 update : function(du){
-	if(entityManager._bombs.length <= 15){
+	if(entityManager._bombs.length <= 0){
 
 		if(this.level < 5){
-			// play start theman
+			// play start theme
 			if(!this.renderStarSprite){
 				this.clearLevel();
 				backgroundManager.setBackground(this.getMap(this.level+1).background)
@@ -49,7 +54,7 @@ update : function(du){
 
 
 		}else{
-			// play winnign theman
+			// play winning theme
 				this.clearLevel();
 				this.level = 1;
 				scoreboardManager.clearScore();
@@ -222,8 +227,10 @@ _levelInfo : {
 		background: "img/backgroundEgypt.png",
 		backgroundSound : "sounds/arcade/Arcade-Track1.mp3",
 
+		// JACK
 		jack:{cx : 300,cy : 500},
 
+		// PLATFORMS
 		platform:[
 
 			//Top Left Platform
@@ -243,6 +250,7 @@ _levelInfo : {
 
 		],
 
+		// ENEMIES
 		enemy:[
 				//Bottom Left Enemy
 				//{cx : 4*30, cy : 15*30-20, range : 100, velX: 1.2},
@@ -252,12 +260,14 @@ _levelInfo : {
 		   	{cx : 14*30, cy : 3*30-20, range : 100, velX: 1}
 		],
 
+		// BIRDS
 		bird:[
 
-			{cx : 10*30, cy : 15*30-20, range : 400, velX: 4}
+			//{cx : 10*30, cy : 2*30, range : 400, velX: 2}
 
 		],
 
+		// BOMBS
 		bomb:[
 		 	/*{cx: 80, cy: 20},
 		    {cx: 140, cy: 20},
@@ -298,6 +308,7 @@ _levelInfo : {
 
 		],
 
+		// POWERUPS
 		powerup:[{cx: 1*30,    cy: 14*30}]
 
 
@@ -351,7 +362,7 @@ _levelInfo : {
 
     	// BIRDS
     	bird : [
-    		{cx : 300, cy : 225, range : 200, velX: 3}
+    		{cx : 300, cy : 225, range : 200, velX: 1.5}
 
     	],
 
@@ -446,7 +457,7 @@ _levelInfo : {
 
     	// BIRDS
     	bird : [
-    		{cx : 300, cy : 500, range : 500, velX: 3},
+    		{cx : 300, cy : 500, range : 500, velX: 1.5},
 
     		//{cx : 300, cy : 340, range : 500, velX: 4},
 
@@ -632,8 +643,8 @@ _levelInfo : {
     	// BIRDS
     	bird : [
 
-    		{cx : 300, cy : 425, range : 550, velX: 2},
-    		{cx : 300, cy : 225, range : 550, velX: 2, movingRight: true}
+    		{cx : 300, cy : 425, range : 550, velX: 1.5},
+    		{cx : 300, cy : 225, range : 550, velX: 1.5, movingRight: true}
 
     	],
 
@@ -696,7 +707,5 @@ _levelInfo : {
 	}
 
 }
-
-
 
 }

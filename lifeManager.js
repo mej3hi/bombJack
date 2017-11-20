@@ -1,3 +1,13 @@
+// ============
+// LIFE MANAGER
+// ============
+
+/*
+
+This module keeps track of how many lives Jack has remaining.
+
+*/
+
 var lifeManager = {
 
 _jackLife : 3,
@@ -72,12 +82,6 @@ render : function(ctx){
 		g_sprites.bombJack.scale = origScale;
 	}
 
-
-
-
-
 }
-
-
 
 }

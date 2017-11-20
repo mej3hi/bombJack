@@ -1,4 +1,12 @@
-// GENERIC RENDERING
+// ======
+// RENDER
+// ======
+
+/*
+
+Generic rendering
+
+*/
 
 var g_doClear = true;
 var g_doBox = false;

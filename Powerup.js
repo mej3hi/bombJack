@@ -2,6 +2,12 @@
 // POWERUP
 // =======
 
+/*
+
+This module creates a powerup for Jack to jump higher.
+
+*/
+
 "use strict";
 
 /* jshint browser: true, devel: true, globalstrict: true */
