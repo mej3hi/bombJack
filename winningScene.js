@@ -1,4 +1,12 @@
+// =============
+// WINNING SCENE
+// =============
 
+/*
+
+This module plays the final victory scene if the game is beaten.
+
+*/
 
 var winningScene = {
 
@@ -184,14 +192,6 @@ render : function(ctx){
   			this._fontFamliy,
   			this._fontColor);
 
-
-
-
-
-
 },
-
-
-
 
 }

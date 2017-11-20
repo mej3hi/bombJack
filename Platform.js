@@ -50,14 +50,11 @@ Platform.prototype.getRadius = function () {
     //return this.scale * (this.sprite.width / 2) * 0.9;
 };
 
-Platform.prototype.collidesWith = function (prevX, prevY,
-                                          nextX, nextY,
-                                          r) {
+Platform.prototype.collidesWith = function (prevX, prevY, nextX, nextY, r) {
     var platformEdgeTop = this.cy - this.halfHeight;
     var platformEdgeBottom = this.cy + this.halfHeight;
 
     // Check Y coords
-
 
     if ((nextY + r > platformEdgeTop && prevY + r <= platformEdgeTop)||
         (nextY - r < platformEdgeBottom && prevY - r >= platformEdgeBottom)) {
@@ -73,6 +70,14 @@ Platform.prototype.collidesWith = function (prevX, prevY,
     // It's a miss!
     return false;
 };
+
+Platform.prototype.isWithin = function (X, Y) {
+    if (X < this.cx + this.halfWidth && X > this.cx - this.halfWidth && Y < this.cy + this.halfHeight && Y > this.cy - this.halfHeight) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 Platform.prototype.render = function (ctx) {

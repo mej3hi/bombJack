@@ -1,3 +1,7 @@
+// ====
+// UTIL
+// ====
+
 // util.js
 //
 // A module of utility functions, with no private elements to hide.

@@ -1,6 +1,12 @@
-// =================
-// KEYBOARD HANDLING
-// =================
+// ====
+// KEYS
+// ====
+
+/*
+
+Keyboard handling
+
+*/
 
 var keys = [];
 

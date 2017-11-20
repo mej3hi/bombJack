@@ -1,4 +1,12 @@
+// =====
+// INTRO
+// =====
 
+/*
+
+An intro sequence that is played at the start of a new game of Bomb Jack
+
+*/
 
 var intro = {
 
@@ -121,18 +129,6 @@ render : function(ctx){
       this._fontFamliy,
       this._fontColor);
 
-
 },
-
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -1,6 +1,13 @@
-// ==========
-// JACK STUFF
-// ==========
+// ====
+// JACK
+// ====
+
+/*
+
+The main character of Bomb Jack. This module handles Jack's movement and 
+collision detection, as well as the relevant consequenses of those actions.
+
+*/
 
 "use strict";
 
@@ -127,7 +134,7 @@ Jack.prototype.update = function (du) {
         return;
     }
 
-    // TODO: YOUR STUFF HERE! --- Unregister and check for death
+    // Unregister and check for death
     spatialManager.unregister(this);
 
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
@@ -153,6 +160,10 @@ Jack.prototype.update = function (du) {
         if (ent instanceof Enemy || ent instanceof Bird){
             this.warp();
             lifeManager.takeJackLife(1);
+        }
+
+        if (ent instanceof Bird) {
+            ent.warp();
         }
 
         if (ent instanceof Bomb){
@@ -182,7 +193,7 @@ Jack.prototype.computeSubStep = function (du) {
 Jack.prototype.calculateJump = function (accelY) {
 
     var jump = 0;
-    var powerJump = 1;
+    var powerJump = 1; // Multiplication factor that is modified when Jack picks up a powerup.
 
     if (this.powerupActive) {
         powerJump = this.powerupEffectSize;

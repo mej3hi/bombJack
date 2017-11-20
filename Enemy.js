@@ -1,6 +1,8 @@
-// ====
-// Enemy
-// ====
+// =====
+// ENEMY
+// =====
+
+// The main enemy, walking skeleton present in every level
 
 "use strict";
 

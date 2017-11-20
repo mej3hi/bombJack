@@ -1,8 +1,6 @@
-// ==========
-// BACKGROUND STUFF
-// ==========
-
-// BACKGROUND STUFF
+// ==================
+// BACKGROUND MANAGER
+// ==================
 
 var backgroundManager = {
 

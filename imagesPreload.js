@@ -1,3 +1,7 @@
+// ==============
+// IMAGES PRELOAD
+// ==============
+
 // Multi-Image Preloader
 
 "use strict";
