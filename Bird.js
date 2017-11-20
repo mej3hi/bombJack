@@ -112,7 +112,7 @@ Bird.prototype.update = function (du) {
     if (this.cx + this.velX * du > g_canvas.width - this.getRadius || this.cx + this.velX * du < this.getRadius) {
         this.velX *= -1;
     }
-    if (this.cy + this.velY * du > g_canvas.height - this.getRadius || this.cy + this.velY * du < this.getRadius) {
+    if (this.cy + this.velY * du > levelManager.mapHeight - this.getRadius || this.cy + this.velY * du < this.getRadius) {
         this.velY *= -1;
     }
 
