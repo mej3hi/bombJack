@@ -160,18 +160,13 @@ Jack.prototype.update = function (du) {
     if (ent){
 
         if (ent instanceof Enemy || ent instanceof Bird){
-            this.warp();
-            lifeManager.takeJackLife(1);
-            entityManager.generatePowerup( {cx: 1*30,    cy: 14*30} );
-        }
-
-        if (ent instanceof Bird) {
-            console.log(ent);
-            ent.warp();
             for(var i = 0; i < entityManager._birds.length; i++){
               console.log(entityManager._birds[i], "Bird");
               entityManager._birds[i].warp();
             }
+            this.warp();
+            lifeManager.takeJackLife(1);
+            entityManager.generatePowerup( {cx: 1*30,    cy: 14*30} );
         }
 
         if (ent instanceof Bomb){
