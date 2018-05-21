@@ -1,5 +1,5 @@
 # Bombjack
-Bombjack er tölvuleikur sem hægt er að spila á netið.
+Þetta er eftirlíking af hinn klassíkur Bomb Jack  tölvuleikinn sem kom út árið 1984, en núna er hægt að spila hann í vafra í staðinn. 
 
 ## Forrit 
 Javascript
