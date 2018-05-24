@@ -24,3 +24,9 @@ Hægt er að hala niður forritinu á þessari síðu (clone or download).
 
 
 ![Alt tag](https://raw.githubusercontent.com/mej3hi/screenshot/master/myndBJ4.PNG)
+
+### Höfundar
+Eiríkur Kristinn Hlöðversson  
+Gunnsteinn Aron Skúlason  
+Jón Hafsteinn Guðmundsson  
+Martin Einar Jensen  
